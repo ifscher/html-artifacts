@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Background jobs — header illustrations</title>
+<title>Jobs em background — ilustrações de cabeçalho</title>
 <style>
   :root {
     --ivory:   #FAF9F5;
@@ -189,17 +189,17 @@
 <div class="sheet">
 
   <header>
-    <h1>Background jobs — header illustrations</h1>
+    <h1>Jobs em background — ilustrações de cabeçalho</h1>
     <p class="lead">
-      Three 720×320 hand-drawn SVGs for the Birchline docs section on
-      background jobs. Flat fills, 1.5–2px strokes, palette-locked. Each
-      exports standalone via the button below it.
+      Três SVGs 720×320 desenhados à mão para a seção de docs do Birchline sobre
+      jobs em background. Preenchimentos planos, traços de 1,5–2px, paleta bloqueada. Cada
+      um pode ser exportado individualmente pelo botão abaixo.
     </p>
-    <div class="meta">720 × 320 · inline SVG · no external assets</div>
+    <div class="meta">720 × 320 · SVG inline · sem assets externos</div>
   </header>
 
   <!-- ============================================================
-       A — Queue
+       A — Fila
        ============================================================ -->
   <figure>
     <div class="canvas">
@@ -217,7 +217,7 @@
         <rect width="720" height="320" fill="#FAF9F5"/>
 
         <!-- queue label -->
-        <text x="60" y="96" class="s" fill="#87867F">queue</text>
+        <text x="60" y="96" class="s" fill="#87867F">fila</text>
 
         <!-- five job rects -->
         <g>
@@ -247,21 +247,21 @@
         <text x="595" y="172" text-anchor="middle" class="m" fill="#87867F">pool=4</text>
 
         <!-- annotations -->
-        <text x="415" y="234" text-anchor="middle" class="s" fill="#87867F">next to run</text>
-        <text x="60"  y="258" class="s" fill="#87867F">Jobs are pulled FIFO; the worker leases one at a time.</text>
+        <text x="415" y="234" text-anchor="middle" class="s" fill="#87867F">próximo a executar</text>
+        <text x="60"  y="258" class="s" fill="#87867F">Jobs são consumidos em FIFO; o worker processa um por vez.</text>
       </svg>
     </div>
     <figcaption>
       <div class="cap-text">
-        <div class="cap-title">Queue</div>
-        <div class="cap-sub">For "How jobs are picked up" — intro page header.</div>
+        <div class="cap-title">Fila</div>
+        <div class="cap-sub">Para "Como os jobs são processados" — cabeçalho da página introdutória.</div>
       </div>
-      <button class="dl" data-target="ill-queue" data-filename="birchline-jobs-queue.svg">Download SVG</button>
+      <button class="dl" data-target="ill-queue" data-filename="birchline-jobs-queue.svg">Baixar SVG</button>
     </figcaption>
   </figure>
 
   <!-- ============================================================
-       B — Retry with backoff
+       B — Retry com backoff
        ============================================================ -->
   <figure>
     <div class="canvas">
@@ -278,31 +278,31 @@
         <!-- timeline axis -->
         <line x1="60" y1="190" x2="660" y2="190" stroke="#D1CFC5" stroke-width="1.5"/>
         <text x="60" y="214" class="s" fill="#87867F">t = 0</text>
-        <text x="660" y="214" text-anchor="end" class="s" fill="#87867F">time →</text>
+        <text x="660" y="214" text-anchor="end" class="s" fill="#87867F">tempo →</text>
 
         <!-- attempts: exponential spacing at x = 100, 170, 310, 590 -->
         <!-- attempt 1 (fail) -->
         <circle cx="100" cy="190" r="8" fill="#FAF9F5" stroke="#D97757" stroke-width="2"/>
         <line x1="96" y1="186" x2="104" y2="194" stroke="#D97757" stroke-width="1.5"/>
         <line x1="104" y1="186" x2="96" y2="194" stroke="#D97757" stroke-width="1.5"/>
-        <text x="100" y="222" text-anchor="middle" class="m" fill="#3D3D3A">try 1</text>
+        <text x="100" y="222" text-anchor="middle" class="m" fill="#3D3D3A">tent. 1</text>
 
         <!-- attempt 2 (fail) -->
         <circle cx="170" cy="190" r="8" fill="#FAF9F5" stroke="#D97757" stroke-width="2"/>
         <line x1="166" y1="186" x2="174" y2="194" stroke="#D97757" stroke-width="1.5"/>
         <line x1="174" y1="186" x2="166" y2="194" stroke="#D97757" stroke-width="1.5"/>
-        <text x="170" y="222" text-anchor="middle" class="m" fill="#3D3D3A">try 2</text>
+        <text x="170" y="222" text-anchor="middle" class="m" fill="#3D3D3A">tent. 2</text>
 
         <!-- attempt 3 (fail) -->
         <circle cx="310" cy="190" r="8" fill="#FAF9F5" stroke="#D97757" stroke-width="2"/>
         <line x1="306" y1="186" x2="314" y2="194" stroke="#D97757" stroke-width="1.5"/>
         <line x1="314" y1="186" x2="306" y2="194" stroke="#D97757" stroke-width="1.5"/>
-        <text x="310" y="222" text-anchor="middle" class="m" fill="#3D3D3A">try 3</text>
+        <text x="310" y="222" text-anchor="middle" class="m" fill="#3D3D3A">tent. 3</text>
 
         <!-- attempt 4 (success) -->
         <circle cx="590" cy="190" r="9" fill="#788C5D" stroke="#141413" stroke-width="1.5"/>
         <path d="M585,190 L589,194 L596,185" fill="none" stroke="#FAF9F5" stroke-width="1.5" stroke-linecap="round"/>
-        <text x="590" y="222" text-anchor="middle" class="m" fill="#3D3D3A">try 4</text>
+        <text x="590" y="222" text-anchor="middle" class="m" fill="#3D3D3A">tent. 4</text>
 
         <!-- dashed backoff arcs (loop back over the gap) -->
         <path d="M 100 182 Q 135 130 170 182" fill="none" stroke="#87867F" stroke-width="1.5" stroke-dasharray="4 4"/>
@@ -315,15 +315,15 @@
         <text x="450" y="74" text-anchor="middle" class="m" fill="#87867F">+4s</text>
 
         <!-- annotation -->
-        <text x="60" y="262" class="s" fill="#87867F">Each failure waits twice as long before re-queuing; jitter not pictured.</text>
+        <text x="60" y="262" class="s" fill="#87867F">Cada falha aguarda o dobro do tempo antes de recolocar na fila; jitter não ilustrado.</text>
       </svg>
     </div>
     <figcaption>
       <div class="cap-text">
-        <div class="cap-title">Retry with backoff</div>
-        <div class="cap-sub">For "Handling failures" — retry policy header.</div>
+        <div class="cap-title">Retry com backoff</div>
+        <div class="cap-sub">Para "Tratamento de falhas" — cabeçalho da política de retry.</div>
       </div>
-      <button class="dl" data-target="ill-retry" data-filename="birchline-jobs-retry.svg">Download SVG</button>
+      <button class="dl" data-target="ill-retry" data-filename="birchline-jobs-retry.svg">Baixar SVG</button>
     </figcaption>
   </figure>
 
@@ -385,23 +385,23 @@
         <!-- annotations -->
         <text x="232" y="42"  class="s" fill="#87867F">fan-out</text>
         <text x="486" y="42"  text-anchor="end" class="s" fill="#87867F">fan-in</text>
-        <text x="60"  y="300" class="s" fill="#87867F">Parent job spawns N children, then blocks on a completion barrier.</text>
+        <text x="60"  y="300" class="s" fill="#87867F">O job pai cria N filhos e aguarda em uma barreira de conclusão.</text>
       </svg>
     </div>
     <figcaption>
       <div class="cap-text">
         <div class="cap-title">Fan-out / fan-in</div>
-        <div class="cap-sub">For "Batch and parallel work" — fan-out pattern header.</div>
+        <div class="cap-sub">Para "Trabalho em lote e paralelo" — cabeçalho do padrão fan-out.</div>
       </div>
-      <button class="dl" data-target="ill-fanout" data-filename="birchline-jobs-fanout.svg">Download SVG</button>
+      <button class="dl" data-target="ill-fanout" data-filename="birchline-jobs-fanout.svg">Baixar SVG</button>
     </figcaption>
   </figure>
 
   <!-- ============================================================
-       Palette + usage notes
+       Paleta + notas de uso
        ============================================================ -->
   <section class="palette">
-    <h2>Palette &amp; rules</h2>
+    <h2>Paleta &amp; regras</h2>
 
     <div class="swatches">
       <div class="swatch">
@@ -463,11 +463,11 @@
     </div>
 
     <ul class="notes">
-      <li>Strokes are 1.5px for neutral boxes, 2px for emphasised containers.</li>
-      <li>All rectangles use <code>rx="10"</code>; no drop shadows or gradients.</li>
-      <li>Labels inside boxes are 11px mono; annotations outside are 12px sans, gray-500.</li>
-      <li>Clay marks "the thing in focus"; olive marks "success / done".</li>
-      <li>Each SVG carries its own <code>&lt;style&gt;</code> block so the download stands alone.</li>
+      <li>Traços são 1,5px para caixas neutras, 2px para containers enfatizados.</li>
+      <li>Todos os retângulos usam <code>rx="10"</code>; sem sombras ou gradientes.</li>
+      <li>Labels dentro das caixas são 11px mono; anotações externas são 12px sans, gray-500.</li>
+      <li>Clay marca "o elemento em foco"; olive marca "sucesso / concluído".</li>
+      <li>Cada SVG carrega seu próprio bloco <code>&lt;style&gt;</code> para que o download seja independente.</li>
     </ul>
   </section>
 

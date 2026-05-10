@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How authentication flows through birchline/web</title>
+<title>Como a autenticação flui pelo birchline/web</title>
 <style>
   :root {
     --ivory: #FAF9F5;
@@ -255,17 +255,17 @@
 <div class="page">
 
   <header>
-    <div class="repo-line">birchline/web · architecture note</div>
-    <h1>How authentication flows through the codebase</h1>
+    <div class="repo-line">birchline/web · nota de arquitetura</div>
+    <h1>Como a autenticação flui pelo codebase</h1>
     <p class="summary">
-      Birchline uses cookie-based sessions: the browser never holds a bearer token directly. Every authenticated request hits <code>/api/*</code>, passes through a single <code>verifyToken()</code> middleware, and resolves to a <code>Session</code> row that downstream handlers read off <code>req.ctx</code>. The middleware is the only place that talks to the session store, which is the only place that talks to the <code>sessions</code> table — so there's exactly one trust boundary to reason about.
+      O Birchline usa sessões baseadas em cookie: o browser nunca guarda um bearer token diretamente. Toda requisição autenticada bate em <code>/api/*</code>, passa por um único middleware <code>verifyToken()</code> e resolve para uma linha <code>Session</code> que os handlers downstream leem de <code>req.ctx</code>. O middleware é o único lugar que fala com o session store, que é o único lugar que fala com a tabela <code>sessions</code> — então há exatamente um trust boundary para raciocinar.
     </p>
   </header>
 
   <main>
-    <h2 style="margin-top:0">Request path</h2>
+    <h2 style="margin-top:0">Caminho da requisição</h2>
     <div class="diagram-panel">
-      <svg class="flow" viewBox="0 0 720 280" width="720" height="280" role="img" aria-label="Authentication flow diagram">
+      <svg class="flow" viewBox="0 0 720 280" width="720" height="280" role="img" aria-label="Diagrama de fluxo de autenticação">
         <defs>
           <marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M 0 0 L 10 5 L 0 10 z" fill="#87867F"></path>
@@ -298,7 +298,7 @@
         <g>
           <rect class="box" x="245" y="170" width="150" height="64" rx="10"></rect>
           <text x="320" y="198" text-anchor="middle">Postgres</text>
-          <text class="sub" x="320" y="214" text-anchor="middle">sessions table</text>
+          <text class="sub" x="320" y="214" text-anchor="middle">tabela sessions</text>
         </g>
 
         <!-- Arrows -->
@@ -312,16 +312,16 @@
       </svg>
     </div>
 
-    <h2>Callstack walkthrough</h2>
+    <h2>Passo a passo da callstack</h2>
 
     <!-- Step 1 -->
     <div class="step">
       <div class="badge">1</div>
       <div class="step-body">
         <div class="step-loc">src/app/providers/AuthProvider.tsx<span class="range"> :22-48</span></div>
-        <p>On mount, the React provider issues a <code style="font-family:var(--mono);font-size:12.5px">GET /api/session</code> with <code style="font-family:var(--mono);font-size:12.5px">credentials: 'include'</code> so the <code style="font-family:var(--mono);font-size:12.5px">fw_sid</code> cookie rides along. The response either hydrates <code style="font-family:var(--mono);font-size:12.5px">currentUser</code> into context or leaves it <code style="font-family:var(--mono);font-size:12.5px">null</code>, which the router treats as "show the sign-in screen".</p>
+        <p>Na montagem, o provider React faz um <code style="font-family:var(--mono);font-size:12.5px">GET /api/session</code> com <code style="font-family:var(--mono);font-size:12.5px">credentials: 'include'</code> para que o cookie <code style="font-family:var(--mono);font-size:12.5px">fw_sid</code> seja enviado junto. A resposta ou hidrata <code style="font-family:var(--mono);font-size:12.5px">currentUser</code> no contexto ou o deixa como <code style="font-family:var(--mono);font-size:12.5px">null</code>, que o router interpreta como "exibir a tela de login".</p>
         <details class="snippet">
-          <summary>show source</summary>
+          <summary>ver código</summary>
 <pre class="code"><span class="dim">// src/app/providers/AuthProvider.tsx</span>
 <span class="kw">export function</span> AuthProvider({ children }: Props) {
   <span class="kw">const</span> [user, setUser] = useState&lt;User | <span class="kw">null</span>&gt;(<span class="kw">null</span>);
@@ -343,9 +343,9 @@
       <div class="badge">2</div>
       <div class="step-body">
         <div class="step-loc">src/server/routes/session.ts<span class="range"> :9-27</span></div>
-        <p>The route itself is thin: it just returns whatever <code style="font-family:var(--mono);font-size:12.5px">req.ctx.session</code> the middleware attached. If the middleware short-circuited with a 401, this handler never runs — so there's no auth logic duplicated here.</p>
+        <p>A própria rota é enxuta: apenas retorna o que o middleware anexou em <code style="font-family:var(--mono);font-size:12.5px">req.ctx.session</code>. Se o middleware respondeu com 401, este handler nunca executa — então não há lógica de autenticação duplicada aqui.</p>
         <details class="snippet">
-          <summary>show source</summary>
+          <summary>ver código</summary>
 <pre class="code"><span class="dim">// src/server/routes/session.ts</span>
 router.get(<span class="str">'/session'</span>, verifyToken, (req, res) =&gt; {
   <span class="kw">const</span> { session } = req.ctx;
@@ -365,9 +365,9 @@ router.get(<span class="str">'/session'</span>, verifyToken, (req, res) =&gt; {
       <div class="badge">3</div>
       <div class="step-body">
         <div class="step-loc">src/middleware/auth.ts<span class="range"> :14-31</span></div>
-        <p>This is the trust boundary. <code style="font-family:var(--mono);font-size:12.5px">verifyToken</code> reads the signed <code style="font-family:var(--mono);font-size:12.5px">fw_sid</code> cookie, asks <code style="font-family:var(--mono);font-size:12.5px">SessionStore</code> to resolve it, and either populates <code style="font-family:var(--mono);font-size:12.5px">req.ctx.session</code> or responds 401. Every protected route in the app is mounted behind this function, so changing its behaviour changes auth globally.</p>
+        <p>Este é o trust boundary. <code style="font-family:var(--mono);font-size:12.5px">verifyToken</code> lê o cookie assinado <code style="font-family:var(--mono);font-size:12.5px">fw_sid</code>, pede ao <code style="font-family:var(--mono);font-size:12.5px">SessionStore</code> para resolvê-lo, e ou popula <code style="font-family:var(--mono);font-size:12.5px">req.ctx.session</code> ou responde 401. Todas as rotas protegidas do app são montadas atrás desta função, então alterar seu comportamento muda a autenticação globalmente.</p>
         <details class="snippet" open>
-          <summary>show source</summary>
+          <summary>ver código</summary>
 <pre class="code"><span class="dim">// src/middleware/auth.ts</span>
 <span class="kw">export async function</span> verifyToken(req, res, next) {
   <span class="kw">const</span> raw = req.signedCookies[<span class="str">'fw_sid'</span>];
@@ -390,9 +390,9 @@ router.get(<span class="str">'/session'</span>, verifyToken, (req, res) =&gt; {
       <div class="badge">4</div>
       <div class="step-body">
         <div class="step-loc">src/lib/sessionStore.ts<span class="range"> :8-52</span></div>
-        <p><code style="font-family:var(--mono);font-size:12.5px">SessionStore</code> is a small read-through cache: it checks an in-process LRU first, then falls back to Postgres. Writes (<code style="font-family:var(--mono);font-size:12.5px">create</code>, <code style="font-family:var(--mono);font-size:12.5px">revoke</code>) always go straight to the DB and invalidate the cache entry so other workers don't serve a stale session.</p>
+        <p><code style="font-family:var(--mono);font-size:12.5px">SessionStore</code> é um cache read-through pequeno: verifica primeiro um LRU em processo, depois recorre ao Postgres. Escritas (<code style="font-family:var(--mono);font-size:12.5px">create</code>, <code style="font-family:var(--mono);font-size:12.5px">revoke</code>) sempre vão direto ao banco e invalidam a entrada no cache para que outros workers não sirvam uma sessão obsoleta.</p>
         <details class="snippet">
-          <summary>show source</summary>
+          <summary>ver código</summary>
 <pre class="code"><span class="dim">// src/lib/sessionStore.ts</span>
 <span class="kw">const</span> cache = <span class="kw">new</span> LRU&lt;string, Session&gt;({ max: 5000, ttl: 60_000 });
 
@@ -415,9 +415,9 @@ router.get(<span class="str">'/session'</span>, verifyToken, (req, res) =&gt; {
       <div class="badge">5</div>
       <div class="step-body">
         <div class="step-loc">db/migrations/004_sessions.sql<span class="range"> :1-18</span></div>
-        <p>The <code style="font-family:var(--mono);font-size:12.5px">sessions</code> table is keyed on a random 32-byte id (the cookie value) with a covering index on <code style="font-family:var(--mono);font-size:12.5px">user_id</code> for "sign out everywhere". Expiry is enforced both here (<code style="font-family:var(--mono);font-size:12.5px">expires_at</code>) and again in the middleware as defence in depth.</p>
+        <p>A tabela <code style="font-family:var(--mono);font-size:12.5px">sessions</code> é indexada por um id aleatório de 32 bytes (o valor do cookie) com um índice de cobertura em <code style="font-family:var(--mono);font-size:12.5px">user_id</code> para "deslogar em todos os dispositivos". A expiração é verificada tanto aqui (<code style="font-family:var(--mono);font-size:12.5px">expires_at</code>) quanto no middleware como defesa em profundidade.</p>
         <details class="snippet">
-          <summary>show source</summary>
+          <summary>ver código</summary>
 <pre class="code"><span class="dim">-- db/migrations/004_sessions.sql</span>
 <span class="kw">create table</span> sessions (
   id          <span class="kw">text primary key</span>,
@@ -435,40 +435,40 @@ router.get(<span class="str">'/session'</span>, verifyToken, (req, res) =&gt; {
 
   <aside>
     <div class="panel">
-      <h3>Key files</h3>
+      <h3>Arquivos-chave</h3>
       <ul class="key-files">
         <li>
           <span class="path">src/middleware/auth.ts</span>
-          <span class="desc">Single entry point for request authentication.</span>
+          <span class="desc">Único ponto de entrada para autenticação de requisições.</span>
         </li>
         <li>
           <span class="path">src/lib/sessionStore.ts</span>
-          <span class="desc">LRU + Postgres session lookup; only DB caller.</span>
+          <span class="desc">Lookup de sessão via LRU + Postgres; único chamador do banco.</span>
         </li>
         <li>
           <span class="path">src/server/routes/session.ts</span>
-          <span class="desc">Returns the current session to the client.</span>
+          <span class="desc">Retorna a sessão atual para o cliente.</span>
         </li>
         <li>
           <span class="path">src/server/routes/login.ts</span>
-          <span class="desc">Exchanges credentials for a cookie via SessionStore.create.</span>
+          <span class="desc">Troca credenciais por cookie via SessionStore.create.</span>
         </li>
         <li>
           <span class="path">src/app/providers/AuthProvider.tsx</span>
-          <span class="desc">Client-side context that mirrors the server session.</span>
+          <span class="desc">Contexto client-side que espelha a sessão do servidor.</span>
         </li>
         <li>
           <span class="path">db/migrations/004_sessions.sql</span>
-          <span class="desc">Schema for the sessions table and indexes.</span>
+          <span class="desc">Schema da tabela sessions e índices.</span>
         </li>
       </ul>
     </div>
 
     <div class="gotchas">
-      <h3>Gotchas</h3>
+      <h3>Atenção</h3>
       <ul>
-        <li>The LRU in <code>SessionStore</code> is per-process. Revoking a session only clears the local cache — other workers may serve it for up to 60s until their TTL lapses.</li>
-        <li><code>verifyToken</code> compares <code>expiresAt</code> against <code>Date.now()</code>, but the column is <code>timestamptz</code>. The driver returns a <code>Date</code>, so the comparison works, but don't refactor it to a raw string without adjusting the check.</li>
+        <li>O LRU no <code>SessionStore</code> é por processo. Revogar uma sessão só limpa o cache local — outros workers podem servi-la por até 60s até o TTL expirar.</li>
+        <li><code>verifyToken</code> compara <code>expiresAt</code> com <code>Date.now()</code>, mas a coluna é <code>timestamptz</code>. O driver retorna um <code>Date</code>, então a comparação funciona, mas não refatore para string pura sem ajustar a verificação.</li>
       </ul>
     </div>
   </aside>

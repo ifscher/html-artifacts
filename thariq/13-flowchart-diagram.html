@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deploy pipeline — annotated flowchart</title>
+<title>Pipeline de deploy — fluxograma anotado</title>
 <style>
   :root {
     --ivory:   #FAF9F5;
@@ -161,11 +161,11 @@
 <div class="sheet">
 
   <header>
-    <div class="eyebrow">Illustrations &amp; Diagrams · Flowchart</div>
-    <h1>What happens when you <code>git push</code></h1>
+    <div class="eyebrow">Ilustrações &amp; Diagramas · Fluxograma</div>
+    <h1>O que acontece quando você faz <code>git push</code></h1>
     <p class="lead">
-      The deploy pipeline for <code>birchline/web</code>, drawn from <code>.github/workflows/</code> and the
-      Argo manifests. Click any step to see what runs, how long it usually takes, and where it can short-circuit.
+      O pipeline de deploy do <code>birchline/web</code>, desenhado a partir do <code>.github/workflows/</code> e dos
+      manifestos Argo. Clique em qualquer etapa para ver o que executa, quanto tempo costuma levar e onde pode ser interrompido.
     </p>
   </header>
 
@@ -191,15 +191,15 @@
           <path class="edge" d="M310,140 L310,176"/>
           <path class="edge" d="M310,224 L310,262"/>
           <path class="edge yes" d="M310,326 L310,368"/>
-          <text class="lbl" x="320" y="350">pass</text>
+          <text class="lbl" x="320" y="350">passou</text>
           <path class="edge no" d="M268,294 C190,294 150,294 150,212 L150,212"/>
-          <text class="lbl" x="138" y="260" fill="#B04A3F">fail → status</text>
+          <text class="lbl" x="138" y="260" fill="#B04A3F">falha → status</text>
           <path class="edge" d="M310,416 L310,452"/>
           <path class="edge" d="M310,500 L310,538"/>
           <path class="edge yes" d="M310,602 L310,644"/>
-          <text class="lbl" x="320" y="626">healthy</text>
+          <text class="lbl" x="320" y="626">saudável</text>
           <path class="edge no" d="M352,570 C470,570 470,690 392,720"/>
-          <text class="lbl" x="448" y="636" fill="#B04A3F">canary fails</text>
+          <text class="lbl" x="448" y="636" fill="#B04A3F">canary falha</text>
           <path class="edge" d="M310,692 L310,730"/>
           <path class="edge" d="M310,778 L310,816"/>
 
@@ -217,31 +217,31 @@
 
           <g class="node" data-k="test">
             <rect x="210" y="176" width="200" height="48"/>
-            <text x="310" y="196" text-anchor="middle">Unit + integration tests</text>
+            <text x="310" y="196" text-anchor="middle">Testes unitários + integração</text>
             <text class="sub" x="310" y="212" text-anchor="middle">~6 min · 3 shards</text>
           </g>
 
           <g class="node gate" data-k="gate-tests">
             <path d="M310,262 L352,294 L310,326 L268,294 Z"/>
-            <text x="310" y="298" text-anchor="middle">pass?</text>
+            <text x="310" y="298" text-anchor="middle">passou?</text>
           </g>
 
           <g class="node bad" data-k="status">
             <rect x="60" y="176" width="180" height="48"/>
-            <text x="150" y="196" text-anchor="middle">Post failure status</text>
+            <text x="150" y="196" text-anchor="middle">Publicar status de falha</text>
             <text class="sub" x="150" y="212" text-anchor="middle">slack #deploys</text>
           </g>
 
           <g class="node" data-k="build">
             <rect x="210" y="368" width="200" height="48"/>
-            <text x="310" y="388" text-anchor="middle">Build + push image</text>
+            <text x="310" y="388" text-anchor="middle">Build + push da imagem</text>
             <text class="sub" x="310" y="404" text-anchor="middle">ghcr.io/birchline/web</text>
           </g>
 
           <g class="node" data-k="canary">
             <rect x="210" y="452" width="200" height="48"/>
             <text x="310" y="472" text-anchor="middle">Argo canary 5%</text>
-            <text class="sub" x="310" y="488" text-anchor="middle">10 min soak</text>
+            <text class="sub" x="310" y="488" text-anchor="middle">10 min de observação</text>
           </g>
 
           <g class="node gate" data-k="gate-canary">
@@ -251,42 +251,42 @@
 
           <g class="node" data-k="promote">
             <rect x="210" y="644" width="200" height="48"/>
-            <text x="310" y="664" text-anchor="middle">Promote 25 → 50 → 100%</text>
+            <text x="310" y="664" text-anchor="middle">Promover 25 → 50 → 100%</text>
             <text class="sub" x="310" y="680" text-anchor="middle">~8 min</text>
           </g>
 
           <g class="node bad" data-k="rollback">
             <rect x="392" y="700" width="170" height="48"/>
-            <text x="477" y="720" text-anchor="middle">Auto-rollback</text>
-            <text class="sub" x="477" y="736" text-anchor="middle">revert image tag</text>
+            <text x="477" y="720" text-anchor="middle">Rollback automático</text>
+            <text class="sub" x="477" y="736" text-anchor="middle">reverte a tag da imagem</text>
           </g>
 
           <g class="node" data-k="smoke">
             <rect x="210" y="730" width="200" height="48"/>
-            <text x="310" y="750" text-anchor="middle">Smoke tests in prod</text>
+            <text x="310" y="750" text-anchor="middle">Smoke tests em prod</text>
             <text class="sub" x="310" y="766" text-anchor="middle">playwright · 90s</text>
           </g>
 
           <g class="node ok term" data-k="done">
             <rect x="230" y="816" width="160" height="44"/>
-            <text x="310" y="843" text-anchor="middle">✅ Deploy complete</text>
+            <text x="310" y="843" text-anchor="middle">✅ Deploy concluído</text>
           </g>
         </svg>
       </div>
 
       <div class="legend">
-        <span><i class="chip"></i> process step</span>
-        <span><i class="chip gate"></i> decision</span>
-        <span><i class="chip ok"></i> terminal success</span>
-        <span><i class="chip bad"></i> failure path</span>
+        <span><i class="chip"></i> etapa do processo</span>
+        <span><i class="chip gate"></i> decisão</span>
+        <span><i class="chip ok"></i> sucesso terminal</span>
+        <span><i class="chip bad"></i> caminho de falha</span>
       </div>
     </div>
 
     <aside id="panel">
-      <div class="hint">Click a step in the chart →</div>
+      <div class="hint">Clique em uma etapa no diagrama →</div>
       <h3 id="p-title">git push main</h3>
-      <div class="meta" id="p-meta">trigger · 0s</div>
-      <p id="p-body">A push or merge to <code>main</code> fires the <code>deploy</code> workflow. Pushes to other branches stop after CI and never reach the image build.</p>
+      <div class="meta" id="p-meta">gatilho · 0s</div>
+      <p id="p-body">Um push ou merge em <code>main</code> dispara o workflow <code>deploy</code>. Pushes em outros branches param após o CI e nunca chegam ao build da imagem.</p>
       <pre id="p-code">on:
   push:
     branches: [main]</pre>
@@ -299,75 +299,75 @@
 const DETAIL = {
   push: {
     title: "git push main",
-    meta: "trigger · 0s",
-    body: "A push or merge to <code>main</code> fires the <code>deploy</code> workflow. Pushes to other branches stop after CI and never reach the image build.",
+    meta: "gatilho · 0s",
+    body: "Um push ou merge em <code>main</code> dispara o workflow <code>deploy</code>. Pushes em outros branches param após o CI e nunca chegam ao build da imagem.",
     code: "on:\n  push:\n    branches: [main]"
   },
   ci: {
     title: "CI · lint + typecheck",
     meta: "github actions · ~2 min",
-    body: "Runs ESLint and <code>tsc --noEmit</code> in parallel. This is the only job that also runs on pull-request branches, so it stays fast on purpose.",
+    body: "Executa ESLint e <code>tsc --noEmit</code> em paralelo. Este é o único job que também roda em branches de pull request, por isso é mantido rápido intencionalmente.",
     code: "jobs:\n  lint:\n    run: pnpm lint && pnpm typecheck"
   },
   test: {
-    title: "Unit + integration tests",
+    title: "Testes unitários + integração",
     meta: "github actions · ~6 min · 3 shards",
-    body: "Vitest unit suite plus the API integration tests against an ephemeral Postgres. Sharded three ways; the slowest shard gates the pipeline.",
+    body: "Suite de testes unitários Vitest mais os testes de integração da API contra um Postgres efêmero. Dividido em três shards; o shard mais lento bloqueia o pipeline.",
     code: "strategy:\n  matrix:\n    shard: [1, 2, 3]\nrun: pnpm test --shard ${{ matrix.shard }}/3"
   },
   "gate-tests": {
-    title: "Tests pass?",
-    meta: "decision",
-    body: "Any shard failing short-circuits here. Nothing is built, and a red status is posted back to the PR and to <code>#deploys</code>.",
+    title: "Testes passaram?",
+    meta: "decisão",
+    body: "Qualquer shard com falha interrompe aqui. Nada é construído e um status vermelho é publicado no PR e no <code>#deploys</code>.",
     code: "needs: [test]\nif: success()"
   },
   status: {
-    title: "Post failure status",
-    meta: "side-effect · ~5s",
-    body: "The <code>notify</code> job posts the failing shard's summary to Slack and sets the commit status to <code>failure</code>. Pipeline ends.",
+    title: "Publicar status de falha",
+    meta: "efeito colateral · ~5s",
+    body: "O job <code>notify</code> posta o resumo do shard com falha no Slack e define o status do commit como <code>failure</code>. Pipeline encerrado.",
     code: "uses: slackapi/slack-github-action@v1\nwith:\n  channel: '#deploys'"
   },
   build: {
-    title: "Build + push image",
+    title: "Build + push da imagem",
     meta: "github actions · ~4 min",
-    body: "Docker buildx with layer caching. Tags the image with the short SHA and pushes to GHCR. This is the first step that produces an artifact.",
+    body: "Docker buildx com cache de camadas. Marca a imagem com o SHA curto e envia para o GHCR. Esta é a primeira etapa que produz um artefato.",
     code: "tags: ghcr.io/birchline/web:${{ github.sha }}"
   },
   canary: {
     title: "Argo canary 5%",
-    meta: "argo rollouts · 10 min soak",
-    body: "Argo shifts 5% of traffic to the new ReplicaSet and watches the error-rate and p95 SLOs for ten minutes before deciding.",
+    meta: "argo rollouts · 10 min de observação",
+    body: "O Argo direciona 5% do tráfego para o novo ReplicaSet e observa os SLOs de taxa de erro e p95 durante dez minutos antes de decidir.",
     code: "steps:\n  - setWeight: 5\n  - pause: { duration: 10m }\n  - analysis: slo-check"
   },
   "gate-canary": {
-    title: "Canary healthy?",
-    meta: "decision · analysis template",
-    body: "The <code>slo-check</code> analysis compares error rate and p95 against the previous revision. Either metric breaching for two consecutive intervals fails the gate.",
+    title: "Canary saudável?",
+    meta: "decisão · analysis template",
+    body: "A análise <code>slo-check</code> compara a taxa de erro e o p95 com a revisão anterior. Qualquer métrica ultrapassando o limite por dois intervalos consecutivos reprova o gate.",
     code: "successCondition: result.error_rate < 0.5\n               && result.p95_ms < 800"
   },
   promote: {
-    title: "Promote 25 → 50 → 100%",
+    title: "Promover 25 → 50 → 100%",
     meta: "argo rollouts · ~8 min",
-    body: "Three more weight steps with a short pause between each. The same analysis runs at every step, so a late regression still aborts.",
+    body: "Mais três etapas de peso com uma pausa curta entre cada uma. A mesma análise roda em cada etapa, então uma regressão tardia ainda cancela o rollout.",
     code: "- setWeight: 25\n- pause: { duration: 2m }\n- setWeight: 50\n- pause: { duration: 2m }\n- setWeight: 100"
   },
   rollback: {
-    title: "Auto-rollback",
+    title: "Rollback automático",
     meta: "argo rollouts · ~30s",
-    body: "On a failed analysis Argo flips traffic back to the stable ReplicaSet and marks the rollout <code>Degraded</code>. A page goes to the on-call.",
+    body: "Em uma análise com falha, o Argo direciona o tráfego de volta para o ReplicaSet estável e marca o rollout como <code>Degraded</code>. Um alerta é enviado para o plantão.",
     code: "abort:\n  scaleDownDelaySeconds: 30"
   },
   smoke: {
-    title: "Smoke tests in prod",
+    title: "Smoke tests em prod",
     meta: "github actions · ~90s",
-    body: "A tiny Playwright suite hits the public URL: load the homepage, sign in with a synthetic account, create and delete one record.",
+    body: "Uma pequena suite Playwright acessa a URL pública: carrega a homepage, faz login com uma conta sintética, cria e exclui um registro.",
     code: "run: pnpm playwright test smoke/\nenv:\n  BASE_URL: https://birchline.app"
   },
   done: {
-    title: "Deploy complete",
-    meta: "terminal · ~30 min total",
-    body: "Commit status flips to <code>success</code>, the rollout is marked <code>Healthy</code>, and the SHA is recorded as the new stable revision.",
-    code: "✓ web@a1b9e3f live on prod"
+    title: "Deploy concluído",
+    meta: "terminal · ~30 min no total",
+    body: "O status do commit muda para <code>success</code>, o rollout é marcado como <code>Healthy</code> e o SHA é registrado como a nova revisão estável.",
+    code: "✓ web@a1b9e3f no ar em prod"
   }
 };
 

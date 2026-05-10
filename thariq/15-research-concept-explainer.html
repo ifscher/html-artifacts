@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Consistent hashing — an interactive explainer</title>
+<title>Consistent hashing — um explicador interativo</title>
 <style>
   :root {
     --ivory:   #FAF9F5;
@@ -172,21 +172,21 @@
 <div class="page">
 
   <main>
-    <div class="eyebrow">Research &amp; Learning · concept explainer</div>
-    <h1>Consistent hashing, in one ring</h1>
+    <div class="eyebrow">Pesquisa &amp; Aprendizado · explicador de conceito</div>
+    <h1>Consistent hashing, em um único anel</h1>
     <p class="lead">
-      You have <em>K</em> keys spread across <em>N</em> cache servers. A server dies, or you add one. How many
-      keys have to move? With naive <code>hash(key) mod N</code> the answer is "almost all of them." Consistent
-      hashing gets it down to roughly <code>K&nbsp;/&nbsp;N</code>. Here's why.
+      Você tem <em>K</em> chaves distribuídas entre <em>N</em> servidores de cache. Um servidor morre ou você
+      adiciona um. Quantas chaves precisam ser movidas? Com o ingênuo <code>hash(key) mod N</code> a resposta é
+      "quase todas". O consistent hashing reduz isso para aproximadamente <code>K&nbsp;/&nbsp;N</code>. Veja por quê.
     </p>
 
-    <h2>The trick: hash onto a circle, not a line</h2>
+    <h2>O truque: mapear para um círculo, não uma linha</h2>
     <p>
-      Map both <span class="term" data-term="node">nodes</span> and keys onto the same
-      <span class="term" data-term="ring">ring</span> (the hash output space, wrapped around). A key belongs to
-      the first node found by walking clockwise from the key's position. When a node leaves, only the keys in
-      its <span class="term" data-term="arc">arc</span> reassign — to the next node round — and everything else
-      stays put.
+      Mapeie tanto os <span class="term" data-term="node">nós</span> quanto as chaves no mesmo
+      <span class="term" data-term="ring">anel</span> (o espaço de saída do hash, enrolado em volta). Uma chave
+      pertence ao primeiro nó encontrado caminhando no sentido horário a partir da posição da chave. Quando um nó
+      sai, apenas as chaves no seu <span class="term" data-term="arc">arco</span> são reatribuídas — ao próximo nó
+      no anel — e todo o resto permanece no lugar.
     </p>
 
     <div class="demo">
@@ -194,66 +194,66 @@
         <svg class="ring" id="ring" viewBox="0 0 260 260"></svg>
         <div class="controls">
           <div class="row">
-            <label>nodes</label>
+            <label>nós</label>
             <input id="nSlider" type="range" min="2" max="8" value="4">
             <span class="val" id="nVal">4</span>
           </div>
           <div class="row">
-            <label>keys</label>
+            <label>chaves</label>
             <input id="kSlider" type="range" min="10" max="60" value="32" step="2">
             <span class="val" id="kVal">32</span>
           </div>
           <div>
-            <button id="rm">remove a node</button>
-            <button id="add">add a node</button>
-            <button id="reset">reset</button>
+            <button id="rm">remover um nó</button>
+            <button id="add">adicionar um nó</button>
+            <button id="reset">resetar</button>
           </div>
           <div class="readout" id="readout">
-            <b>4</b> nodes · <b>32</b> keys · <span class="moved">—</span> moved on last change
+            <b>4</b> nós · <b>32</b> chaves · <span class="moved">—</span> movidas na última alteração
           </div>
         </div>
       </div>
     </div>
     <p style="font-size:13px; color:var(--gray-500); max-width:640px;">
-      Colored arcs show ownership. Removing a node hands its arc to its clockwise neighbor; every dot outside
-      that arc keeps its color. That's the whole idea.
+      Os arcos coloridos mostram a propriedade. Remover um nó passa seu arco para o vizinho no sentido horário;
+      cada ponto fora desse arco mantém sua cor. Essa é a ideia toda.
     </p>
 
     <h2>Versus <code>mod N</code></h2>
     <table>
       <thead><tr><th></th><th>hash mod N</th><th>consistent hashing</th></tr></thead>
       <tbody>
-        <tr><td>Keys moved when N→N+1</td><td class="bad">~ (N−1)/N of all keys</td><td class="good">~ 1/(N+1)</td></tr>
-        <tr><td>Hot-spot risk</td><td class="good">even by construction</td><td>uneven — fix with <span class="term" data-term="vnode">virtual nodes</span></td></tr>
-        <tr><td>Lookup cost</td><td class="good">O(1)</td><td>O(log N) (binary search on ring)</td></tr>
-        <tr><td>Used by</td><td>array sharding, simple LB</td><td>Dynamo, Cassandra, Memcached clients, Envoy</td></tr>
+        <tr><td>Chaves movidas quando N→N+1</td><td class="bad">~ (N−1)/N de todas as chaves</td><td class="good">~ 1/(N+1)</td></tr>
+        <tr><td>Risco de hotspot</td><td class="good">distribuído por construção</td><td>desigual — corrija com <span class="term" data-term="vnode">nós virtuais</span></td></tr>
+        <tr><td>Custo de busca</td><td class="good">O(1)</td><td>O(log N) (busca binária no anel)</td></tr>
+        <tr><td>Usado por</td><td>sharding em arrays, LB simples</td><td>Dynamo, Cassandra, clientes Memcached, Envoy</td></tr>
       </tbody>
     </table>
 
-    <h2>Where you'll meet it</h2>
+    <h2>Onde você vai encontrar</h2>
     <p>
-      Any time you're spreading state across a pool that changes size: cache fleets, partitioned queues, object
-      storage, request routing with sticky sessions. The
-      <span class="term" data-term="vnode">virtual-node</span> variant (each physical node owns many small arcs
-      instead of one big one) is what production systems actually run, because it smooths out load and makes
-      rebalancing even gentler.
+      Toda vez que você distribui estado em um pool que muda de tamanho: frotas de cache, filas particionadas,
+      armazenamento de objetos, roteamento de requisições com sessões persistentes. A variante de
+      <span class="term" data-term="vnode">nó virtual</span> (cada nó físico possui muitos arcos pequenos em vez
+      de um grande) é o que os sistemas em produção realmente usam, porque distribui melhor a carga e torna o
+      rebalanceamento ainda mais suave.
     </p>
   </main>
 
   <!-- glossary -->
   <aside>
-    <div class="label">Glossary</div>
+    <div class="label">Glossário</div>
     <dl id="gloss">
-      <dt data-g="ring">Ring</dt>
-      <dd>The hash function's output range, treated as a circle so the value after <code>max</code> is <code>0</code>.</dd>
-      <dt data-g="node">Node</dt>
-      <dd>A server placed on the ring at <code>hash(node_id)</code>. Owns every key between it and its anticlockwise neighbor.</dd>
-      <dt data-g="arc">Arc</dt>
-      <dd>The stretch of ring a node owns. Removing a node merges its arc into the next node's.</dd>
-      <dt data-g="vnode">Virtual node</dt>
-      <dd>Placing each physical node at many ring positions so arcs are small and evenly sized.</dd>
-      <dt data-g="successor">Successor</dt>
-      <dd>The first node clockwise from a given point — the owner of any key landing there.</dd>
+      <dt data-g="ring">Anel</dt>
+      <dd>O intervalo de saída da função hash, tratado como um círculo para que o valor após <code>max</code> seja <code>0</code>.</dd>
+      <dt data-g="node">Nó</dt>
+      <dd>Um servidor posicionado no anel em <code>hash(node_id)</code>. Possui cada chave entre ele e seu vizinho no sentido anti-horário.</dd>
+      <dt data-g="arc">Arco</dt>
+      <dd>O trecho do anel que um nó possui. Remover um nó mescla seu arco ao do próximo nó.</dd>
+      <dt data-g="vnode">Nó virtual</dt>
+      <dd>Posicionar cada nó físico em várias posições no anel para que os arcos sejam pequenos e uniformes.</dd>
+      <dt data-g="successor">Sucessor</dt>
+      <dd>O primeiro nó no sentido horário a partir de um ponto — o dono de qualquer chave que cair ali.</dd>
     </dl>
   </aside>
 
@@ -325,8 +325,8 @@ function render(moved) {
   ring.innerHTML = svg;
 
   readout.innerHTML =
-    `<b>${nodes.length}</b> nodes · <b>${keys.length}</b> keys · ` +
-    `<span class="moved">${moved == null ? "—" : moved + " (" + Math.round(moved / keys.length * 100) + "%)"}</span> moved on last change`;
+    `<b>${nodes.length}</b> nós · <b>${keys.length}</b> chaves · ` +
+    `<span class="moved">${moved == null ? "—" : moved + " (" + Math.round(moved / keys.length * 100) + "%)"}</span> movidas na última alteração`;
 }
 
 function diffAndRender() {

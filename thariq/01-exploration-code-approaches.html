@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Debounced search — three approaches</title>
+  <title>Busca com debounce — três abordagens</title>
   <style>
     :root {
       --ivory:    #FAF9F5;
@@ -257,12 +257,12 @@
   <div class="page">
 
     <header class="page-head">
-      <div class="eyebrow">Exploration · Birchline web client</div>
-      <h1>Three ways to implement debounced search</h1>
+      <div class="eyebrow">Exploração · Birchline web client</div>
+      <h1>Três formas de implementar busca com debounce</h1>
       <div class="prompt-box">
         <span class="label">Prompt</span>
-        Show me three different ways to implement debounced search for the task
-        filter input in our React codebase, with tradeoffs for each.
+        Mostre três formas diferentes de implementar busca com debounce para o
+        input de filtro de tarefas no nosso codebase React, com os trade-offs de cada uma.
       </div>
     </header>
 
@@ -273,8 +273,8 @@
       <!-- ---------- Approach 1 ---------- -->
       <article class="approach">
         <header class="approach-head">
-          <h2><span class="num">01</span>Inline useEffect + setTimeout</h2>
-          <p>Debounce logic lives directly inside the component that owns the input.</p>
+          <h2><span class="num">01</span>useEffect + setTimeout inline</h2>
+          <p>A lógica de debounce fica diretamente dentro do componente que possui o input.</p>
         </header>
 
         <div class="code"><pre><span class="kw">export function</span> <span class="fn">TaskSearch</span>() {
@@ -292,43 +292,43 @@
     &lt;<span class="fn">input</span>
       value={draft}
       onChange={(e) <span class="kw">=&gt;</span> setDraft(e.target.value)}
-      placeholder=<span class="str">"Filter tasks…"</span>
+      placeholder=<span class="str">"Filtrar tarefas…"</span>
     /&gt;
   );
 }</pre></div>
 
         <div class="tradeoffs">
           <div class="row head">
-            <div class="cell">Pro</div>
-            <div class="cell">Con</div>
+            <div class="cell">Prós</div>
+            <div class="cell">Contras</div>
           </div>
           <div class="row">
-            <div class="cell pro">Zero new abstractions to learn</div>
-            <div class="cell con">Logic duplicated everywhere search exists</div>
+            <div class="cell pro">Nenhuma abstração nova para aprender</div>
+            <div class="cell con">Lógica duplicada em todo lugar que tem busca</div>
           </div>
           <div class="row">
-            <div class="cell pro">Easy to step through in devtools</div>
-            <div class="cell con">Two pieces of state for one conceptual value</div>
+            <div class="cell pro">Fácil de depurar no devtools</div>
+            <div class="cell con">Dois estados para um único valor conceitual</div>
           </div>
           <div class="row">
-            <div class="cell pro">No dependency or bundle change</div>
-            <div class="cell con">Delay constant is buried in component body</div>
+            <div class="cell pro">Sem nova dependência ou mudança no bundle</div>
+            <div class="cell con">Constante de delay enterrada no corpo do componente</div>
           </div>
         </div>
 
         <div class="chips">
-          <span class="chip">Bundle impact: <strong>+0 kb</strong></span>
-          <span class="chip">Testability: <strong>medium</strong></span>
-          <span class="chip">Reuse: <strong>low</strong></span>
-          <span class="chip">SSR safe: <strong>yes</strong></span>
+          <span class="chip">Impacto no bundle: <strong>+0 kb</strong></span>
+          <span class="chip">Testabilidade: <strong>média</strong></span>
+          <span class="chip">Reuso: <strong>baixo</strong></span>
+          <span class="chip">Seguro para SSR: <strong>sim</strong></span>
         </div>
       </article>
 
       <!-- ---------- Approach 2 ---------- -->
       <article class="approach">
         <header class="approach-head">
-          <h2><span class="num">02</span>Custom useDebounce hook</h2>
-          <p>Extract the timer into a shared hook under <code style="font-family:var(--mono)">src/hooks/</code>.</p>
+          <h2><span class="num">02</span>Hook customizado useDebounce</h2>
+          <p>Extrai o timer para um hook compartilhado em <code style="font-family:var(--mono)">src/hooks/</code>.</p>
         </header>
 
         <div class="code"><pre><span class="cm">// src/hooks/useDebounce.ts</span>
@@ -348,36 +348,36 @@
 
         <div class="tradeoffs">
           <div class="row head">
-            <div class="cell">Pro</div>
-            <div class="cell">Con</div>
+            <div class="cell">Prós</div>
+            <div class="cell">Contras</div>
           </div>
           <div class="row">
-            <div class="cell pro">Single import reused across filter, command bar, board search</div>
-            <div class="cell con">One more file to maintain and document</div>
+            <div class="cell pro">Um único import reutilizado no filtro, command bar e busca do board</div>
+            <div class="cell con">Mais um arquivo para manter e documentar</div>
           </div>
           <div class="row">
-            <div class="cell pro">Trivial to unit test with fake timers</div>
-            <div class="cell con">Generic <code style="font-family:var(--mono)">T</code> hides intent slightly</div>
+            <div class="cell pro">Trivial de testar com fake timers</div>
+            <div class="cell con">O genérico <code style="font-family:var(--mono)">T</code> esconde um pouco a intenção</div>
           </div>
           <div class="row">
-            <div class="cell pro">Delay is a visible, tunable argument</div>
-            <div class="cell con">Still re-renders on every keystroke</div>
+            <div class="cell pro">O delay é um argumento visível e ajustável</div>
+            <div class="cell con">Ainda re-renderiza a cada tecla pressionada</div>
           </div>
         </div>
 
         <div class="chips">
-          <span class="chip">Bundle impact: <strong>+0.2 kb</strong></span>
-          <span class="chip">Testability: <strong>high</strong></span>
-          <span class="chip">Reuse: <strong>high</strong></span>
-          <span class="chip">SSR safe: <strong>yes</strong></span>
+          <span class="chip">Impacto no bundle: <strong>+0,2 kb</strong></span>
+          <span class="chip">Testabilidade: <strong>alta</strong></span>
+          <span class="chip">Reuso: <strong>alto</strong></span>
+          <span class="chip">Seguro para SSR: <strong>sim</strong></span>
         </div>
       </article>
 
       <!-- ---------- Approach 3 ---------- -->
       <article class="approach">
         <header class="approach-head">
-          <h2><span class="num">03</span>Tiny external library</h2>
-          <p>Adopt <code style="font-family:var(--mono)">use-debounce</code> for both values and callbacks.</p>
+          <h2><span class="num">03</span>Biblioteca externa pequena</h2>
+          <p>Adota <code style="font-family:var(--mono)">use-debounce</code> para valores e callbacks.</p>
         </header>
 
         <div class="code"><pre><span class="kw">import</span> { useDebouncedCallback }
@@ -404,28 +404,28 @@
 
         <div class="tradeoffs">
           <div class="row head">
-            <div class="cell">Pro</div>
-            <div class="cell">Con</div>
+            <div class="cell">Prós</div>
+            <div class="cell">Contras</div>
           </div>
           <div class="row">
-            <div class="cell pro">leading / trailing / maxWait handled for us</div>
-            <div class="cell con">New runtime dependency to audit and update</div>
+            <div class="cell pro">leading / trailing / maxWait tratados automaticamente</div>
+            <div class="cell con">Nova dependência de runtime para auditar e atualizar</div>
           </div>
           <div class="row">
-            <div class="cell pro">Callback form skips intermediate re-renders</div>
-            <div class="cell con">Uncontrolled input diverges from Birchline form patterns</div>
+            <div class="cell pro">Forma de callback evita re-renders intermediários</div>
+            <div class="cell con">Input não controlado diverge dos padrões de formulário do Birchline</div>
           </div>
           <div class="row">
-            <div class="cell pro">Well-tested edge cases (unmount, flush, cancel)</div>
-            <div class="cell con">~1.4 kb gzipped for something we could own</div>
+            <div class="cell pro">Casos de borda bem testados (unmount, flush, cancel)</div>
+            <div class="cell con">~1,4 kb gzipped para algo que poderíamos implementar</div>
           </div>
         </div>
 
         <div class="chips">
-          <span class="chip">Bundle impact: <strong>+1.4 kb</strong></span>
-          <span class="chip">Testability: <strong>high</strong></span>
-          <span class="chip">Reuse: <strong>high</strong></span>
-          <span class="chip">SSR safe: <strong>yes</strong></span>
+          <span class="chip">Impacto no bundle: <strong>+1,4 kb</strong></span>
+          <span class="chip">Testabilidade: <strong>alta</strong></span>
+          <span class="chip">Reuso: <strong>alto</strong></span>
+          <span class="chip">Seguro para SSR: <strong>sim</strong></span>
         </div>
       </article>
 
@@ -434,17 +434,17 @@
     <!-- ============================================================= -->
 
     <aside class="reco">
-      <h2>Recommendation</h2>
+      <h2>Recomendação</h2>
       <p>
-        Go with <strong>approach 02, the custom <code>useDebounce</code> hook</strong>.
-        Birchline already has three places that hand-roll the inline pattern
-        (task filter, command palette, member picker), so extracting one
-        shared hook removes duplication without taking on a new dependency.
+        Use a <strong>abordagem 02, o hook customizado <code>useDebounce</code></strong>.
+        O Birchline já tem três lugares que replicam o padrão inline
+        (filtro de tarefas, command palette, seletor de membros), então extrair um
+        hook compartilhado elimina a duplicação sem adicionar nova dependência.
       </p>
       <p>
-        Revisit approach 03 only if we later need <code>maxWait</code> or
-        <code>flush()</code> semantics — the library earns its bundle cost
-        once the requirements outgrow a ten-line hook.
+        Reavalie a abordagem 03 apenas se precisarmos de semânticas de <code>maxWait</code> ou
+        <code>flush()</code> — a biblioteca justifica seu custo no bundle
+        quando os requisitos ultrapassam um hook de dez linhas.
       </p>
     </aside>
 

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Birchline — Sidebar drag-to-reorder</title>
+<title>Birchline — Arrastar para reordenar na sidebar</title>
 <style>
   :root {
     --ivory: #FAF9F5;
@@ -246,12 +246,12 @@
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">Birchline / prototype / interaction</div>
-    <h1>Sidebar drag-to-reorder</h1>
+    <div class="eyebrow">Birchline / protótipo / interação</div>
+    <h1>Arrastar para reordenar na sidebar</h1>
     <p class="sub">
-      Throwaway HTML so we can <em>feel</em> the reorder before porting it to
-      React. Native <code class="inline">dragstart / dragover / drop</code>,
-      ~40 lines of JS, no libraries. Grab a row by the dots and move it.
+      HTML descartável para <em>sentir</em> a reordenação antes de portar para o
+      React. <code class="inline">dragstart / dragover / drop</code> nativos,
+      ~40 linhas de JS, sem bibliotecas. Arraste uma linha pelos pontos e mova-a.
     </p>
   </header>
 
@@ -259,77 +259,75 @@
 
     <div>
       <nav class="sidebar">
-        <div class="sidebar-title">Views</div>
+        <div class="sidebar-title">Visualizações</div>
         <ul class="list" id="list">
           <li class="item" draggable="true">
             <span class="grip"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            <span class="label">Inbox</span>
+            <span class="label">Entrada</span>
             <span class="count">14</span>
           </li>
           <li class="item" draggable="true">
             <span class="grip"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            <span class="label">Today</span>
+            <span class="label">Hoje</span>
             <span class="count">3</span>
           </li>
           <li class="item" draggable="true">
             <span class="grip"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            <span class="label">Upcoming</span>
+            <span class="label">Próximas</span>
             <span class="count">21</span>
           </li>
           <li class="item" draggable="true">
             <span class="grip"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            <span class="label">Projects</span>
+            <span class="label">Projetos</span>
             <span class="count">8</span>
           </li>
           <li class="item" draggable="true">
             <span class="grip"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            <span class="label">Archive</span>
+            <span class="label">Arquivo</span>
             <span class="count"></span>
           </li>
           <li class="item" draggable="true">
             <span class="grip"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            <span class="label">Trash</span>
+            <span class="label">Lixeira</span>
             <span class="count"></span>
           </li>
           <div class="indicator" id="indicator"></div>
         </ul>
       </nav>
-      <p class="footnote">Order persists in the DOM only — refresh to reset.</p>
+      <p class="footnote">A ordem persiste apenas no DOM — atualize a página para resetar.</p>
     </div>
 
     <div>
       <section class="notes">
-        <h2>What you're feeling</h2>
-        <p class="lede">Design decisions baked into this prototype, so you can push back on them.</p>
+        <h2>O que você está sentindo</h2>
+        <p class="lede">Decisões de design incorporadas neste protótipo, para que você possa questioná-las.</p>
         <ul>
           <li>
-            <b>Drop indicator snaps to the nearest gap</b>, not the raw cursor Y.
-            It only moves when you cross a row's midpoint — feels more decisive,
-            less jittery.
+            <b>O indicador de soltar encaixa na lacuna mais próxima</b>, não na posição Y bruta do cursor.
+            Ele só se move quando você cruza o ponto médio de uma linha — parece mais decisivo,
+            menos instável.
           </li>
           <li>
-            <b>Dragged row stays in place at 35% opacity</b> with a 2&deg; tilt.
-            Keeping the ghost in the list preserves your sense of where you
-            started; the tilt reads as "lifted."
+            <b>A linha arrastada permanece no lugar com 35% de opacidade</b> e uma inclinação de 2&deg;.
+            Manter o fantasma na lista preserva a noção de onde você começou; a inclinação transmite "levantado."
           </li>
           <li>
-            <b>Grip dots are the affordance, but the whole row is draggable.</b>
-            Dots darken on hover to teach the gesture without forcing a
-            tiny hit target.
+            <b>Os pontos são a affordance, mas a linha inteira é arrastável.</b>
+            Os pontos escurecem no hover para ensinar o gesto sem forçar um alvo de clique minúsculo.
           </li>
           <li>
-            <b>No auto-scroll, no drop animation.</b> Left out on purpose so the
-            core feel is easy to judge — say the word and we add them next.
+            <b>Sem auto-scroll, sem animação de soltar.</b> Omitidos intencionalmente para que a
+            sensação central seja fácil de avaliar — diga a palavra e adicionamos na próxima iteração.
           </li>
         </ul>
       </section>
 
       <section class="questions">
-        <h2>Open questions</h2>
+        <h2>Questões em aberto</h2>
         <ol>
-          <li>Should <b>Trash</b> (and maybe <b>Archive</b>) be pinned to the bottom and excluded from reordering?</li>
-          <li>Do we want rows to <b>slide</b> to their new slot on drop, or is the instant snap acceptable?</li>
-          <li>Keyboard path: is <code class="inline">Alt + Arrow</code> to move the focused row enough for the first ship?</li>
+          <li>A <b>Lixeira</b> (e talvez o <b>Arquivo</b>) deve ser fixada no rodapé e excluída da reordenação?</li>
+          <li>Queremos que as linhas <b>deslizem</b> para a nova posição ao soltar, ou o snap instantâneo é aceitável?</li>
+          <li>Caminho pelo teclado: <code class="inline">Alt + Seta</code> para mover a linha focada é suficiente para o primeiro lançamento?</li>
         </ol>
       </section>
     </div>

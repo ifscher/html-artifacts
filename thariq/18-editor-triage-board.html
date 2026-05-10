@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Birchline — Cycle 14 triage</title>
+<title>Birchline — Triage do Ciclo 14</title>
 <style>
   :root {
     --ivory: #FAF9F5;
@@ -295,21 +295,21 @@
 
   <header>
     <div class="eyebrow">Birchline / editor / triage</div>
-    <h1>Cycle 14 triage</h1>
+    <h1>Triage do Ciclo 14</h1>
     <p class="sub">
-      Twenty-four open Linear tickets, pre-sorted into a best guess. Drag them
-      across Now / Next / Later / Cut until the cut feels right, then copy the
-      result back into the planning doc as markdown.
+      Vinte e quatro tickets abertos no Linear, pré-ordenados com uma sugestão inicial. Arraste-os
+      entre Agora / Próximo / Depois / Cortar até o corte parecer certo, depois copie
+      o resultado de volta para o doc de planejamento como markdown.
     </p>
-    <div class="hintline">drag tickets between columns &nbsp;·&nbsp; click a tag to filter</div>
+    <div class="hintline">arraste tickets entre colunas &nbsp;·&nbsp; clique em uma tag para filtrar</div>
   </header>
 
   <div class="toolbar">
     <div class="summary" id="summary"></div>
     <div class="spacer"></div>
     <button class="filter-active" id="filterBadge"></button>
-    <button class="ghost" id="resetBtn">Reset</button>
-    <button class="primary" id="copyBtn">Copy as markdown</button>
+    <button class="ghost" id="resetBtn">Resetar</button>
+    <button class="primary" id="copyBtn">Copiar como markdown</button>
   </div>
 
   <div class="board" id="board"></div>
@@ -319,43 +319,43 @@
 <script>
   // ---------- data ----------
   var COLUMNS = [
-    { key: 'now',   label: 'Now',   rationale: 'Blocking the v2.4 release or actively losing user data.' },
-    { key: 'next',  label: 'Next',  rationale: 'High-leverage and well-scoped — start the moment Now clears.' },
-    { key: 'later', label: 'Later', rationale: 'Real, but can ride to a future cycle without anyone noticing.' },
-    { key: 'cut',   label: 'Cut',   rationale: 'Not this quarter — close, dedupe, or push back to the requester.' }
+    { key: 'now',   label: 'Agora',   rationale: 'Bloqueando o lançamento v2.4 ou causando perda ativa de dados de usuários.' },
+    { key: 'next',  label: 'Próximo', rationale: 'Alto impacto e bem definido — iniciar assim que Agora for concluído.' },
+    { key: 'later', label: 'Depois',  rationale: 'Real, mas pode ir para um ciclo futuro sem que ninguém perceba.' },
+    { key: 'cut',   label: 'Cortar',  rationale: 'Não neste trimestre — fechar, deduplicar ou devolver ao solicitante.' }
   ];
 
   var EST_PTS = { S: 1, M: 2, L: 3 };
 
   // tag, est, owner, col
   var INITIAL = [
-    { id: 'BIR-241', title: 'Fix sync conflict toast firing twice on reconnect', tag: 'bug',   est: 'M', owner: 'AK', col: 'now' },
-    { id: 'BIR-238', title: 'Comments lost when editing offline then reloading', tag: 'bug',   est: 'L', owner: 'JM', col: 'now' },
-    { id: 'BIR-252', title: 'Billing webhook 500s on annual → monthly downgrade', tag: 'bug',   est: 'M', owner: 'RS', col: 'now' },
-    { id: 'BIR-219', title: 'Migrate workspace permissions to new ACL table',    tag: 'debt',  est: 'L', owner: 'AK', col: 'now' },
-    { id: 'BIR-260', title: 'SSO login loop on Safari 17 with strict cookies',   tag: 'bug',   est: 'S', owner: 'TN', col: 'now' },
+    { id: 'BIR-241', title: 'Corrigir toast de conflito de sync disparando duas vezes ao reconectar', tag: 'bug',   est: 'M', owner: 'AK', col: 'now' },
+    { id: 'BIR-238', title: 'Comentários perdidos ao editar offline e recarregar',                   tag: 'bug',   est: 'L', owner: 'JM', col: 'now' },
+    { id: 'BIR-252', title: 'Webhook de billing com erro 500 em downgrade anual → mensal',           tag: 'bug',   est: 'M', owner: 'RS', col: 'now' },
+    { id: 'BIR-219', title: 'Migrar permissões de workspace para nova tabela ACL',                   tag: 'debt',  est: 'L', owner: 'AK', col: 'now' },
+    { id: 'BIR-260', title: 'Loop de login SSO no Safari 17 com cookies estritos',                   tag: 'bug',   est: 'S', owner: 'TN', col: 'now' },
 
-    { id: 'BIR-244', title: 'Inline @-mention picker in doc comments',           tag: 'feat',  est: 'M', owner: 'JM', col: 'next' },
-    { id: 'BIR-231', title: 'Bulk-archive completed projects from the sidebar',  tag: 'feat',  est: 'S', owner: 'EL', col: 'next' },
-    { id: 'BIR-247', title: 'Activity feed: collapse repeated edit events',      tag: 'feat',  est: 'M', owner: 'TN', col: 'next' },
-    { id: 'BIR-228', title: 'Notification preferences per project',              tag: 'feat',  est: 'L', owner: 'EL', col: 'next' },
-    { id: 'BIR-255', title: 'Keyboard shortcut cheat-sheet overlay (⌘/)',        tag: 'feat',  est: 'S', owner: 'RS', col: 'next' },
-    { id: 'BIR-236', title: 'Empty-state illustrations for new workspaces',      tag: 'chore', est: 'S', owner: 'EL', col: 'next' },
-    { id: 'BIR-249', title: 'Audit log export to CSV for admins',                tag: 'feat',  est: 'M', owner: 'AK', col: 'next' },
+    { id: 'BIR-244', title: 'Seletor de @menção inline nos comentários de doc',                      tag: 'feat',  est: 'M', owner: 'JM', col: 'next' },
+    { id: 'BIR-231', title: 'Arquivar projetos concluídos em massa pela sidebar',                    tag: 'feat',  est: 'S', owner: 'EL', col: 'next' },
+    { id: 'BIR-247', title: 'Feed de atividade: colapsar eventos de edição repetidos',               tag: 'feat',  est: 'M', owner: 'TN', col: 'next' },
+    { id: 'BIR-228', title: 'Preferências de notificação por projeto',                               tag: 'feat',  est: 'L', owner: 'EL', col: 'next' },
+    { id: 'BIR-255', title: 'Overlay de atalhos de teclado (⌘/)',                                    tag: 'feat',  est: 'S', owner: 'RS', col: 'next' },
+    { id: 'BIR-236', title: 'Ilustrações de empty-state para novos workspaces',                      tag: 'chore', est: 'S', owner: 'EL', col: 'next' },
+    { id: 'BIR-249', title: 'Exportação de audit log para CSV para admins',                          tag: 'feat',  est: 'M', owner: 'AK', col: 'next' },
 
-    { id: 'BIR-213', title: 'Dark mode pass on settings + billing pages',        tag: 'chore', est: 'M', owner: 'EL', col: 'later' },
-    { id: 'BIR-258', title: 'Slack integration: post on milestone close',        tag: 'feat',  est: 'M', owner: 'RS', col: 'later' },
-    { id: 'BIR-221', title: 'Replace moment.js with date-fns across web',        tag: 'debt',  est: 'L', owner: 'TN', col: 'later' },
-    { id: 'BIR-263', title: 'Drag-to-reorder columns on the board view',         tag: 'feat',  est: 'M', owner: 'JM', col: 'later' },
-    { id: 'BIR-209', title: 'Upgrade Postgres minor + reindex search vectors',   tag: 'chore', est: 'M', owner: 'AK', col: 'later' },
-    { id: 'BIR-251', title: 'Per-doc read receipts in the share dialog',         tag: 'feat',  est: 'L', owner: 'JM', col: 'later' },
-    { id: 'BIR-240', title: 'Onboarding checklist resurfaces after dismissal',   tag: 'bug',   est: 'S', owner: 'TN', col: 'later' },
-    { id: 'BIR-265', title: 'Add request-id to client error reports',            tag: 'debt',  est: 'S', owner: 'RS', col: 'later' },
+    { id: 'BIR-213', title: 'Revisão de dark mode nas páginas de configurações e billing',           tag: 'chore', est: 'M', owner: 'EL', col: 'later' },
+    { id: 'BIR-258', title: 'Integração Slack: postar ao fechar um marco',                           tag: 'feat',  est: 'M', owner: 'RS', col: 'later' },
+    { id: 'BIR-221', title: 'Substituir moment.js por date-fns em toda a web',                       tag: 'debt',  est: 'L', owner: 'TN', col: 'later' },
+    { id: 'BIR-263', title: 'Arrastar para reordenar colunas na visualização de board',              tag: 'feat',  est: 'M', owner: 'JM', col: 'later' },
+    { id: 'BIR-209', title: 'Atualizar minor do Postgres + reindexar vetores de busca',              tag: 'chore', est: 'M', owner: 'AK', col: 'later' },
+    { id: 'BIR-251', title: 'Confirmações de leitura por doc no diálogo de compartilhamento',        tag: 'feat',  est: 'L', owner: 'JM', col: 'later' },
+    { id: 'BIR-240', title: 'Checklist de onboarding reaparece após ser dispensado',                 tag: 'bug',   est: 'S', owner: 'TN', col: 'later' },
+    { id: 'BIR-265', title: 'Adicionar request-id aos relatórios de erro do cliente',                tag: 'debt',  est: 'S', owner: 'RS', col: 'later' },
 
-    { id: 'BIR-198', title: 'Custom emoji reactions on comments',                tag: 'feat',  est: 'M', owner: 'EL', col: 'cut' },
-    { id: 'BIR-204', title: 'Native Windows desktop wrapper',                    tag: 'feat',  est: 'L', owner: 'TN', col: 'cut' },
-    { id: 'BIR-217', title: 'AI summary of long comment threads',                tag: 'feat',  est: 'L', owner: 'JM', col: 'cut' },
-    { id: 'BIR-233', title: 'Public roadmap page with voting',                   tag: 'feat',  est: 'L', owner: 'RS', col: 'cut' }
+    { id: 'BIR-198', title: 'Reações com emoji personalizados em comentários',                       tag: 'feat',  est: 'M', owner: 'EL', col: 'cut' },
+    { id: 'BIR-204', title: 'Wrapper desktop nativo para Windows',                                   tag: 'feat',  est: 'L', owner: 'TN', col: 'cut' },
+    { id: 'BIR-217', title: 'Resumo por IA de threads de comentários longos',                        tag: 'feat',  est: 'L', owner: 'JM', col: 'cut' },
+    { id: 'BIR-233', title: 'Página de roadmap público com votação',                                 tag: 'feat',  est: 'L', owner: 'RS', col: 'cut' }
   ];
 
   var OWNER_CLASS = { AK: 'o1', JM: 'o2', RS: 'o3', TN: 'o4', EL: 'o1' };
@@ -491,7 +491,7 @@
 
     COLUMNS.forEach(function (c) {
       colCounts[c.key].textContent = counts[c.key];
-      colFoots[c.key].innerHTML = 'estimate <b>' + pts[c.key] + ' pt' + (pts[c.key] === 1 ? '' : 's') + '</b>';
+      colFoots[c.key].innerHTML = 'estimativa <b>' + pts[c.key] + ' pt' + (pts[c.key] === 1 ? '' : 's') + '</b>';
     });
 
     var summary = document.getElementById('summary');
@@ -501,7 +501,7 @@
 
     var badge = document.getElementById('filterBadge');
     if (activeFilter) {
-      badge.textContent = 'filter: ' + activeFilter + ' ×';
+      badge.textContent = 'filtro: ' + activeFilter + ' ×';
       badge.classList.add('on');
     } else {
       badge.classList.remove('on');
@@ -516,7 +516,7 @@
   // ---------- export ----------
   function buildMarkdown() {
     var lines = [];
-    lines.push('# Birchline — Cycle 14 triage');
+    lines.push('# Birchline — Triage do Ciclo 14');
     lines.push('');
     COLUMNS.forEach(function (c) {
       var rows = tickets.filter(function (t) { return t.col === c.key; });
@@ -538,11 +538,11 @@
   copyBtn.addEventListener('click', function () {
     var md = buildMarkdown();
     function flash() {
-      copyBtn.textContent = 'Copied ✓';
+      copyBtn.textContent = 'Copiado ✓';
       copyBtn.classList.add('copied');
       clearTimeout(copyTimer);
       copyTimer = setTimeout(function () {
-        copyBtn.textContent = 'Copy as markdown';
+        copyBtn.textContent = 'Copiar como markdown';
         copyBtn.classList.remove('copied');
       }, 1200);
     }

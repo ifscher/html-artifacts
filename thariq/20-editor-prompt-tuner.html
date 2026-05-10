@@ -1,9 +1,9 @@
-<!doctype html>
-<html lang="en">
+﻿<!doctype html>
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Birchline — Support reply prompt tuner</title>
+<title>Birchline — Ajustador de prompt de resposta ao suporte</title>
 <style>
   :root {
     --ivory: #FAF9F5;
@@ -290,16 +290,16 @@
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">Birchline / editor / prompt-tuner</div>
-    <h1>Support reply draft prompt</h1>
-    <p class="sub">Edit the system prompt on the left and watch three real sample tickets re-render the filled template on the right, live as you type. When it reads well across all three moods, copy the template out.</p>
+    <div class="eyebrow">Birchline / editor / ajustador-de-prompt</div>
+    <h1>Prompt de rascunho de resposta ao suporte</h1>
+    <p class="sub">Edite o prompt do sistema à esquerda e veja três tickets de exemplo reais re-renderizarem o template preenchido à direita, ao vivo enquanto você digita. Quando estiver bom nos três cenários, copie o template.</p>
   </header>
 
   <div class="toolbar">
-    <button id="copyBtn" class="btn-primary">Copy prompt</button>
-    <button id="resetBtn" class="btn-ghost">Reset</button>
+    <button id="copyBtn" class="btn-primary">Copiar prompt</button>
+    <button id="resetBtn" class="btn-ghost">Resetar</button>
     <div class="spacer"></div>
-    <div class="hint">slots use <strong>{{double_brace}}</strong> syntax</div>
+    <div class="hint">slots usam sintaxe <strong>{{dupla_chave}}</strong></div>
   </div>
 
   <div class="cols">
@@ -313,20 +313,20 @@
       </div>
       <div id="editor" class="editor" contenteditable="true" spellcheck="false" autocapitalize="off" autocorrect="off"></div>
       <div class="legend">
-        <div class="legend-label">Available slots</div>
+        <div class="legend-label">Slots disponíveis</div>
         <div id="legendChips" class="legend-chips"></div>
       </div>
     </section>
 
     <!-- right -->
     <section class="panel preview-panel">
-      <div class="preview-head">Live preview · 3 sample tickets</div>
+      <div class="preview-head">Preview ao vivo · 3 tickets de exemplo</div>
       <div id="samples"></div>
     </section>
 
   </div>
 
-  <footer>Highlighted slots fill from each sample's ticket fields. Anything underlined in dashed clay isn't a known field and will pass through unfilled.</footer>
+  <footer>Slots destacados são preenchidos com os campos de cada ticket. Qualquer coisa sublinhada em tracejado laranja não é um campo conhecido e passará sem ser preenchida.</footer>
 
 </div>
 
@@ -339,49 +339,49 @@
   // ---------------------------------------------------------------------------
 
   var DEFAULT_TEMPLATE =
-'You are a support agent for Birchline, a project workspace for small teams.\n' +
+'Você é um agente de suporte da Birchline, um espaço de trabalho para times pequenos.\n' +
 '\n' +
-'A customer named {{customer_name}} on the {{plan_tier}} plan wrote in about:\n' +
+'Um cliente chamado {{customer_name}} no plano {{plan_tier}} entrou em contato sobre:\n' +
 '"{{ticket_subject}}"\n' +
 '\n' +
-'Their message:\n' +
+'Mensagem dele:\n' +
 '{{ticket_body}}\n' +
 '\n' +
-'Write a reply that is {{tone}}, no more than 120 words, and ends with a single concrete next step.\n' +
-'Never promise a refund without escalating. Sign off as "The Birchline team."';
+'Escreva uma resposta que seja {{tone}}, com no máximo 120 palavras, e termine com um próximo passo concreto.\n' +
+'Nunca prometa reembolso sem escalar. Assine como "O time Birchline."';
 
   var SAMPLES = [
     {
-      label: 'SAMPLE 1',
+      label: 'EXEMPLO 1',
       planClass: 'free',
       data: {
         customer_name: 'Priya N.',
         plan_tier: 'Free',
-        ticket_subject: 'Where did my board go?',
-        ticket_body: 'Hi — I made a board yesterday called "Spring launch" with my coworker and today I can’t find it anywhere. I’m new to Birchline and I’m not sure if I deleted it by accident or if I’m just looking in the wrong place. Can you help?',
-        tone: 'warm and patient'
+        ticket_subject: 'Cadê o meu board?',
+        ticket_body: 'Oi — ontem criei um board chamado "Lançamento de primavera" com minha colega e hoje não acho em lugar nenhum. Sou nova na Birchline e não sei se deletei sem querer ou se estou procurando no lugar errado. Pode me ajudar?',
+        tone: 'acolhedor e paciente'
       }
     },
     {
-      label: 'SAMPLE 2',
+      label: 'EXEMPLO 2',
       planClass: 'team',
       data: {
         customer_name: 'Marcus D.',
         plan_tier: 'Team',
-        ticket_subject: 'Sync keeps dropping comments',
-        ticket_body: 'This is the third time this week. I leave comments on cards from my laptop, switch to my phone on the train, and they’re gone. My team thinks I’m ignoring them. We pay for 14 seats and this is genuinely making us look bad to a client.',
-        tone: 'direct and apologetic'
+        ticket_subject: 'Sync continua apagando comentários',
+        ticket_body: 'É a terceira vez essa semana. Deixo comentários nos cards pelo notebook, troco pro celular no metrô, e eles somem. Meu time acha que estou ignorando eles. Pagamos por 14 assentos e isso está nos fazendo passar vergonha com um cliente.',
+        tone: 'direto e com pedido de desculpas'
       }
     },
     {
-      label: 'SAMPLE 3',
+      label: 'EXEMPLO 3',
       planClass: 'studio',
       data: {
         customer_name: 'Lena K.',
         plan_tier: 'Studio',
-        ticket_subject: 'Update billing entity on next invoice',
-        ticket_body: 'Hey folks! We just spun up a new holding company (Korhonen Studio Oy) and finance would love the May invoice to use that name + our new VAT ID, FI28361049. No rush at all, just want it sorted before the cycle runs. Thanks a million.',
-        tone: 'brisk and friendly'
+        ticket_subject: 'Atualizar entidade de cobrança na próxima fatura',
+        ticket_body: 'Oi pessoal! Acabamos de abrir uma nova holding (Korhonen Studio Oy) e o financeiro gostaria que a fatura de maio viesse com esse nome + nosso novo CNPJ. Sem pressa, só quero resolver antes do ciclo fechar. Muito obrigada!',
+        tone: 'ágil e simpático'
       }
     }
   ];
@@ -677,11 +677,11 @@
   copyBtn.addEventListener('click', function () {
     var text = getPlainText();
     var done = function () {
-      copyBtn.textContent = 'Copied ✓';
+      copyBtn.textContent = 'Copiado ✓';
       copyBtn.classList.add('copied');
       if (copyTimer) clearTimeout(copyTimer);
       copyTimer = setTimeout(function () {
-        copyBtn.textContent = 'Copy prompt';
+        copyBtn.textContent = 'Copiar prompt';
         copyBtn.classList.remove('copied');
       }, 1200);
     };

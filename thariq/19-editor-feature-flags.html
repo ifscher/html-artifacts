@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -307,29 +307,29 @@
   <header>
     <div class="eyebrow">Birchline / editor / feature-flags</div>
     <h1>flags.production.json</h1>
-    <p class="sub">A form-based editor for the production feature-flag config.
-      Toggle flags, fix dependency warnings as they surface, then copy out
-      only the lines that changed.</p>
+    <p class="sub">Editor de formulário para a configuração de feature flags em produção.
+      Ative ou desative flags, resolva os avisos de dependência à medida que aparecem, e copie
+      apenas as linhas que foram alteradas.</p>
   </header>
 
   <div class="layout">
     <div class="banner" id="banner">
       <span class="glyph">&#9888;</span>
-      <span id="bannerText">1 flag is enabled without its prerequisite</span>
+      <span id="bannerText">1 flag está ativa sem seu pré-requisito</span>
     </div>
 
     <div class="form-col" id="formCol"><!-- groups injected --></div>
 
     <aside class="sidebar">
       <div>
-        <div class="side-label">Pending changes</div>
-        <div class="side-count" id="sideCount">0 changed</div>
+        <div class="side-label">Alterações pendentes</div>
+        <div class="side-count" id="sideCount">0 alteradas</div>
       </div>
-      <pre class="diff" id="diff"><span class="empty">// no changes yet</span></pre>
+      <pre class="diff" id="diff"><span class="empty">// nenhuma alteração ainda</span></pre>
       <div class="btn-stack">
-        <button class="btn primary" id="copyDiff" disabled>Copy diff</button>
-        <button class="btn ghost" id="copyJson">Copy full JSON</button>
-        <button class="btn ghost" id="reset">Reset</button>
+        <button class="btn primary" id="copyDiff" disabled>Copiar diff</button>
+        <button class="btn ghost" id="copyJson">Copiar JSON completo</button>
+        <button class="btn ghost" id="reset">Resetar</button>
       </div>
     </aside>
   </div>
@@ -349,37 +349,37 @@ const GROUPS = [
     label: "Onboarding",
     flags: [
       { key: "onboarding.checklist_v2",
-        desc: "New three-step setup checklist replacing the modal tour.",
+        desc: "Novo checklist de configuração em três etapas substituindo o tour modal.",
         on: true },
       { key: "onboarding.invite_nudge",
-        desc: "Nudge owners to invite teammates after creating their first project.",
+        desc: "Incentivar proprietários a convidar colegas após criar o primeiro projeto.",
         on: true },
       { key: "onboarding.workspace_templates",
-        desc: "Offer prebuilt workspace templates during signup.",
+        desc: "Oferecer templates de workspace prontos durante o cadastro.",
         on: false, requires: "onboarding.checklist_v2" },
       { key: "onboarding.skip_email_verify",
-        desc: "Let SSO-domain users in before email verification completes.",
+        desc: "Permitir entrada de usuários de domínio SSO antes da verificação de e-mail.",
         on: false }
     ]
   },
   {
     id: "sync",
-    label: "Sync engine",
+    label: "Motor de sync",
     flags: [
       { key: "sync.delta_compression",
-        desc: "Send field-level deltas instead of full document snapshots.",
+        desc: "Enviar deltas por campo em vez de snapshots completos do documento.",
         on: true },
       { key: "sync.offline_queue_v2",
-        desc: "Persist offline edits to IndexedDB and replay on reconnect.",
+        desc: "Persistir edições offline no IndexedDB e reproduzir ao reconectar.",
         on: false, requires: "sync.delta_compression" },
       { key: "sync.presence_cursors",
-        desc: "Show live collaborator cursors in board and doc views.",
+        desc: "Mostrar cursores de colaboradores ao vivo nas visualizações de board e doc.",
         on: true },
       { key: "sync.conflict_banner",
-        desc: "Surface a merge banner instead of silently last-write-wins.",
+        desc: "Exibir um banner de merge em vez de silenciosamente usar last-write-wins.",
         on: false, requires: "sync.offline_queue_v2" },
       { key: "sync.binary_ws_frames",
-        desc: "Switch the realtime channel to binary WebSocket frames.",
+        desc: "Trocar o canal em tempo real para frames WebSocket binários.",
         on: false, rollout: 10 }
     ]
   },
@@ -388,31 +388,31 @@ const GROUPS = [
     label: "Billing",
     flags: [
       { key: "billing.usage_meter",
-        desc: "Show per-seat usage meter on the workspace billing page.",
+        desc: "Mostrar medidor de uso por assento na página de billing do workspace.",
         on: false },
       { key: "billing.annual_discount_banner",
-        desc: "Promote the annual-plan discount in the upgrade flow.",
+        desc: "Promover o desconto do plano anual no fluxo de upgrade.",
         on: true },
       { key: "billing.proration_preview",
-        desc: "Preview the prorated charge before confirming a plan change.",
+        desc: "Pré-visualizar a cobrança proporcional antes de confirmar uma mudança de plano.",
         on: false, requires: "billing.usage_meter" },
       { key: "billing.dunning_emails_v3",
-        desc: "Use the rewritten dunning sequence with a 14-day grace window.",
+        desc: "Usar a sequência de dunning reescrita com uma janela de carência de 14 dias.",
         on: true, rollout: 25 }
     ]
   },
   {
     id: "internal",
-    label: "Internal",
+    label: "Interno",
     flags: [
       { key: "internal.shadow_traffic",
-        desc: "Mirror 1% of API traffic to the staging cluster for diffing.",
+        desc: "Espelhar 1% do tráfego de API para o cluster de staging para comparação.",
         on: false },
       { key: "internal.query_tracing",
-        desc: "Attach OpenTelemetry spans to every Postgres query.",
+        desc: "Anexar spans OpenTelemetry a cada query Postgres.",
         on: true },
       { key: "internal.kill_switch_ui",
-        desc: "Expose the emergency kill-switch panel in the admin console.",
+        desc: "Expor o painel de kill-switch de emergência no console de admin.",
         on: true, requires: "internal.query_tracing" }
     ]
   }
@@ -469,7 +469,7 @@ function buildForm() {
 
       const reqChip = f.requires
         ? '<div class="req-chip"><span class="warn-glyph">&#9888;</span>' +
-          '<span>requires ' + esc(f.requires) + '</span></div>'
+          '<span>requer ' + esc(f.requires) + '</span></div>'
         : "";
 
       row.innerHTML =
@@ -563,13 +563,13 @@ function update() {
     }
     const meta = formCol.querySelector(
       '.group[data-group="' + g.id + '"] [data-meta]');
-    meta.textContent = g.flags.length + " flags, " + onCount + " on";
+    meta.textContent = g.flags.length + " flags, " + onCount + " ativas";
   }
 
   // diff + sidebar
   const lines = computeDiff(state);
   if (lines.length === 0) {
-    diffEl.innerHTML = '<span class="empty">// no changes yet</span>';
+    diffEl.innerHTML = '<span class="empty">// nenhuma alteração ainda</span>';
     copyDiffBtn.disabled = true;
   } else {
     diffEl.innerHTML = lines.map(l =>
@@ -580,18 +580,18 @@ function update() {
   }
 
   sideCount.innerHTML =
-    lines.length + " changed" +
+    lines.length + " alterada" + (lines.length === 1 ? "" : "s") +
     '<span class="sep">&middot;</span>' +
     '<span class="' + (warnCount ? "warn-n" : "") + '">' +
-      warnCount + " warning" + (warnCount === 1 ? "" : "s") +
+      warnCount + " aviso" + (warnCount === 1 ? "" : "s") +
     "</span>";
 
   // banner
   if (warnCount > 0) {
     bannerTxt.textContent =
       warnCount === 1
-        ? "1 flag is enabled without its prerequisite"
-        : warnCount + " flags are enabled without their prerequisites";
+        ? "1 flag está ativa sem seu pré-requisito"
+        : warnCount + " flags estão ativas sem seus pré-requisitos";
     banner.classList.add("show");
   } else {
     banner.classList.remove("show");
@@ -634,11 +634,11 @@ function writeClipboard(text) {
 copyDiffBtn.addEventListener("click", () => {
   const lines = computeDiff(currentState());
   if (!lines.length) return;
-  writeClipboard(diffText(lines)).then(() => flash(copyDiffBtn, "Copied ✓"));
+  writeClipboard(diffText(lines)).then(() => flash(copyDiffBtn, "Copiado ✓"));
 });
 
 copyJsonBtn.addEventListener("click", () => {
-  writeClipboard(fullJson(currentState())).then(() => flash(copyJsonBtn, "Copied ✓"));
+  writeClipboard(fullJson(currentState())).then(() => flash(copyJsonBtn, "Copiado ✓"));
 });
 
 resetBtn.addEventListener("click", () => {

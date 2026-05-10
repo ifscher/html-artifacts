@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>INC-2025-0412 — Elevated 502s on task sync</title>
+<title>INC-2025-0412 — Aumento de 502s no sync de tarefas</title>
 <style>
   :root {
     --ivory: #FAF9F5;
@@ -385,42 +385,42 @@
 <body>
 
   <nav class="toc">
-    <div class="toc-title">On this page</div>
+    <div class="toc-title">Nesta página</div>
     <a href="#tldr">TL;DR</a>
-    <a href="#timeline">Timeline</a>
-    <a href="#root-cause">Root cause</a>
-    <a href="#impact">Impact</a>
-    <a href="#actions">Action items</a>
+    <a href="#timeline">Cronologia</a>
+    <a href="#root-cause">Causa raiz</a>
+    <a href="#impact">Impacto</a>
+    <a href="#actions">Ações</a>
   </nav>
 
   <div class="page">
 
     <header>
       <div class="inc-id">INC-2025-0412</div>
-      <h1>Elevated 502s on task sync</h1>
+      <h1>Aumento de 502s no sync de tarefas</h1>
       <div class="meta-row">
         <span class="pill sev">SEV-2</span>
-        <span class="pill resolved">Resolved</span>
-        <span class="pill neutral"><span class="k">Duration</span> <span class="v">47 min</span></span>
-        <span class="pill neutral"><span class="k">Detected</span> <span class="v">Apr 12 &middot; 14:07</span></span>
-        <span class="pill neutral"><span class="k">Owner</span> <span class="v">Devon Park</span></span>
+        <span class="pill resolved">Resolvido</span>
+        <span class="pill neutral"><span class="k">Duração</span> <span class="v">47 min</span></span>
+        <span class="pill neutral"><span class="k">Detectado</span> <span class="v">12 abr &middot; 14:07</span></span>
+        <span class="pill neutral"><span class="k">Responsável</span> <span class="v">Devon Park</span></span>
       </div>
     </header>
 
     <div class="tldr" id="tldr">
       <div class="tldr-label">TL;DR</div>
       <p>
-        A config rollout lowered the database connection-pool limit on the
-        <code>sync-worker</code> tier from 64 to 8, exhausting connections under
-        normal afternoon load. The sync API returned 502s for roughly 21% of
-        requests over 47 minutes. We mitigated by reverting the config and
-        cycling the worker fleet; no data was lost.
+        Um rollout de configuração reduziu o limite do connection pool do banco de dados
+        no tier <code>sync-worker</code> de 64 para 8, esgotando as conexões sob
+        carga normal da tarde. A API de sync retornou 502s em aproximadamente 21% das
+        requisições durante 47 minutos. Mitigamos revertendo a configuração e
+        reciclando a frota de workers; nenhum dado foi perdido.
       </p>
     </div>
 
     <!-- Timeline -->
     <section id="timeline">
-      <h2>Timeline</h2>
+      <h2>Cronologia</h2>
       <hr class="rule">
       <div class="timeline">
 
@@ -428,8 +428,8 @@
           <span class="tl-dot"></span>
           <span class="tl-time">14:02</span>
           <div class="tl-body">
-            Config change <code class="inline">cfg-9a12</code> promoted to
-            production via the standard rollout pipeline.
+            Alteração de configuração <code class="inline">cfg-9a12</code> promovida para
+            produção via pipeline de rollout padrão.
           </div>
         </div>
 
@@ -437,9 +437,9 @@
           <span class="tl-dot impact"></span>
           <span class="tl-time">14:06</span>
           <div class="tl-body">
-            <strong>Impact starts.</strong> Sync workers begin queueing on pool
-            checkout; p95 latency climbs past 4s and the load balancer starts
-            returning 502s.
+            <strong>Impacto começa.</strong> Workers de sync começam a enfileirar no
+            checkout do pool; latência p95 ultrapassa 4s e o load balancer começa
+            a retornar 502s.
           </div>
         </div>
 
@@ -447,8 +447,8 @@
           <span class="tl-dot"></span>
           <span class="tl-time">14:07</span>
           <div class="tl-body">
-            Alert fires: <code class="inline">sync_5xx_rate &gt; 2%</code> for 60s.
-            On-call (Devon) acknowledges.
+            Alerta disparado: <code class="inline">sync_5xx_rate &gt; 2%</code> por 60s.
+            Plantão (Devon) confirma recebimento.
           </div>
         </div>
 
@@ -456,8 +456,8 @@
           <span class="tl-dot"></span>
           <span class="tl-time">14:18</span>
           <div class="tl-body">
-            Initial hypothesis is a bad deploy of the API service; last two
-            application deploys are rolled back with no effect.
+            Hipótese inicial é um deploy ruim do serviço de API; os dois últimos
+            deploys de aplicação são revertidos sem efeito.
           </div>
         </div>
 
@@ -465,8 +465,8 @@
           <span class="tl-dot"></span>
           <span class="tl-time">14:31</span>
           <div class="tl-body">
-            Mira joins and notices pool-wait saturation in the worker dashboard.
-            Investigation pivots to infra config rather than app code.
+            Mira entra e percebe saturação de pool-wait no dashboard de workers.
+            Investigação muda o foco para config de infra em vez de código da aplicação.
           </div>
         </div>
 
@@ -474,9 +474,9 @@
           <span class="tl-dot mitigated"></span>
           <span class="tl-time">14:44</span>
           <div class="tl-body">
-            <strong>Mitigated.</strong> <code class="inline">cfg-9a12</code>
-            reverted; worker fleet cycled. 5xx rate drops below 0.2% within
-            three minutes.
+            <strong>Mitigado.</strong> <code class="inline">cfg-9a12</code>
+            revertido; frota de workers reciclada. Taxa de 5xx cai abaixo de 0,2% em
+            três minutos.
           </div>
         </div>
 
@@ -484,8 +484,8 @@
           <span class="tl-dot"></span>
           <span class="tl-time">14:49</span>
           <div class="tl-body">
-            Monitors green for 5 minutes. Incident declared resolved; status
-            page updated.
+            Monitores verdes por 5 minutos. Incidente declarado resolvido; página de
+            status atualizada.
           </div>
         </div>
 
@@ -494,21 +494,19 @@
 
     <!-- Root cause -->
     <section id="root-cause">
-      <h2>Root cause</h2>
+      <h2>Causa raiz</h2>
       <hr class="rule">
       <p>
-        PR <code class="inline">#4888</code> made connection-pool limits
-        configurable per worker tier. The default for the new
-        <code class="inline">sync-worker</code> key was meant to inherit the
-        global value (64) but was hard-coded to 8 during a local test and
-        committed. The config linter only validates type, not magnitude, so the
-        change passed CI.
+        O PR <code class="inline">#4888</code> tornou os limites de connection pool
+        configuráveis por tier de worker. O valor padrão para a nova chave
+        <code class="inline">sync-worker</code> deveria herdar o valor global (64), mas
+        foi hard-coded para 8 durante um teste local e commitado. O linter de config
+        valida apenas o tipo, não a magnitude, então a alteração passou no CI.
       </p>
       <p>
-        Because config rollouts and code deploys go through separate pipelines,
-        the on-call's first instinct &mdash; rolling back the most recent
-        application deploys &mdash; had no effect and cost roughly 13 minutes of
-        diagnosis time.
+        Como rollouts de configuração e deploys de código usam pipelines separados,
+        o primeiro instinto do plantão &mdash; reverter os deploys de aplicação mais recentes
+        &mdash; não teve efeito e custou aproximadamente 13 minutos de diagnóstico.
       </p>
 
       <div class="code-panel">
@@ -524,71 +522,71 @@
 
     <!-- Impact -->
     <section id="impact">
-      <h2>Impact</h2>
+      <h2>Impacto</h2>
       <hr class="rule">
       <table class="impact">
         <tr>
-          <th>Requests failed (502)</th>
-          <td>~41,200</td>
+          <th>Requisições com falha (502)</th>
+          <td>~41.200</td>
         </tr>
         <tr>
-          <th>Peak error rate</th>
-          <td>21.4%</td>
+          <th>Taxa de erro no pico</th>
+          <td>21,4%</td>
         </tr>
         <tr>
-          <th>Users affected</th>
-          <td>~2,300 workspaces</td>
+          <th>Usuários afetados</th>
+          <td>~2.300 workspaces</td>
         </tr>
         <tr>
-          <th>Data loss</th>
-          <td>None &mdash; clients retried</td>
+          <th>Perda de dados</th>
+          <td>Nenhuma &mdash; clientes repetiram as requisições</td>
         </tr>
         <tr>
-          <th>SLA breach</th>
-          <td>No (within monthly budget)</td>
+          <th>Violação de SLA</th>
+          <td>Não (dentro do orçamento mensal)</td>
         </tr>
       </table>
     </section>
 
     <!-- Action items -->
     <section id="actions">
-      <h2>Action items</h2>
+      <h2>Ações</h2>
       <hr class="rule">
       <div class="actions">
 
         <div class="ai-row done">
           <span class="ai-check"></span>
           <span class="ai-avatar" title="Devon Park">DP</span>
-          <span class="ai-desc">Revert cfg-9a12 and restore pool limit to 64</span>
-          <span class="ai-due">Apr 12</span>
+          <span class="ai-desc">Reverter cfg-9a12 e restaurar o limite do pool para 64</span>
+          <span class="ai-due">12 abr</span>
         </div>
 
         <div class="ai-row">
           <span class="ai-check"></span>
           <span class="ai-avatar" title="Mira Okafor">MO</span>
-          <span class="ai-desc">Add config-linter range check for <code class="inline">max_connections</code> (warn &lt; 32)</span>
-          <span class="ai-due">Apr 18</span>
+          <span class="ai-desc">Adicionar verificação de intervalo no config-linter para <code class="inline">max_connections</code> (avisar se &lt; 32)</span>
+          <span class="ai-due">18 abr</span>
         </div>
 
         <div class="ai-row">
           <span class="ai-check"></span>
           <span class="ai-avatar" title="Sam Reyes">SR</span>
-          <span class="ai-desc">Surface &ldquo;recent config rollouts&rdquo; alongside deploys in the on-call dashboard</span>
-          <span class="ai-due">Apr 25</span>
+          <span class="ai-desc">Exibir &ldquo;rollouts de config recentes&rdquo; junto aos deploys no dashboard de plantão</span>
+          <span class="ai-due">25 abr</span>
         </div>
 
         <div class="ai-row">
           <span class="ai-check"></span>
           <span class="ai-avatar" title="Priya Anand">PA</span>
-          <span class="ai-desc">Canary config changes to one worker AZ for 10 min before fleet-wide promote</span>
-          <span class="ai-due">May 02</span>
+          <span class="ai-desc">Fazer canary de alterações de config em uma AZ de worker por 10 min antes de promover para toda a frota</span>
+          <span class="ai-due">02 mai</span>
         </div>
 
       </div>
     </section>
 
     <footer>
-      Authored from on-call notes + alert history &middot; reviewed by Devon Park, Mira Okafor
+      Gerado a partir de notas de plantão + histórico de alertas &middot; revisado por Devon Park, Mira Okafor
     </footer>
 
   </div>

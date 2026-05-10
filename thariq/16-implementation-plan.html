@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Implementation plan — Comment threads on task cards</title>
+  <title>Plano de implementação — Threads de comentários em cards de tarefa</title>
   <style>
     :root {
       --ivory:    #FAF9F5;
@@ -386,69 +386,70 @@
   <div class="page">
 
     <header class="page-head">
-      <div class="eyebrow">Implementation plan · Birchline web client</div>
-      <h1>Comment threads on task cards</h1>
+      <div class="eyebrow">Plano de implementação · Birchline web client</div>
+      <h1>Threads de comentários em cards de tarefa</h1>
       <div class="prompt-box">
         <span class="label">Prompt</span>
-        Create a thorough implementation plan for adding threaded comments to
-        task cards. Include mockups, the data flow from client to persistence,
-        the key code I'll need to write, and a risk table. Make it easy to
-        skim on a phone — I'm going to pass this to the implementer as-is.
+        Crie um plano de implementação detalhado para adicionar comentários em thread
+        aos cards de tarefa. Inclua mockups, o fluxo de dados do cliente até a
+        persistência, o código principal que precisarei escrever e uma tabela de
+        riscos. Deixe fácil de escanear no celular — vou passar direto para o
+        implementador.
       </div>
     </header>
 
     <!-- ============================================================= -->
 
     <div class="summary">
-      <div class="cell"><div class="k">Effort</div><div class="v accent">~2 weeks</div></div>
-      <div class="cell"><div class="k">Surfaces touched</div><div class="v">3 packages</div></div>
-      <div class="cell"><div class="k">New tables</div><div class="v">2</div></div>
+      <div class="cell"><div class="k">Esforço</div><div class="v accent">~2 semanas</div></div>
+      <div class="cell"><div class="k">Superfícies tocadas</div><div class="v">3 pacotes</div></div>
+      <div class="cell"><div class="k">Novas tabelas</div><div class="v">2</div></div>
       <div class="cell"><div class="k">Feature flag</div><div class="v">task_comments_v1</div></div>
     </div>
 
     <!-- ============================================================= -->
 
     <section>
-      <div class="sec-head"><span class="num">01</span><h2>Milestones</h2></div>
-      <p class="sec-intro">Ship in four slices, each independently reviewable and each behind the flag. Nothing is user-visible until slice&nbsp;4.</p>
+      <div class="sec-head"><span class="num">01</span><h2>Marcos</h2></div>
+      <p class="sec-intro">Entregar em quatro fatias, cada uma revisável independentemente e cada uma sob a flag. Nada fica visível ao usuário até a fatia&nbsp;4.</p>
 
       <div class="milestones">
         <div class="milestone">
-          <div class="when">Week&nbsp;1 · Mon–Tue</div>
+          <div class="when">Sem&nbsp;1 · Seg–Ter</div>
           <div class="dot-col"><span class="dot done"></span><span class="line"></span></div>
           <div class="body">
-            <h3>Schema &amp; API contract</h3>
-            <p>New <code>comments</code> and <code>comment_reads</code> tables, migrations, and the tRPC router stubs. No UI. Contract reviewed before anything else lands.</p>
+            <h3>Schema &amp; contrato de API</h3>
+            <p>Novas tabelas <code>comments</code> e <code>comment_reads</code>, migrations e stubs do roteador tRPC. Sem UI. Contrato revisado antes de qualquer outra coisa ser entregue.</p>
             <div class="tags"><span class="tag">packages/db</span><span class="tag">packages/api</span><span class="tag">migration 0042</span></div>
           </div>
         </div>
 
         <div class="milestone">
-          <div class="when">Week&nbsp;1 · Wed–Fri</div>
+          <div class="when">Sem&nbsp;1 · Qua–Sex</div>
           <div class="dot-col"><span class="dot"></span><span class="line"></span></div>
           <div class="body">
-            <h3>Thread component &amp; composer</h3>
-            <p>Static <code>&lt;CommentThread&gt;</code> rendered from fixtures. Optimistic insert on submit, rollback on failure, one level of nesting only.</p>
+            <h3>Componente de thread &amp; composer</h3>
+            <p><code>&lt;CommentThread&gt;</code> estático renderizado a partir de fixtures. Inserção otimista ao enviar, rollback em caso de falha, apenas um nível de aninhamento.</p>
             <div class="tags"><span class="tag">apps/web</span><span class="tag">storybook</span></div>
           </div>
         </div>
 
         <div class="milestone">
-          <div class="when">Week&nbsp;2 · Mon–Wed</div>
+          <div class="when">Sem&nbsp;2 · Seg–Qua</div>
           <div class="dot-col"><span class="dot"></span><span class="line"></span></div>
           <div class="body">
-            <h3>Realtime fan-out &amp; unread state</h3>
-            <p>Subscribe the open card to its comment channel. Track per-user read cursors so the sidebar can show an unread count without a second query.</p>
+            <h3>Fan-out em tempo real &amp; estado de não lido</h3>
+            <p>Inscrever o card aberto no seu canal de comentários. Rastrear cursores de leitura por usuário para que a sidebar mostre uma contagem de não lidos sem uma segunda query.</p>
             <div class="tags"><span class="tag">packages/realtime</span><span class="tag">apps/web</span></div>
           </div>
         </div>
 
         <div class="milestone">
-          <div class="when">Week&nbsp;2 · Thu–Fri</div>
+          <div class="when">Sem&nbsp;2 · Qui–Sex</div>
           <div class="dot-col"><span class="dot"></span><span class="line"></span></div>
           <div class="body">
-            <h3>Notifications, flag ramp, docs</h3>
-            <p>Mention detection → notification row, email digest fallback, ramp <code>task_comments_v1</code> to internal, then 10% → 100% over three days.</p>
+            <h3>Notificações, ramp da flag, docs</h3>
+            <p>Detecção de menção → linha de notificação, fallback de digest por e-mail, ramp de <code>task_comments_v1</code> para interno, depois 10% → 100% ao longo de três dias.</p>
             <div class="tags"><span class="tag">packages/notify</span><span class="tag">growthbook</span></div>
           </div>
         </div>
@@ -458,8 +459,8 @@
     <!-- ============================================================= -->
 
     <section>
-      <div class="sec-head"><span class="num">02</span><h2>Data flow</h2></div>
-      <p class="sec-intro">Optimistic write path on the left, fan-out on the right. The read cursor update is fire-and-forget — we never block the thread render on it.</p>
+      <div class="sec-head"><span class="num">02</span><h2>Fluxo de dados</h2></div>
+      <p class="sec-intro">Caminho de escrita otimista à esquerda, fan-out à direita. A atualização do cursor de leitura é fire-and-forget — nunca bloqueamos o render do thread nela.</p>
 
       <div class="diagram">
         <svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg">
@@ -479,28 +480,28 @@
             <text x="110" y="60" text-anchor="middle" fill="#87867F" font-size="10.5">apps/web</text>
 
             <rect x="20"  y="150" width="180" height="54" rx="10" fill="#FFFFFF" stroke="#D1CFC5" stroke-width="1.5"/>
-            <text x="110" y="173" text-anchor="middle" font-weight="600">React Query cache</text>
-            <text x="110" y="190" text-anchor="middle" fill="#87867F" font-size="10.5">optimistic insert</text>
+            <text x="110" y="173" text-anchor="middle" font-weight="600">Cache React Query</text>
+            <text x="110" y="190" text-anchor="middle" fill="#87867F" font-size="10.5">inserção otimista</text>
 
             <rect x="340" y="150" width="180" height="54" rx="10" fill="#FFFFFF" stroke="#D1CFC5" stroke-width="1.5"/>
             <text x="430" y="173" text-anchor="middle" font-weight="600">comments.create</text>
             <text x="430" y="190" text-anchor="middle" fill="#87867F" font-size="10.5">tRPC · packages/api</text>
 
             <rect x="340" y="266" width="180" height="54" rx="10" fill="#141413" stroke="#141413"/>
-            <text x="430" y="289" text-anchor="middle" font-weight="600" fill="#FAF9F5">comments table</text>
+            <text x="430" y="289" text-anchor="middle" font-weight="600" fill="#FAF9F5">tabela comments</text>
             <text x="430" y="306" text-anchor="middle" fill="#C9B98A" font-size="10.5">postgres · packages/db</text>
 
             <rect x="660" y="150" width="180" height="54" rx="10" fill="#FFFFFF" stroke="#D1CFC5" stroke-width="1.5"/>
-            <text x="750" y="173" text-anchor="middle" font-weight="600">realtime channel</text>
+            <text x="750" y="173" text-anchor="middle" font-weight="600">canal em tempo real</text>
             <text x="750" y="190" text-anchor="middle" fill="#87867F" font-size="10.5">task:{id}:comments</text>
 
             <rect x="660" y="20"  width="180" height="54" rx="10" fill="#FFFFFF" stroke="#D1CFC5" stroke-width="1.5"/>
-            <text x="750" y="43" text-anchor="middle" font-weight="600">Other viewers</text>
-            <text x="750" y="60" text-anchor="middle" fill="#87867F" font-size="10.5">subscribed cards</text>
+            <text x="750" y="43" text-anchor="middle" font-weight="600">Outros visualizadores</text>
+            <text x="750" y="60" text-anchor="middle" fill="#87867F" font-size="10.5">cards inscritos</text>
 
             <rect x="660" y="266" width="180" height="54" rx="10" fill="#FFFFFF" stroke="#D1CFC5" stroke-width="1.5"/>
-            <text x="750" y="289" text-anchor="middle" font-weight="600">notify worker</text>
-            <text x="750" y="306" text-anchor="middle" fill="#87867F" font-size="10.5">@mentions → queue</text>
+            <text x="750" y="289" text-anchor="middle" font-weight="600">worker de notificação</text>
+            <text x="750" y="306" text-anchor="middle" fill="#87867F" font-size="10.5">@menções → fila</text>
           </g>
 
           <!-- arrows -->
@@ -520,14 +521,14 @@
           <g font-size="10.5" fill="#87867F">
             <text x="118" y="118">submit (id=temp)</text>
             <text x="240" y="170">mutate</text>
-            <text x="438" y="240">INSERT + read cursor</text>
+            <text x="438" y="240">INSERT + cursor de leitura</text>
             <text x="548" y="286">enqueue</text>
-            <text x="548" y="172" fill="#D97757">broadcast row</text>
-            <text x="758" y="118" fill="#D97757">live append</text>
-            <text x="360" y="112" fill="#D97757">reconcile temp id → real id</text>
+            <text x="548" y="172" fill="#D97757">broadcast da linha</text>
+            <text x="758" y="118" fill="#D97757">append ao vivo</text>
+            <text x="360" y="112" fill="#D97757">reconciliar id temp → id real</text>
           </g>
         </svg>
-        <p class="caption">Solid = request/response path. Dashed clay = realtime fan-out. The composer never waits on the dashed path.</p>
+        <p class="caption">Sólido = caminho de requisição/resposta. Tracejado clay = fan-out em tempo real. O composer nunca espera pelo caminho tracejado.</p>
       </div>
     </section>
 
@@ -535,35 +536,35 @@
 
     <section>
       <div class="sec-head"><span class="num">03</span><h2>Mockups</h2></div>
-      <p class="sec-intro">Not pixel-final — just enough that the reviewer and I agree on nesting depth, composer placement, and what the sidebar digest looks like.</p>
+      <p class="sec-intro">Não é pixel-final — apenas o suficiente para que o revisor e eu concordemos sobre a profundidade de aninhamento, o posicionamento do composer e como é o digest da sidebar.</p>
 
       <div class="mocks">
         <div class="mock">
-          <div class="mock-label">A · Thread inside an open task card</div>
+          <div class="mock-label">A · Thread dentro de um card de tarefa aberto</div>
           <div class="mock-body">
             <div class="card-mock">
-              <div class="cm-title">Ship onboarding empty-state rewrite</div>
-              <div class="cm-meta">BIR-1142 · Assigned to Priya · Due Fri</div>
+              <div class="cm-title">Entregar reescrita do empty-state de onboarding</div>
+              <div class="cm-meta">BIR-1142 · Atribuído a Priya · Vence Sex</div>
               <div class="cm-divider"></div>
               <div class="thread">
                 <div class="comment">
                   <div class="avatar">JM</div>
                   <div class="bubble">
-                    <div class="author">Jonah M. <span class="time">2h ago</span></div>
-                    <div class="text">Should the illustration swap when the workspace already has one project? Feels odd to show the "start here" art twice.</div>
-                    <div class="reply-link">Reply</div>
+                    <div class="author">Jonah M. <span class="time">2h atrás</span></div>
+                    <div class="text">A ilustração deve mudar quando o workspace já tem um projeto? Parece estranho mostrar o art "comece aqui" duas vezes.</div>
+                    <div class="reply-link">Responder</div>
                   </div>
                 </div>
                 <div class="comment nested">
                   <div class="avatar alt">PS</div>
                   <div class="bubble">
-                    <div class="author">Priya S. <span class="time">40m ago</span></div>
-                    <div class="text">Good catch — I'll gate it on <code>projects.count &gt; 0</code> and fall back to the minimal variant.</div>
+                    <div class="author">Priya S. <span class="time">40m atrás</span></div>
+                    <div class="text">Boa observação — vou condicionar em <code>projects.count &gt; 0</code> e usar o fallback para a variante minimalista.</div>
                   </div>
                 </div>
                 <div class="composer">
-                  <div class="field">Add a comment…</div>
-                  <div class="send">Post</div>
+                  <div class="field">Adicionar um comentário…</div>
+                  <div class="send">Publicar</div>
                 </div>
               </div>
             </div>
@@ -571,20 +572,20 @@
         </div>
 
         <div class="mock">
-          <div class="mock-label">B · Sidebar unread digest</div>
+          <div class="mock-label">B · Digest de não lidos na sidebar</div>
           <div class="mock-body">
             <div class="digest">
               <div class="row unread">
                 <div class="mini-av">JM</div>
-                <div class="txt"><strong>Jonah</strong> commented <span class="on">on BIR-1142</span> — "Should the illustration swap when…"</div>
+                <div class="txt"><strong>Jonah</strong> comentou <span class="on">em BIR-1142</span> — "A ilustração deve mudar quando…"</div>
               </div>
               <div class="row unread">
                 <div class="mini-av">AK</div>
-                <div class="txt"><strong>Aiko</strong> mentioned you <span class="on">on BIR-1098</span> — "@priya can you confirm the copy here?"</div>
+                <div class="txt"><strong>Aiko</strong> mencionou você <span class="on">em BIR-1098</span> — "@priya pode confirmar o texto aqui?"</div>
               </div>
               <div class="row">
                 <div class="mini-av">RW</div>
-                <div class="txt"><strong>Rowan</strong> replied <span class="on">on BIR-0971</span> — "Merged, thanks for the quick turnaround."</div>
+                <div class="txt"><strong>Rowan</strong> respondeu <span class="on">em BIR-0971</span> — "Mergeado, obrigado pela agilidade."</div>
               </div>
             </div>
           </div>
@@ -595,8 +596,8 @@
     <!-- ============================================================= -->
 
     <section>
-      <div class="sec-head"><span class="num">04</span><h2>Key code</h2></div>
-      <p class="sec-intro">The two pieces most likely to be done wrong: the migration (soft deletes, read cursors) and the optimistic mutation (temp-id reconciliation).</p>
+      <div class="sec-head"><span class="num">04</span><h2>Código principal</h2></div>
+      <p class="sec-intro">As duas partes com maior risco de serem feitas errado: a migration (soft deletes, cursores de leitura) e a mutation otimista (reconciliação de temp-id).</p>
 
       <div class="code-grid">
         <div class="code-block">
@@ -604,8 +605,8 @@
           <div class="code"><pre><span class="kw">create table</span> <span class="fn">comments</span> (
   id          uuid <span class="kw">primary key default</span> gen_random_uuid(),
   task_id     uuid <span class="kw">not null references</span> tasks(id),
-  parent_id   uuid <span class="kw">references</span> comments(id),   <span class="cm">-- one level only,</span>
-                                                <span class="cm">-- enforced in API</span>
+  parent_id   uuid <span class="kw">references</span> comments(id),   <span class="cm">-- apenas um nível,</span>
+                                                <span class="cm">-- aplicado na API</span>
   author_id   uuid <span class="kw">not null references</span> users(id),
   body        text <span class="kw">not null</span>,
   created_at  timestamptz <span class="kw">not null default</span> now(),
@@ -636,8 +637,8 @@
       <span class="kw">return</span> { tempId: temp.id };
     },
     <span class="fn">onSuccess</span>: (row, _v, ctx) =&gt; {
-      <span class="cm">// reconcile temp id → real id so the</span>
-      <span class="cm">// realtime append doesn't duplicate it</span>
+      <span class="cm">// reconciliar id temp → id real para que o</span>
+      <span class="cm">// append em tempo real não duplique</span>
       qc.<span class="fn">setQueryData</span>(key(taskId), (prev) =&gt;
         prev.map((c) =&gt; c.id === ctx.tempId ? row : c));
     },
@@ -654,27 +655,27 @@
     <!-- ============================================================= -->
 
     <section>
-      <div class="sec-head"><span class="num">05</span><h2>Risks &amp; mitigations</h2></div>
+      <div class="sec-head"><span class="num">05</span><h2>Riscos &amp; mitigações</h2></div>
       <div class="risks">
         <div class="row">
-          <div class="cell head">Risk</div>
+          <div class="cell head">Risco</div>
           <div class="cell head">Sev</div>
-          <div class="cell head">Mitigation</div>
+          <div class="cell head">Mitigação</div>
         </div>
         <div class="row">
-          <div class="cell">Realtime duplicate: socket append races with the HTTP response and the temp-id reconcile.</div>
-          <div class="cell"><span class="sev high">HIGH</span></div>
-          <div class="cell">Dedupe on server-assigned <code>id</code> in the cache updater; socket payload carries the real id, temp rows are filtered on reconcile.</div>
+          <div class="cell">Duplicata em tempo real: o append via socket entra em race com a resposta HTTP e a reconciliação do temp-id.</div>
+          <div class="cell"><span class="sev high">ALTO</span></div>
+          <div class="cell">Deduplicar pelo <code>id</code> atribuído pelo servidor no updater do cache; o payload do socket carrega o id real, e linhas temp são filtradas na reconciliação.</div>
         </div>
         <div class="row">
-          <div class="cell">Unread counts go stale when a user reads the thread on another device.</div>
+          <div class="cell">Contagens de não lidos ficam desatualizadas quando o usuário lê o thread em outro dispositivo.</div>
           <div class="cell"><span class="sev med">MED</span></div>
-          <div class="cell">Broadcast <code>comment_reads</code> upserts on the same channel; client treats its own cursor as max(local, remote).</div>
+          <div class="cell">Transmitir upserts de <code>comment_reads</code> no mesmo canal; o cliente trata seu próprio cursor como max(local, remoto).</div>
         </div>
         <div class="row">
-          <div class="cell">Mention detection false-positives on pasted markdown (<code>@media</code>, <code>@2x</code>).</div>
-          <div class="cell"><span class="sev low">LOW</span></div>
-          <div class="cell">Resolve mentions against workspace members only, at write time, and store the resolved user ids — never re-parse on read.</div>
+          <div class="cell">Falsos positivos na detecção de menção em markdown colado (<code>@media</code>, <code>@2x</code>).</div>
+          <div class="cell"><span class="sev low">BAIXO</span></div>
+          <div class="cell">Resolver menções apenas contra membros do workspace, no momento da escrita, e armazenar os user ids resolvidos — nunca re-parsear na leitura.</div>
         </div>
       </div>
     </section>
@@ -682,17 +683,17 @@
     <!-- ============================================================= -->
 
     <section>
-      <div class="sec-head"><span class="num">06</span><h2>Open questions</h2></div>
+      <div class="sec-head"><span class="num">06</span><h2>Questões em aberto</h2></div>
       <div class="open-q">
         <div class="q">
-          <div class="qt">Do we allow editing, or only delete-and-repost?</div>
-          <div class="qd">Editing needs an <code>edited_at</code> column and an "edited" affordance. Delete-and-repost is simpler but loses the reply anchor. Leaning toward delete-only for v1.</div>
-          <div class="owner">Decide with · design, before slice 2</div>
+          <div class="qt">Permitimos edição ou apenas excluir e repostar?</div>
+          <div class="qd">Edição requer uma coluna <code>edited_at</code> e uma affordance de "editado". Excluir e repostar é mais simples, mas perde a âncora de resposta. Tendência para excluir apenas no v1.</div>
+          <div class="owner">Decidir com · design, antes da fatia 2</div>
         </div>
         <div class="q">
-          <div class="qt">Email digest cadence when a user has the app closed</div>
-          <div class="qd">Immediate-per-mention will be noisy. Proposal: batch on a 15-minute window, collapse to one email per task, and respect quiet hours from the existing settings table.</div>
-          <div class="owner">Decide with · platform, before slice 4</div>
+          <div class="qt">Cadência do digest por e-mail quando o usuário está com o app fechado</div>
+          <div class="qd">Imediato por menção vai ser muito ruidoso. Proposta: agrupar em uma janela de 15 minutos, colapsar em um e-mail por tarefa e respeitar o horário de silêncio da tabela de configurações existente.</div>
+          <div class="owner">Decidir com · platform, antes da fatia 4</div>
         </div>
       </div>
     </section>

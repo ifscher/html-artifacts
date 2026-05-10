@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Platform Eng — Week of Mar 10</title>
+<title>Eng de Plataforma — Semana de 10 de mar</title>
 <style>
   /* ------------------------------------------------------------------
      Design tokens
@@ -369,7 +369,7 @@
 <body>
 
   <!-- ============================================================
-       Slide 1 — Title
+       Slide 1 — Título
        ============================================================ -->
   <section class="slide title-slide" id="s1">
     <div class="slide-inner">
@@ -378,13 +378,13 @@
         <path d="M16 28 H40 M28 16 V40" stroke="#D97757" stroke-width="1.5" stroke-linecap="round"/>
         <circle cx="28" cy="28" r="3" fill="#141413"/>
       </svg>
-      <h1>Platform Eng<br>— Week of Mar 10</h1>
+      <h1>Eng de Plataforma<br>— Semana de 10 de mar</h1>
       <p class="subtitle">
-        What shipped, what's moving, and one decision we need from the
-        room before the Birchline 2.4 cut.
+        O que foi entregue, o que está em andamento, e uma decisão que precisamos
+        da sala antes do corte do Birchline 2.4.
       </p>
       <div class="byline">
-        <span>Friday demo</span>
+        <span>Demo de sexta</span>
         <span>6 slides</span>
         <span>~4 min</span>
       </div>
@@ -392,20 +392,20 @@
   </section>
 
   <!-- ============================================================
-       Slide 2 — Shipped
+       Slide 2 — Entregues
        ============================================================ -->
   <section class="slide" id="s2">
     <div class="slide-inner">
-      <div class="eyebrow">Shipped this week</div>
-      <h2>Three things out the door</h2>
+      <div class="eyebrow">Entregue esta semana</div>
+      <h2>Três coisas concluídas</h2>
       <ul class="ship-list">
         <li class="ship-item">
           <span class="ship-dot"></span>
           <div>
-            <div class="ship-title">Bulk task import</div>
+            <div class="ship-title">Importação em massa de tarefas</div>
             <div class="ship-desc">
-              CSV and JSON uploads now land straight into a board with
-              column mapping — no more paste-and-pray.
+              Uploads de CSV e JSON agora chegam direto em um board com
+              mapeamento de colunas — sem mais colar e torcer para funcionar.
             </div>
           </div>
           <span class="ship-ref">#4211</span>
@@ -413,10 +413,10 @@
         <li class="ship-item">
           <span class="ship-dot"></span>
           <div>
-            <div class="ship-title">Webhook retries v2</div>
+            <div class="ship-title">Retentativas de webhook v2</div>
             <div class="ship-desc">
-              Exponential backoff with jitter; dead-letter queue surfaces
-              in the workspace admin panel.
+              Backoff exponencial com jitter; fila de dead-letter visível
+              no painel de administração do workspace.
             </div>
           </div>
           <span class="ship-ref">#4188 #4203</span>
@@ -424,10 +424,10 @@
         <li class="ship-item">
           <span class="ship-dot"></span>
           <div>
-            <div class="ship-title">Postgres 16 migration</div>
+            <div class="ship-title">Migração para Postgres 16</div>
             <div class="ship-desc">
-              All read replicas cut over Tuesday night; zero customer-facing
-              downtime, ~9% faster aggregate queries.
+              Todas as réplicas de leitura migradas na terça à noite; zero
+              de downtime visível ao cliente, ~9% de queries agregadas mais rápidas.
             </div>
           </div>
           <span class="ship-ref">#4179</span>
@@ -437,33 +437,33 @@
   </section>
 
   <!-- ============================================================
-       Slide 3 — In progress
+       Slide 3 — Em andamento
        ============================================================ -->
   <section class="slide" id="s3">
     <div class="slide-inner">
-      <div class="eyebrow">In progress</div>
-      <h2>Carrying into next week</h2>
+      <div class="eyebrow">Em andamento</div>
+      <h2>Carregando para a próxima semana</h2>
       <ul class="prog-list">
         <li class="prog-item">
           <div class="prog-head">
-            <span class="prog-title">Recurring tasks engine</span>
+            <span class="prog-title">Motor de tarefas recorrentes</span>
             <span class="prog-pct">~70%</span>
           </div>
           <div class="prog-track"><div class="prog-fill" style="width:70%"></div></div>
           <p class="prog-note">
-            Scheduler and RRULE parsing are done; remaining work is the
-            timezone edge cases and the "skip holidays" toggle.
+            Agendador e parsing de RRULE concluídos; trabalho restante são os
+            casos de borda de fuso horário e o toggle "pular feriados".
           </p>
         </li>
         <li class="prog-item">
           <div class="prog-head">
-            <span class="prog-title">Audit log export</span>
+            <span class="prog-title">Exportação de log de auditoria</span>
             <span class="prog-pct">~35%</span>
           </div>
           <div class="prog-track"><div class="prog-fill" style="width:35%"></div></div>
           <p class="prog-note">
-            Streaming NDJSON endpoint is up behind a flag; still wiring
-            the S3 destination picker and retention policy UI.
+            Endpoint NDJSON em streaming está ativo por trás de uma flag; ainda
+            conectando o seletor de destino S3 e a UI de política de retenção.
           </p>
         </li>
       </ul>
@@ -471,23 +471,23 @@
   </section>
 
   <!-- ============================================================
-       Slide 4 — Metrics
+       Slide 4 — Métricas
        ============================================================ -->
   <section class="slide" id="s4">
     <div class="slide-inner">
-      <div class="eyebrow">Metrics</div>
-      <h2>Numbers we watch</h2>
+      <div class="eyebrow">Métricas</div>
+      <h2>Números que acompanhamos</h2>
 
       <div class="metrics">
         <div class="metric">
-          <div class="metric-label">API p95 latency</div>
+          <div class="metric-label">Latência p95 da API</div>
           <div class="metric-value">184<span style="font-size:28px">ms</span></div>
-          <div class="metric-delta down">↓ 12% wk/wk</div>
+          <div class="metric-delta down">↓ 12% sem/sem</div>
         </div>
         <div class="metric">
-          <div class="metric-label">Background job error rate</div>
-          <div class="metric-value">0.21<span style="font-size:28px">%</span></div>
-          <div class="metric-delta down">↓ 0.08pp</div>
+          <div class="metric-label">Taxa de erro em jobs em background</div>
+          <div class="metric-value">0,21<span style="font-size:28px">%</span></div>
+          <div class="metric-delta down">↓ 0,08pp</div>
         </div>
       </div>
 
@@ -504,53 +504,53 @@
           <line x1="0" y1="63" x2="780" y2="63" stroke="#D1CFC5" stroke-width="1"/>
         </svg>
         <div class="sparkline-caption">
-          p95 latency, trailing 8 days — lower is better
+          Latência p95, últimos 8 dias — menor é melhor
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       Slide 5 — Decision needed (inverted)
+       Slide 5 — Decisão necessária (invertido)
        ============================================================ -->
   <section class="slide invert" id="s5">
     <div class="slide-inner">
-      <div class="eyebrow">Decision needed</div>
-      <h2>One call to make</h2>
+      <div class="eyebrow">Decisão necessária</div>
+      <h2>Uma escolha a fazer</h2>
 
       <div class="decision-card">
         <p class="decision-q">
-          Do we ship recurring tasks behind a workspace flag in 2.4, or
-          hold one more week for the timezone fixes?
+          Entregamos tarefas recorrentes por trás de uma flag de workspace no 2.4, ou
+          seguramos mais uma semana para os ajustes de fuso horário?
         </p>
         <p class="decision-context">
-          Flagged rollout gets it to design partners Friday but means two
-          code paths for ~2 weeks. Holding keeps a single path but slips
-          the partner promise.
+          O rollout com flag entrega para os design partners na sexta, mas significa dois
+          caminhos de código por ~2 semanas. Segurar mantém um único caminho mas atrasa
+          a promessa com os parceiros.
         </p>
       </div>
 
       <div class="options">
-        <span class="chip lean">A — Flag it, ship Friday</span>
-        <span class="chip">B — Hold for 2.5</span>
+        <span class="chip lean">A — Flag, entregar sexta</span>
+        <span class="chip">B — Segurar para o 2.5</span>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       Slide 6 — Next week
+       Slide 6 — Próxima semana
        ============================================================ -->
   <section class="slide" id="s6">
     <div class="slide-inner">
-      <div class="eyebrow">Next week</div>
-      <h2>On deck</h2>
+      <div class="eyebrow">Próxima semana</div>
+      <h2>Na fila</h2>
       <ul class="next-list">
-        <li>Finish recurring tasks — timezone matrix tests, then dogfood on the internal ops board.</li>
-        <li>Audit log export to private beta — three workspaces lined up.</li>
-        <li>Start scoping rate-limit headers for the public API; RFC draft by Thursday.</li>
+        <li>Concluir tarefas recorrentes — testes de matriz de fuso horário, depois dogfood no board de ops interno.</li>
+        <li>Exportação de log de auditoria para beta privado — três workspaces confirmados.</li>
+        <li>Começar o escopo de headers de rate-limit para a API pública; rascunho de RFC até quinta.</li>
       </ul>
       <div class="footnote">
-        Questions → drop them in the platform channel or grab anyone after standup.
+        Perguntas → deixe no canal de plataforma ou fale com alguém após o standup.
       </div>
     </div>
   </section>

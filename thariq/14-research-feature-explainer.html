@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How rate limiting works in birchline/api</title>
+<title>Como funciona o rate limiting no birchline/api</title>
 <style>
   :root {
     --ivory:   #FAF9F5;
@@ -224,18 +224,18 @@
 
   <!-- ── side nav ── -->
   <nav>
-    <div class="label">On this page</div>
+    <div class="label">Nesta página</div>
     <a href="#tldr">TL;DR</a>
-    <a href="#path">Request path</a>
-    <a href="#path" class="l2">1. Identify</a>
-    <a href="#path" class="l2">2. Bucket lookup</a>
-    <a href="#path" class="l2">3. Consume</a>
-    <a href="#path" class="l2">4. Reject</a>
-    <a href="#config">Configuring a route</a>
-    <a href="#gotchas">Gotchas</a>
+    <a href="#path">Caminho da requisição</a>
+    <a href="#path" class="l2">1. Identificar</a>
+    <a href="#path" class="l2">2. Buscar bucket</a>
+    <a href="#path" class="l2">3. Consumir</a>
+    <a href="#path" class="l2">4. Rejeitar</a>
+    <a href="#config">Configurar uma rota</a>
+    <a href="#gotchas">Atenção</a>
     <a href="#faq">FAQ</a>
     <div class="files">
-      <div class="label">Files read</div>
+      <div class="label">Arquivos lidos</div>
       <code>middleware/ratelimit.ts</code>
       <code>lib/tokenBucket.ts</code>
       <code>config/limits.yaml</code>
@@ -246,66 +246,66 @@
   <!-- ── main ── -->
   <main>
     <header>
-      <div class="eyebrow">Research &amp; Learning · feature summary</div>
-      <h1>How rate limiting works in <code>birchline/api</code></h1>
+      <div class="eyebrow">Pesquisa &amp; Aprendizado · resumo de funcionalidade</div>
+      <h1>Como funciona o rate limiting no <code>birchline/api</code></h1>
       <div class="tldr" id="tldr">
-        <b>TL;DR</b> — Every request passes through <code>rateLimit()</code> middleware, which resolves the
-        caller to a <em>bucket key</em>, fetches a token-bucket from Redis, and either consumes one token or
-        returns <code>429</code>. Limits are declared per-route in <code>config/limits.yaml</code>; routes
-        without an entry inherit the <code>default</code> tier (100 req/min per API key).
+        <b>TL;DR</b> — Cada requisição passa pelo middleware <code>rateLimit()</code>, que resolve o
+        chamador para uma <em>bucket key</em>, busca um token-bucket no Redis e consome um token ou
+        retorna <code>429</code>. Os limites são declarados por rota em <code>config/limits.yaml</code>;
+        rotas sem entrada herdam o tier <code>default</code> (100 req/min por chave de API).
       </div>
     </header>
 
-    <h2 id="path">The request path, step by step</h2>
-    <p>Expand each step to see what runs and where it lives. The whole path is ~40 lines and adds about
-      0.4&nbsp;ms p50 to every request.</p>
+    <h2 id="path">O caminho da requisição, passo a passo</h2>
+    <p>Expanda cada etapa para ver o que executa e onde está no código. O caminho completo tem ~40 linhas
+      e adiciona cerca de 0,4&nbsp;ms p50 a cada requisição.</p>
 
     <details open>
-      <summary>1 · Identify the caller <span class="where">middleware/ratelimit.ts:21</span></summary>
+      <summary>1 · Identificar o chamador <span class="where">middleware/ratelimit.ts:21</span></summary>
       <div class="body">
-        <p>The middleware first reduces the request to a <code>bucketKey</code>: API key if an
-          <code>Authorization</code> header is present, otherwise the client IP (via the
-          <code>x-forwarded-for</code> chain, trusting only our own LB). Anonymous IP traffic gets a much
-          lower default tier.</p>
+        <p>O middleware primeiro reduz a requisição a uma <code>bucketKey</code>: chave de API se um cabeçalho
+          <code>Authorization</code> estiver presente, caso contrário o IP do cliente (via cadeia
+          <code>x-forwarded-for</code>, confiando apenas no nosso próprio LB). Tráfego IP anônimo recebe um
+          tier padrão muito mais baixo.</p>
       </div>
     </details>
 
     <details>
-      <summary>2 · Look up the bucket <span class="where">lib/tokenBucket.ts:9</span></summary>
+      <summary>2 · Buscar o bucket <span class="where">lib/tokenBucket.ts:9</span></summary>
       <div class="body">
-        <p>The route name plus bucket key map to a Redis hash (<code>rl:{route}:{key}</code>) holding
-          <code>tokens</code> and <code>updatedAt</code>. If the key is missing it's created lazily at full
-          capacity — there's no warm-up.</p>
+        <p>O nome da rota mais a bucket key mapeiam para um hash Redis (<code>rl:{route}:{key}</code>) contendo
+          <code>tokens</code> e <code>updatedAt</code>. Se a chave não existir, ela é criada sob demanda com
+          capacidade total — sem período de aquecimento.</p>
       </div>
     </details>
 
     <details>
-      <summary>3 · Refill and consume <span class="where">lib/tokenBucket.ts:31</span></summary>
+      <summary>3 · Recarregar e consumir <span class="where">lib/tokenBucket.ts:31</span></summary>
       <div class="body">
-        <p>Refill is computed from elapsed time (<code>rate × Δt</code>, capped at <code>burst</code>), then
-          one token is subtracted. The whole read-modify-write runs as a single Lua script so concurrent
-          requests can't double-spend.</p>
+        <p>O recarregamento é calculado a partir do tempo decorrido (<code>rate × Δt</code>, limitado ao
+          <code>burst</code>), depois um token é subtraído. Toda a operação read-modify-write roda como um
+          único script Lua para que requisições concorrentes não gastem tokens em duplicidade.</p>
       </div>
     </details>
 
     <details>
-      <summary>4 · Reject when empty <span class="where">middleware/ratelimit.ts:48</span></summary>
+      <summary>4 · Rejeitar quando vazio <span class="where">middleware/ratelimit.ts:48</span></summary>
       <div class="body">
-        <p>If the script returns <code>tokens &lt; 0</code> the middleware short-circuits with
-          <code>429 Too Many Requests</code> and sets <code>Retry-After</code> to the seconds until one token
-          refills. Successful responses always carry <code>X-RateLimit-Remaining</code>.</p>
+        <p>Se o script retornar <code>tokens &lt; 0</code>, o middleware interrompe com
+          <code>429 Too Many Requests</code> e define <code>Retry-After</code> com os segundos até um token
+          ser recarregado. Respostas bem-sucedidas sempre incluem <code>X-RateLimit-Remaining</code>.</p>
       </div>
     </details>
 
-    <h2 id="config">Configuring a limit on your route</h2>
-    <p>You don't touch the middleware. Add an entry to <code>config/limits.yaml</code> keyed by route name,
-      and (optionally) tag the route so the middleware can find it.</p>
+    <h2 id="config">Configurar um limite na sua rota</h2>
+    <p>Você não precisa tocar no middleware. Adicione uma entrada em <code>config/limits.yaml</code> com o
+      nome da rota como chave e, opcionalmente, marque a rota para que o middleware a encontre.</p>
 
     <div class="tabs" data-tabs>
       <div class="tabbar">
         <button class="on" data-t="0">limits.yaml</button>
         <button data-t="1">route.ts</button>
-        <button data-t="2">client response</button>
+        <button data-t="2">resposta do cliente</button>
       </div>
 <pre class="on"><span class="cm"># config/limits.yaml</span>
 default:
@@ -315,7 +315,7 @@ default:
 <span class="hl">search.query</span>:
   rate: 20/min
   burst: 40
-  key: api_key        <span class="cm"># or: ip</span></pre>
+  key: api_key        <span class="cm"># ou: ip</span></pre>
 <pre><span class="cm">// routes/search.ts</span>
 router.post(
   "/search",
@@ -332,34 +332,36 @@ X-RateLimit-Remaining: 0
 
     <div class="callout">
       <span class="ico">★</span>
-      <div>If you only need the default tier, you don't need a YAML entry at all — just wrap the handler in
-        <code>rateLimit()</code> with no argument. The route name is inferred from the path.</div>
+      <div>Se você precisar apenas do tier padrão, não é necessário criar uma entrada no YAML — basta
+        envolver o handler em <code>rateLimit()</code> sem argumento. O nome da rota é inferido a partir
+        do caminho.</div>
     </div>
 
-    <h2 id="gotchas">Gotchas worth knowing</h2>
+    <h2 id="gotchas">Atenção</h2>
     <ul style="padding-left:20px; max-width:680px;">
-      <li style="margin-bottom:8px;"><b>Limits are per-process in dev.</b> The Redis client falls back to an
-        in-memory map when <code>REDIS_URL</code> is unset, so local testing won't reflect real cluster
-        behaviour.</li>
-      <li style="margin-bottom:8px;"><b>Burst ≠ rate.</b> <code>burst</code> is the bucket capacity; a caller
-        idle for a minute can fire <code>burst</code> requests instantly even if <code>rate</code> is low.</li>
-      <li><b>Streaming responses count once.</b> The token is consumed at request start; a 30-second SSE
-        stream still costs one token.</li>
+      <li style="margin-bottom:8px;"><b>Os limites são por processo em desenvolvimento.</b> O cliente Redis
+        usa um mapa em memória quando <code>REDIS_URL</code> não está definido, então testes locais não
+        refletem o comportamento real do cluster.</li>
+      <li style="margin-bottom:8px;"><b>Burst ≠ rate.</b> <code>burst</code> é a capacidade do bucket; um
+        chamador ocioso por um minuto pode disparar <code>burst</code> requisições de uma vez mesmo que
+        <code>rate</code> seja baixo.</li>
+      <li><b>Respostas em streaming contam uma vez.</b> O token é consumido no início da requisição; um
+        stream SSE de 30 segundos ainda custa um token.</li>
     </ul>
 
     <h2 id="faq">FAQ</h2>
     <dl class="faq">
-      <dt>How do I exempt internal traffic?</dt>
-      <dd>Set <code>x-birchline-internal: 1</code> from the caller; the middleware checks it against the
-        mTLS peer name and skips the bucket entirely.</dd>
+      <dt>Como isentar tráfego interno?</dt>
+      <dd>Defina <code>x-birchline-internal: 1</code> no chamador; o middleware verifica isso contra o
+        nome do peer mTLS e ignora o bucket completamente.</dd>
 
-      <dt>Where do I see who's getting limited?</dt>
-      <dd>Every <code>429</code> emits a <code>ratelimit.rejected</code> metric tagged with route and key
-        type. There's a Grafana panel under <em>API → Health</em>.</dd>
+      <dt>Onde vejo quem está sendo limitado?</dt>
+      <dd>Cada <code>429</code> emite uma métrica <code>ratelimit.rejected</code> marcada com rota e tipo
+        de chave. Há um painel no Grafana em <em>API → Saúde</em>.</dd>
 
-      <dt>Can a single user have a higher limit?</dt>
-      <dd>Yes — add their API key under <code>overrides:</code> in the YAML. Overrides are reloaded without
-        a deploy.</dd>
+      <dt>Um único usuário pode ter um limite maior?</dt>
+      <dd>Sim — adicione a chave de API dele em <code>overrides:</code> no YAML. Os overrides são
+        recarregados sem necessidade de deploy.</dd>
     </dl>
   </main>
 

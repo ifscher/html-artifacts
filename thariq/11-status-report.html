@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Birchline — Engineering Status — Week 11</title>
+<title>Birchline — Status de Engenharia — Semana 11</title>
 <style>
   :root {
     --ivory: #FAF9F5;
@@ -306,11 +306,11 @@
 
     <header>
       <div class="header-top">
-        <h1>Engineering Status &mdash; Week 11</h1>
-        <span class="auto-pill">auto-generated</span>
+        <h1>Status de Engenharia &mdash; Semana 11</h1>
+        <span class="auto-pill">gerado automaticamente</span>
       </div>
       <div class="date-range">
-        Mar 10 &ndash; Mar 16, 2025 &nbsp;&middot;&nbsp;
+        10 de mar &ndash; 16 de mar, 2025 &nbsp;&middot;&nbsp;
         <span class="repo">birchline/app @ main</span>
       </div>
     </header>
@@ -320,8 +320,8 @@
       <div class="summary-band">
         <div class="stat-card">
           <div class="stat-num">14</div>
-          <div class="stat-label">PRs merged</div>
-          <div class="stat-delta up">+3 vs wk10</div>
+          <div class="stat-label">PRs mergeados</div>
+          <div class="stat-delta up">+3 vs sem10</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">6</div>
@@ -330,101 +330,101 @@
         </div>
         <div class="stat-card warn">
           <div class="stat-num">1</div>
-          <div class="stat-label">Incidents</div>
-          <div class="stat-delta flat">SEV-2 &middot; 47m</div>
+          <div class="stat-label">Incidentes</div>
+          <div class="stat-delta flat">SEV-2 &middot; 47min</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">3</div>
-          <div class="stat-label">Flaky tests fixed</div>
-          <div class="stat-delta up">suite now 99.1%</div>
+          <div class="stat-label">Testes instáveis corrigidos</div>
+          <div class="stat-delta up">suite agora em 99,1%</div>
         </div>
       </div>
     </section>
 
     <!-- Highlights -->
     <section>
-      <h2>Highlights</h2>
+      <h2>Destaques</h2>
       <hr class="rule">
       <ul class="highlights">
         <li>
-          <strong>Bulk task editing shipped to 100%.</strong> The multi-select
-          toolbar landed behind a flag on Monday and ramped to all workspaces by
-          Thursday with no error-rate regression.
+          <strong>Edição em massa de tarefas entregue a 100%.</strong> A toolbar de multi-seleção
+          foi lançada por trás de uma flag na segunda e escalada para todos os workspaces até
+          quinta sem regressão na taxa de erros.
         </li>
         <li>
-          <strong>Sync API p95 down 38%.</strong> Replacing per-task auth checks
-          with a scoped batch lookup cut the hot path from 410ms to 255ms on the
-          staging load test.
+          <strong>p95 da API de sync caiu 38%.</strong> Substituir as verificações de auth por tarefa
+          por um lookup em lote com escopo reduziu o caminho crítico de 410ms para 255ms no
+          teste de carga em staging.
         </li>
         <li>
-          <strong>One SEV-2 on Wednesday</strong> &mdash; a config rollout pushed
-          a bad connection-pool limit to the sync workers. Mitigated in 47 minutes;
-          full postmortem linked below.
+          <strong>Um SEV-2 na quarta</strong> &mdash; um rollout de config enviou um limite de
+          connection-pool inválido para os workers de sync. Mitigado em 47 minutos;
+          postmortem completo linkado abaixo.
         </li>
       </ul>
     </section>
 
     <!-- Shipped -->
     <section>
-      <h2>Shipped</h2>
+      <h2>Entregue</h2>
       <hr class="rule">
       <table class="shipped">
         <thead>
           <tr>
             <th style="width: 90px;">PR</th>
-            <th>Title</th>
-            <th style="width: 140px;">Author</th>
-            <th style="width: 100px;">Risk</th>
+            <th>Título</th>
+            <th style="width: 140px;">Autor</th>
+            <th style="width: 100px;">Risco</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><a class="pr-link" href="#">#4871</a></td>
-            <td>Bulk edit toolbar: selection model + keyboard shortcuts</td>
+            <td>Toolbar de edição em massa: modelo de seleção + atalhos de teclado</td>
             <td class="author">Mira Okafor</td>
-            <td><span class="risk"><span class="risk-dot med"></span>Med</span></td>
+            <td><span class="risk"><span class="risk-dot med"></span>Médio</span></td>
           </tr>
           <tr>
             <td><a class="pr-link" href="#">#4874</a></td>
-            <td>Batch auth lookup for <code>/v2/sync</code> hot path</td>
+            <td>Lookup de auth em lote para o caminho crítico <code>/v2/sync</code></td>
             <td class="author">Devon Park</td>
-            <td><span class="risk"><span class="risk-dot med"></span>Med</span></td>
+            <td><span class="risk"><span class="risk-dot med"></span>Médio</span></td>
           </tr>
           <tr>
             <td><a class="pr-link" href="#">#4878</a></td>
-            <td>Fix race in attachment uploader retry loop</td>
+            <td>Corrigir race condition no loop de retry do uploader de anexos</td>
             <td class="author">Sam Reyes</td>
-            <td><span class="risk"><span class="risk-dot low"></span>Low</span></td>
+            <td><span class="risk"><span class="risk-dot low"></span>Baixo</span></td>
           </tr>
           <tr>
             <td><a class="pr-link" href="#">#4879</a></td>
-            <td>Migrate reminder scheduler to idempotent job keys</td>
+            <td>Migrar agendador de lembretes para chaves de job idempotentes</td>
             <td class="author">Priya Anand</td>
-            <td><span class="risk"><span class="risk-dot high"></span>High</span></td>
+            <td><span class="risk"><span class="risk-dot high"></span>Alto</span></td>
           </tr>
           <tr>
             <td><a class="pr-link" href="#">#4882</a></td>
-            <td>Board view: collapse empty swimlanes by default</td>
+            <td>Visão de board: recolher swimlanes vazias por padrão</td>
             <td class="author">Mira Okafor</td>
-            <td><span class="risk"><span class="risk-dot low"></span>Low</span></td>
+            <td><span class="risk"><span class="risk-dot low"></span>Baixo</span></td>
           </tr>
           <tr>
             <td><a class="pr-link" href="#">#4885</a></td>
-            <td>Quarantine 3 flaky webhook integration tests</td>
+            <td>Colocar em quarentena 3 testes de integração de webhook instáveis</td>
             <td class="author">Jules Tan</td>
-            <td><span class="risk"><span class="risk-dot low"></span>Low</span></td>
+            <td><span class="risk"><span class="risk-dot low"></span>Baixo</span></td>
           </tr>
           <tr>
             <td><a class="pr-link" href="#">#4888</a></td>
-            <td>Connection pool limits configurable per worker tier</td>
+            <td>Limites de connection pool configuráveis por tier de worker</td>
             <td class="author">Devon Park</td>
-            <td><span class="risk"><span class="risk-dot med"></span>Med</span></td>
+            <td><span class="risk"><span class="risk-dot med"></span>Médio</span></td>
           </tr>
           <tr>
             <td><a class="pr-link" href="#">#4891</a></td>
-            <td>Dark mode pass on settings &amp; billing panels</td>
+            <td>Revisão de dark mode nos painéis de configurações e cobrança</td>
             <td class="author">Noor Halabi</td>
-            <td><span class="risk"><span class="risk-dot low"></span>Low</span></td>
+            <td><span class="risk"><span class="risk-dot low"></span>Baixo</span></td>
           </tr>
         </tbody>
       </table>
@@ -432,10 +432,10 @@
 
     <!-- Velocity -->
     <section>
-      <h2>Velocity</h2>
+      <h2>Velocidade</h2>
       <hr class="rule">
       <div class="chart-panel">
-        <svg viewBox="0 0 640 180" role="img" aria-label="PRs merged per day">
+        <svg viewBox="0 0 640 180" role="img" aria-label="PRs mergeados por dia">
           <!-- gridlines -->
           <line x1="48" y1="20"  x2="620" y2="20"  stroke="#F0EEE6" stroke-width="1"/>
           <line x1="48" y1="60"  x2="620" y2="60"  stroke="#F0EEE6" stroke-width="1"/>
@@ -448,21 +448,20 @@
           <text x="40" y="64"  text-anchor="end" font-family="system-ui" font-size="11" fill="#87867F">2</text>
           <text x="40" y="24"  text-anchor="end" font-family="system-ui" font-size="11" fill="#87867F">3</text>
 
-          <!-- bars: 7 days, values 2,3,1,4,2,1,1 (sum 14)
-               baseline y=140, unit=40px, bar width=56, gap=24, start x=64 -->
-          <!-- Mon: 2 -->
+          <!-- bars -->
+          <!-- Seg: 2 -->
           <rect x="64"  y="60"  width="56" height="80"  rx="6" fill="#E3DACC"/>
-          <!-- Tue: 3 -->
+          <!-- Ter: 3 -->
           <rect x="144" y="20"  width="56" height="120" rx="6" fill="#E3DACC"/>
-          <!-- Wed: 1 -->
+          <!-- Qua: 1 -->
           <rect x="224" y="100" width="56" height="40"  rx="6" fill="#E3DACC"/>
-          <!-- Thu: 4 (peak) -->
+          <!-- Qui: 4 (peak) -->
           <rect x="304" y="0"   width="56" height="140" rx="6" fill="#D97757"/>
-          <!-- Fri: 2 -->
+          <!-- Sex: 2 -->
           <rect x="384" y="60"  width="56" height="80"  rx="6" fill="#E3DACC"/>
-          <!-- Sat: 1 -->
+          <!-- Sáb: 1 -->
           <rect x="464" y="100" width="56" height="40"  rx="6" fill="#E3DACC"/>
-          <!-- Sun: 1 -->
+          <!-- Dom: 1 -->
           <rect x="544" y="100" width="56" height="40"  rx="6" fill="#E3DACC"/>
 
           <!-- value labels -->
@@ -475,43 +474,43 @@
           <text x="572" y="94"  text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">1</text>
 
           <!-- x-axis labels -->
-          <text x="92"  y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Mon</text>
-          <text x="172" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Tue</text>
-          <text x="252" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Wed</text>
-          <text x="332" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Thu</text>
-          <text x="412" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Fri</text>
-          <text x="492" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Sat</text>
-          <text x="572" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Sun</text>
+          <text x="92"  y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Seg</text>
+          <text x="172" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Ter</text>
+          <text x="252" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Qua</text>
+          <text x="332" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Qui</text>
+          <text x="412" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Sex</text>
+          <text x="492" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Sáb</text>
+          <text x="572" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#87867F">Dom</text>
         </svg>
         <div class="chart-caption">
-          PRs merged per day. Thursday spike is the bulk-edit feature train (4 PRs landed together).
+          PRs mergeados por dia. O pico de quinta é o trem de funcionalidade de edição em massa (4 PRs entregues juntos).
         </div>
       </div>
     </section>
 
     <!-- Carryover -->
     <section>
-      <h2>Carryover</h2>
+      <h2>Arrastado</h2>
       <hr class="rule">
       <div class="carryover">
         <div class="carry-item">
-          <span class="carry-tag">In review</span>
+          <span class="carry-tag">Em revisão</span>
           <div class="carry-body">
-            Workspace export to CSV &mdash; waiting on pagination review.
+            Exportação de workspace para CSV &mdash; aguardando revisão de paginação.
             <span class="who">&middot; Sam Reyes</span>
           </div>
         </div>
         <div class="carry-item">
-          <span class="carry-tag">Blocked</span>
+          <span class="carry-tag">Bloqueado</span>
           <div class="carry-body">
-            SSO group mapping &mdash; blocked on staging IdP credentials from IT.
+            Mapeamento de grupos SSO &mdash; bloqueado aguardando credenciais de IdP em staging do TI.
             <span class="who">&middot; Priya Anand</span>
           </div>
         </div>
         <div class="carry-item">
-          <span class="carry-tag">Slipped</span>
+          <span class="carry-tag">Atrasado</span>
           <div class="carry-body">
-            Mobile push reliability dashboard &mdash; deprioritized for incident follow-up.
+            Dashboard de confiabilidade de push mobile &mdash; despriorizado para follow-up do incidente.
             <span class="who">&middot; Devon Park</span>
           </div>
         </div>
@@ -519,8 +518,8 @@
     </section>
 
     <footer>
-      Sources: git log main..HEAD &middot; CI dashboard &middot; deploy log
-      &nbsp;&mdash;&nbsp; generated Mar 16 2025 18:02
+      Fontes: git log main..HEAD &middot; painel de CI &middot; log de deploy
+      &nbsp;&mdash;&nbsp; gerado em 16 mar 2025 18:02
     </footer>
 
   </div>

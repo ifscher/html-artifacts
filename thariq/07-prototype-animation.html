@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Birchline — Task completed micro-interaction</title>
+<title>Birchline — Micro-interação: tarefa concluída</title>
 <style>
   :root {
     --ivory: #FAF9F5;
@@ -349,12 +349,12 @@
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">Birchline / prototype / micro-interaction</div>
-    <h1>Task completed</h1>
+    <div class="eyebrow">Birchline / protótipo / micro-interação</div>
+    <h1>Tarefa concluída</h1>
     <p class="sub">
-      A single click should feel like a tiny win. Circle fills, check draws,
-      label strikes, a small burst, then the row quietly steps back. Click
-      the row to play; click again to reset.
+      Um único clique deve parecer uma pequena conquista. O círculo preenche, o check desenha,
+      o rótulo é riscado, um pequeno estouro acontece, então a linha recua discretamente. Clique
+      na linha para reproduzir; clique novamente para resetar.
     </p>
   </header>
 
@@ -365,8 +365,8 @@
         <div class="check">
           <svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4.5"/></svg>
         </div>
-        <span class="label">Send weekly digest</span>
-        <span class="due">Fri</span>
+        <span class="label">Enviar digest semanal</span>
+        <span class="due">Sex</span>
         <div class="confetti c1"></div>
         <div class="confetti c2"></div>
         <div class="confetti c3"></div>
@@ -374,12 +374,12 @@
         <div class="confetti c5"></div>
         <div class="confetti c6"></div>
       </div>
-      <div class="hint">click to toggle</div>
+      <div class="hint">clique para alternar</div>
     </div>
 
     <aside class="panel">
       <h2>Easing</h2>
-      <p>Swaps <code>--ease</code> across every transition so you can feel the difference.</p>
+      <p>Troca <code>--ease</code> em todas as transições para você sentir a diferença.</p>
       <button class="ease-btn" data-ease="linear">
         Linear
         <code>linear</code>
@@ -399,17 +399,17 @@
   <section class="timeline">
     <h2>Keyframes</h2>
     <div class="track">
-      <div class="key k1"><em>fill</em><span>0ms</span></div>
+      <div class="key k1"><em>preenchimento</em><span>0ms</span></div>
       <div class="key k2"><em>check</em><span>80ms</span></div>
-      <div class="key k3"><em>strike</em><span>120ms</span></div>
-      <div class="key k4"><em>confetti</em><span>200ms</span></div>
-      <div class="key k5"><em>collapse</em><span>600ms</span></div>
+      <div class="key k3"><em>riscado</em><span>120ms</span></div>
+      <div class="key k4"><em>confete</em><span>200ms</span></div>
+      <div class="key k5"><em>recolher</em><span>600ms</span></div>
     </div>
   </section>
 
   <section class="snippet">
-    <h2>Copy-paste CSS</h2>
-<pre><span class="c">/* circle: clay flash, settle to olive with spring overshoot */</span>
+    <h2>CSS para copiar</h2>
+<pre><span class="c">/* círculo: flash clay, assentar em olive com overshoot spring */</span>
 <span class="k">.task.done .check</span> {
   animation: settle 380ms <span class="v">cubic-bezier(.34,1.56,.64,1)</span> forwards;
 }
@@ -419,16 +419,16 @@
   100% { transform: scale(1);   background: <span class="v">#788C5D</span>; }
 }
 
-<span class="c">/* checkmark draws via stroke-dashoffset, 80ms delay */</span>
+<span class="c">/* checkmark desenhado via stroke-dashoffset, delay 80ms */</span>
 <span class="k">.check path</span>        { stroke-dasharray: 20; stroke-dashoffset: 20;
                      transition: stroke-dashoffset 220ms var(--ease) 80ms; }
 <span class="k">.task.done path</span>    { stroke-dashoffset: 0; }
 
-<span class="c">/* strikethrough grows left → right */</span>
+<span class="c">/* riscado cresce da esquerda para a direita */</span>
 <span class="k">.label::after</span>      { width: 0; transition: width 240ms var(--ease) 120ms; }
 <span class="k">.task.done .label::after</span> { width: 100%; }
 
-<span class="c">/* row steps back after the celebration */</span>
+<span class="c">/* linha recua após a celebração */</span>
 <span class="k">.task.done</span>         { max-height: 44px; opacity: .6;
                      transition-delay: 600ms; }</pre>
   </section>

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Birchline — Card Variant Matrix</title>
+<title>Birchline — Matriz de variantes do Card</title>
 <style>
   :root {
     --ivory: #FAF9F5;
@@ -363,8 +363,8 @@
 <div class="page">
 
   <header>
-    <h1>Card variant matrix</h1>
-    <p>Six structural treatments of the Birchline <code style="font-family:var(--mono);font-size:13px">&lt;Card /&gt;</code> component. Adjust density and emphasis with the controls, hover a variant to see its prop combo.</p>
+    <h1>Matriz de variantes do Card</h1>
+    <p>Seis tratamentos estruturais do componente <code style="font-family:var(--mono);font-size:13px">&lt;Card /&gt;</code> do Birchline. Ajuste densidade e ênfase com os controles; passe o cursor sobre uma variante para ver sua combinação de props.</p>
   </header>
 
   <!-- ---------- Toolbar ---------- -->
@@ -376,18 +376,18 @@
     </div>
 
     <div class="control">
-      <span class="control-label">Border</span>
+      <span class="control-label">Borda</span>
       <div class="radio-group">
-        <label><input type="radio" name="border" value="none"><span>none</span></label>
-        <label><input type="radio" name="border" value="hairline" checked><span>hairline</span></label>
-        <label><input type="radio" name="border" value="solid"><span>solid</span></label>
+        <label><input type="radio" name="border" value="none"><span>nenhuma</span></label>
+        <label><input type="radio" name="border" value="hairline" checked><span>fina</span></label>
+        <label><input type="radio" name="border" value="solid"><span>sólida</span></label>
       </div>
     </div>
 
     <div class="control">
       <label class="check">
         <input id="ctl-shadow" type="checkbox" checked>
-        Show shadow
+        Mostrar sombra
       </label>
     </div>
   </div>
@@ -400,24 +400,24 @@
       <span class="variant-label">A &middot; Flat</span>
       <div class="card v-flat"
            data-snippet='<Card variant="flat" padding={PAD}>
-  <Card.Header avatar title="Weekly planning" subtitle="12 tasks &middot; due Friday" />
+  <Card.Header avatar title="Planejamento semanal" subtitle="12 tarefas · até sexta" />
   <Card.Meta tags={["Q2", "Roadmap"]} />
-  <Button variant="ghost">Open</Button>
+  <Button variant="ghost">Abrir</Button>
 </Card>'>
         <div class="card-head">
-          <div class="avatar">WP</div>
+          <div class="avatar">PS</div>
           <div class="card-titles">
-            <p class="card-title">Weekly planning</p>
-            <p class="card-sub">12 tasks &middot; due Friday</p>
+            <p class="card-title">Planejamento semanal</p>
+            <p class="card-sub">12 tarefas &middot; até sexta</p>
           </div>
         </div>
         <div class="chips">
           <span class="chip">Q2</span>
           <span class="chip olive">Roadmap</span>
         </div>
-        <button class="ghost-btn">Open</button>
+        <button class="ghost-btn">Abrir</button>
       </div>
-      <p class="variant-note">best for: dense lists on tinted backgrounds</p>
+      <p class="variant-note">ideal para: listas densas em fundos coloridos</p>
     </div>
 
     <!-- B: Outlined -->
@@ -425,24 +425,24 @@
       <span class="variant-label">B &middot; Outlined</span>
       <div class="card v-outlined"
            data-snippet='<Card variant="outlined" padding={PAD} border="BORDER">
-  <Card.Header avatar title="Weekly planning" subtitle="12 tasks &middot; due Friday" />
+  <Card.Header avatar title="Planejamento semanal" subtitle="12 tarefas · até sexta" />
   <Card.Meta tags={["Q2", "Roadmap"]} />
-  <Button variant="ghost">Open</Button>
+  <Button variant="ghost">Abrir</Button>
 </Card>'>
         <div class="card-head">
-          <div class="avatar">WP</div>
+          <div class="avatar">PS</div>
           <div class="card-titles">
-            <p class="card-title">Weekly planning</p>
-            <p class="card-sub">12 tasks &middot; due Friday</p>
+            <p class="card-title">Planejamento semanal</p>
+            <p class="card-sub">12 tarefas &middot; até sexta</p>
           </div>
         </div>
         <div class="chips">
           <span class="chip">Q2</span>
           <span class="chip olive">Roadmap</span>
         </div>
-        <button class="ghost-btn">Open</button>
+        <button class="ghost-btn">Abrir</button>
       </div>
-      <p class="variant-note">best for: default content cards on ivory</p>
+      <p class="variant-note">ideal para: cards de conteúdo padrão em fundo ivory</p>
     </div>
 
     <!-- C: Elevated -->
@@ -450,49 +450,49 @@
       <span class="variant-label">C &middot; Elevated</span>
       <div class="card v-elevated"
            data-snippet='<Card variant="elevated" padding={PAD} shadow="md">
-  <Card.Header avatar title="Weekly planning" subtitle="12 tasks &middot; due Friday" />
+  <Card.Header avatar title="Planejamento semanal" subtitle="12 tarefas · até sexta" />
   <Card.Meta tags={["Q2", "Roadmap"]} />
-  <Button variant="ghost">Open</Button>
+  <Button variant="ghost">Abrir</Button>
 </Card>'>
         <div class="card-head">
-          <div class="avatar">WP</div>
+          <div class="avatar">PS</div>
           <div class="card-titles">
-            <p class="card-title">Weekly planning</p>
-            <p class="card-sub">12 tasks &middot; due Friday</p>
+            <p class="card-title">Planejamento semanal</p>
+            <p class="card-sub">12 tarefas &middot; até sexta</p>
           </div>
         </div>
         <div class="chips">
           <span class="chip">Q2</span>
           <span class="chip olive">Roadmap</span>
         </div>
-        <button class="ghost-btn">Open</button>
+        <button class="ghost-btn">Abrir</button>
       </div>
-      <p class="variant-note">best for: draggable items, popovers</p>
+      <p class="variant-note">ideal para: itens arrastáveis, popovers</p>
     </div>
 
     <!-- D: Accent stripe -->
     <div class="cell">
-      <span class="variant-label">D &middot; Accent stripe</span>
+      <span class="variant-label">D &middot; Faixa de destaque</span>
       <div class="card v-stripe"
            data-snippet='<Card variant="outlined" accent="clay" padding={PAD} border="BORDER">
-  <Card.Header avatar title="Weekly planning" subtitle="12 tasks &middot; due Friday" />
+  <Card.Header avatar title="Planejamento semanal" subtitle="12 tarefas · até sexta" />
   <Card.Meta tags={["Q2", "Roadmap"]} />
-  <Button variant="ghost">Open</Button>
+  <Button variant="ghost">Abrir</Button>
 </Card>'>
         <div class="card-head">
-          <div class="avatar">WP</div>
+          <div class="avatar">PS</div>
           <div class="card-titles">
-            <p class="card-title">Weekly planning</p>
-            <p class="card-sub">12 tasks &middot; due Friday</p>
+            <p class="card-title">Planejamento semanal</p>
+            <p class="card-sub">12 tarefas &middot; até sexta</p>
           </div>
         </div>
         <div class="chips">
           <span class="chip">Q2</span>
           <span class="chip olive">Roadmap</span>
         </div>
-        <button class="ghost-btn">Open</button>
+        <button class="ghost-btn">Abrir</button>
       </div>
-      <p class="variant-note">best for: pinned or priority items</p>
+      <p class="variant-note">ideal para: itens fixados ou prioritários</p>
     </div>
 
     <!-- E: Inset / filled -->
@@ -500,24 +500,24 @@
       <span class="variant-label">E &middot; Inset</span>
       <div class="card v-inset"
            data-snippet='<Card variant="filled" tone="oat" padding={PAD}>
-  <Card.Header avatar title="Weekly planning" subtitle="12 tasks &middot; due Friday" />
+  <Card.Header avatar title="Planejamento semanal" subtitle="12 tarefas · até sexta" />
   <Card.Meta tags={["Q2", "Roadmap"]} />
-  <Button variant="ghost">Open</Button>
+  <Button variant="ghost">Abrir</Button>
 </Card>'>
         <div class="card-head">
-          <div class="avatar">WP</div>
+          <div class="avatar">PS</div>
           <div class="card-titles">
-            <p class="card-title">Weekly planning</p>
-            <p class="card-sub">12 tasks &middot; due Friday</p>
+            <p class="card-title">Planejamento semanal</p>
+            <p class="card-sub">12 tarefas &middot; até sexta</p>
           </div>
         </div>
         <div class="chips">
           <span class="chip">Q2</span>
           <span class="chip olive">Roadmap</span>
         </div>
-        <button class="ghost-btn">Open</button>
+        <button class="ghost-btn">Abrir</button>
       </div>
-      <p class="variant-note">best for: nested cards inside white panels</p>
+      <p class="variant-note">ideal para: cards aninhados dentro de painéis brancos</p>
     </div>
 
     <!-- F: Horizontal / compact -->
@@ -525,32 +525,32 @@
       <span class="variant-label">F &middot; Horizontal</span>
       <div class="card v-horizontal"
            data-snippet='<Card variant="outlined" layout="row" padding={PAD} border="BORDER">
-  <Card.Header avatar title="Weekly planning" />
+  <Card.Header avatar title="Planejamento semanal" />
   <Card.Meta tags={["Q2", "Roadmap"]} />
-  <Button variant="ghost">Open</Button>
+  <Button variant="ghost">Abrir</Button>
 </Card>'>
         <div class="card-head">
-          <div class="avatar">WP</div>
+          <div class="avatar">PS</div>
           <div class="card-titles">
-            <p class="card-title">Weekly planning</p>
-            <p class="card-sub">12 tasks &middot; due Friday</p>
+            <p class="card-title">Planejamento semanal</p>
+            <p class="card-sub">12 tarefas &middot; até sexta</p>
           </div>
         </div>
         <div class="chips">
           <span class="chip">Q2</span>
           <span class="chip olive">Roadmap</span>
         </div>
-        <button class="ghost-btn">Open</button>
+        <button class="ghost-btn">Abrir</button>
       </div>
-      <p class="variant-note">best for: compact row lists, sidebars</p>
+      <p class="variant-note">ideal para: listas compactas em linha, sidebars</p>
     </div>
 
   </div>
 
   <!-- ---------- Snippet ---------- -->
   <div class="snippet-panel">
-    <div class="snippet-head">JSX &mdash; hover a variant above</div>
-    <pre id="snippet">// hover a card to preview its props</pre>
+    <div class="snippet-head">JSX &mdash; passe o cursor sobre uma variante acima</div>
+    <pre id="snippet">// passe o cursor sobre um card para visualizar suas props</pre>
   </div>
 
 </div>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PR #247 — Review Summary</title>
+<title>PR #247 — Resumo de revisão</title>
 <style>
   :root {
     --ivory: #FAF9F5;
@@ -399,13 +399,13 @@
 
   <header class="pr-head">
     <div class="repo-line">birchline/web · Pull Request #247</div>
-    <h1>Add optimistic updates to task list mutations</h1>
+    <h1>Adicionar atualizações otimistas às mutações da lista de tarefas</h1>
     <div class="meta-row">
       <div class="author">
         <div class="avatar">MO</div>
         <div>
           <div class="author-name">Mira Okafor</div>
-          <div class="author-sub">opened 2 days ago</div>
+          <div class="author-sub">aberto há 2 dias</div>
         </div>
       </div>
       <div class="branch">
@@ -413,22 +413,22 @@
       </div>
       <div class="stat">
         <span class="add">+142</span> / <span class="del">−38</span>
-        <span class="files">6 files changed</span>
+        <span class="files">6 arquivos alterados</span>
       </div>
     </div>
   </header>
 
   <section class="prose">
-    <h2>What this PR does</h2>
+    <h2>O que este PR faz</h2>
     <ul>
-      <li>Replaces the await-then-refetch pattern in <code style="font-family:var(--mono);font-size:12.5px;background:var(--gray-150);padding:1px 5px;border-radius:4px">TaskList</code> with optimistic cache writes, so toggling or reordering a task feels instant instead of waiting ~300ms for the round-trip.</li>
-      <li>Introduces a small <code style="font-family:var(--mono);font-size:12.5px;background:var(--gray-150);padding:1px 5px;border-radius:4px">useOptimisticTasks</code> hook that wraps the mutation, snapshots the previous list, and rolls back on error.</li>
-      <li>Extends the API client to accept an idempotency key per mutation and adds a toast when a rollback fires.</li>
+      <li>Substitui o padrão await-then-refetch em <code style="font-family:var(--mono);font-size:12.5px;background:var(--gray-150);padding:1px 5px;border-radius:4px">TaskList</code> por escritas otimistas no cache, fazendo com que marcar ou reordenar uma tarefa pareça instantâneo em vez de aguardar ~300ms pelo round-trip.</li>
+      <li>Introduz um pequeno hook <code style="font-family:var(--mono);font-size:12.5px;background:var(--gray-150);padding:1px 5px;border-radius:4px">useOptimisticTasks</code> que encapsula a mutação, tira um snapshot da lista anterior e reverte em caso de erro.</li>
+      <li>Estende o cliente de API para aceitar uma chave de idempotência por mutação e adiciona um toast quando um rollback é acionado.</li>
     </ul>
   </section>
 
   <section>
-    <h2>Risk map</h2>
+    <h2>Mapa de riscos</h2>
     <div class="risk-map">
       <a class="chip attention" href="#file-hook"><span class="dot"></span>useOptimisticTasks.ts</a>
       <a class="chip medium" href="#file-tasklist"><span class="dot"></span>TaskList.tsx</a>
@@ -438,14 +438,14 @@
       <a class="chip safe" href="#file-test"><span class="dot"></span>TaskList.test.tsx</a>
     </div>
     <div class="legend">
-      <span><span class="dot" style="background:var(--olive)"></span> safe</span>
-      <span><span class="dot" style="background:#B89B6E"></span> worth a look</span>
-      <span><span class="dot" style="background:var(--clay)"></span> needs attention</span>
+      <span><span class="dot" style="background:var(--olive)"></span> seguro</span>
+      <span><span class="dot" style="background:#B89B6E"></span> vale verificar</span>
+      <span><span class="dot" style="background:var(--clay)"></span> precisa de atenção</span>
     </div>
   </section>
 
   <section>
-    <h2>Files</h2>
+    <h2>Arquivos</h2>
 
     <!-- File 1: hook (attention) -->
     <article class="file-card" id="file-hook">
@@ -454,7 +454,7 @@
           <div class="file-path">src/hooks/useOptimisticTasks.ts</div>
         </div>
         <div style="display:flex;align-items:center;gap:12px">
-          <span class="risk-tag attention">needs attention</span>
+          <span class="risk-tag attention">precisa de atenção</span>
           <span class="file-delta"><span class="add">+58</span> <span class="del">−0</span></span>
         </div>
       </div>
@@ -483,12 +483,12 @@
       </div>
       <div class="comments">
         <div class="bubble blocking">
-          <div class="anchor">line 11</div>
-          <p><span class="label">Blocking</span><code>onMutate</code> doesn't call <code>qc.cancelQueries(key)</code> first. If a background refetch lands between the optimistic write and the server response, it will clobber the optimistic state and the UI will flicker back to the old value.</p>
+          <div class="anchor">linha 11</div>
+          <p><span class="label">Bloqueante</span><code>onMutate</code> não chama <code>qc.cancelQueries(key)</code> primeiro. Se um refetch em background chegar entre a escrita otimista e a resposta do servidor, ele vai sobrescrever o estado otimista e a UI vai piscar de volta ao valor antigo.</p>
         </div>
         <div class="bubble nit">
-          <div class="anchor">line 18</div>
-          <p><span class="label">Nit</span>Rollback restores the list but never surfaces the error. Consider wiring the existing <code>pushToast</code> here so users know the toggle didn't stick.</p>
+          <div class="anchor">linha 18</div>
+          <p><span class="label">Detalhe</span>O rollback restaura a lista mas nunca exibe o erro. Considere acionar o <code>pushToast</code> existente aqui para que os usuários saibam que o toggle não foi salvo.</p>
         </div>
       </div>
     </article>
@@ -500,7 +500,7 @@
           <div class="file-path">src/components/TaskList.tsx</div>
         </div>
         <div style="display:flex;align-items:center;gap:12px">
-          <span class="risk-tag medium">worth a look</span>
+          <span class="risk-tag medium">vale verificar</span>
           <span class="file-delta"><span class="add">+31</span> <span class="del">−24</span></span>
         </div>
       </div>
@@ -528,8 +528,8 @@
       </div>
       <div class="comments">
         <div class="bubble nit">
-          <div class="anchor">line 43</div>
-          <p><span class="label">Nit</span><code>isPending</code> is destructured but never read. Either drop it or pass it to <code>TaskRow</code> so the checkbox can dim while the request is in flight.</p>
+          <div class="anchor">linha 43</div>
+          <p><span class="label">Detalhe</span><code>isPending</code> é desestruturado mas nunca usado. Ou remova ou passe para <code>TaskRow</code> para que o checkbox fique desabilitado enquanto a requisição está em andamento.</p>
         </div>
       </div>
     </article>
@@ -541,7 +541,7 @@
           <div class="file-path">src/api/tasks.ts</div>
         </div>
         <div style="display:flex;align-items:center;gap:12px">
-          <span class="risk-tag medium">worth a look</span>
+          <span class="risk-tag medium">vale verificar</span>
           <span class="file-delta"><span class="add">+19</span> <span class="del">−6</span></span>
         </div>
       </div>
@@ -561,8 +561,8 @@
       </div>
       <div class="comments">
         <div class="bubble blocking">
-          <div class="anchor">line 15</div>
-          <p><span class="label">Blocking</span>Generating the idempotency key as a default parameter means retries from the mutation layer get a <em>new</em> key each time, which defeats the purpose. The key should be minted once in <code>onMutate</code> and threaded through.</p>
+          <div class="anchor">linha 15</div>
+          <p><span class="label">Bloqueante</span>Gerar a chave de idempotência como parâmetro padrão significa que retentativas da camada de mutação recebem uma chave <em>nova</em> a cada vez, o que anula o propósito. A chave deve ser criada uma vez em <code>onMutate</code> e repassada.</p>
         </div>
       </div>
     </article>
@@ -572,50 +572,50 @@
       <summary>
         <span class="file-path">src/components/Toast.tsx</span>
         <span style="display:flex;align-items:center;gap:12px">
-          <span class="risk-tag safe">safe</span>
+          <span class="risk-tag safe">seguro</span>
           <span class="file-delta"><span class="add">+14</span> <span class="del">−2</span></span>
         </span>
       </summary>
-      <div class="body">Adds a <code style="font-family:var(--mono)">variant="warning"</code> style and exports <code style="font-family:var(--mono)">pushToast</code>. Purely additive, no behaviour change for existing call sites.</div>
+      <div class="body">Adiciona um estilo <code style="font-family:var(--mono)">variant="warning"</code> e exporta <code style="font-family:var(--mono)">pushToast</code>. Puramente aditivo, sem mudança de comportamento nos locais de chamada existentes.</div>
     </details>
 
     <details class="file-collapsed" id="file-types">
       <summary>
         <span class="file-path">src/types/task.ts</span>
         <span style="display:flex;align-items:center;gap:12px">
-          <span class="risk-tag safe">safe</span>
+          <span class="risk-tag safe">seguro</span>
           <span class="file-delta"><span class="add">+6</span> <span class="del">−2</span></span>
         </span>
       </summary>
-      <div class="body">Widens <code style="font-family:var(--mono)">Task.status</code> to include <code style="font-family:var(--mono)">"archived"</code> and adds an optional <code style="font-family:var(--mono)">updatedAt</code> timestamp. Type-only change.</div>
+      <div class="body">Amplia <code style="font-family:var(--mono)">Task.status</code> para incluir <code style="font-family:var(--mono)">"archived"</code> e adiciona um timestamp opcional <code style="font-family:var(--mono)">updatedAt</code>. Mudança apenas de tipo.</div>
     </details>
 
     <details class="file-collapsed" id="file-test">
       <summary>
         <span class="file-path">src/components/__tests__/TaskList.test.tsx</span>
         <span style="display:flex;align-items:center;gap:12px">
-          <span class="risk-tag safe">safe</span>
+          <span class="risk-tag safe">seguro</span>
           <span class="file-delta"><span class="add">+14</span> <span class="del">−4</span></span>
         </span>
       </summary>
-      <div class="body">Adds a test asserting the row updates synchronously after click, and one asserting rollback when the mocked request rejects. Both pass locally.</div>
+      <div class="body">Adiciona um teste verificando que a linha atualiza sincronamente após clique, e outro verificando rollback quando a requisição mockada rejeita. Ambos passam localmente.</div>
     </details>
   </section>
 
   <footer class="next-steps">
-    <h2>Suggested next steps</h2>
+    <h2>Próximos passos sugeridos</h2>
     <ul class="checklist">
       <li>
         <input type="checkbox" id="step1">
-        <label for="step1">Add <code>await qc.cancelQueries(key)</code> at the top of <code>onMutate</code> in <code>useOptimisticTasks.ts</code>.</label>
+        <label for="step1">Adicionar <code>await qc.cancelQueries(key)</code> no início de <code>onMutate</code> em <code>useOptimisticTasks.ts</code>.</label>
       </li>
       <li>
         <input type="checkbox" id="step2">
-        <label for="step2">Move idempotency-key generation into the mutation context so retries reuse the same key.</label>
+        <label for="step2">Mover a geração da chave de idempotência para o contexto da mutação para que as retentativas reutilizem a mesma chave.</label>
       </li>
       <li>
         <input type="checkbox" id="step3">
-        <label for="step3">Either consume <code>isPending</code> in <code>TaskRow</code> or remove it from the destructure to keep lint clean.</label>
+        <label for="step3">Consumir <code>isPending</code> em <code>TaskRow</code> ou removê-lo da desestruturação para manter o lint limpo.</label>
       </li>
     </ul>
   </footer>

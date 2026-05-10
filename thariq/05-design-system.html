@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Birchline — Design System Reference</title>
+<title>Birchline — Referência do Design System</title>
 <style>
   :root {
     --ivory: #FAF9F5;
@@ -356,19 +356,19 @@
 <div class="page">
 
   <header>
-    <h1>Birchline design system</h1>
+    <h1>Design system Birchline</h1>
     <p class="sub">
-      Generated from <code>src/styles/tokens.ts</code> and <code>src/components/</code> &mdash; use as a portable reference when prompting.
+      Gerado a partir de <code>src/styles/tokens.ts</code> e <code>src/components/</code> &mdash; use como referência portátil ao criar prompts.
     </p>
   </header>
 
   <!-- ===================== COLOR ===================== -->
   <section id="color">
-    <h2>Color</h2>
+    <h2>Cores</h2>
     <hr class="rule">
 
     <div class="swatch-group">
-      <div class="swatch-group-label">Primary</div>
+      <div class="swatch-group-label">Primárias</div>
       <div class="swatch-grid">
         <div class="swatch">
           <div class="chip no-border" style="background:#D97757"></div>
@@ -394,7 +394,7 @@
     </div>
 
     <div class="swatch-group">
-      <div class="swatch-group-label">Neutral</div>
+      <div class="swatch-group-label">Neutras</div>
       <div class="swatch-grid">
         <div class="swatch">
           <div class="chip" style="background:#FFFFFF"></div>
@@ -425,7 +425,7 @@
     </div>
 
     <div class="swatch-group">
-      <div class="swatch-group-label">Semantic</div>
+      <div class="swatch-group-label">Semânticas</div>
       <div class="swatch-grid">
         <div class="swatch">
           <div class="chip no-border" style="background:#788C5D"></div>
@@ -453,49 +453,49 @@
 
   <!-- ===================== TYPOGRAPHY ===================== -->
   <section id="typography">
-    <h2>Typography</h2>
+    <h2>Tipografia</h2>
     <hr class="rule">
 
     <div class="type-scale">
       <div class="type-row">
-        <div class="type-specimen t-display">Plan the week ahead</div>
+        <div class="type-specimen t-display">Planeje a semana à frente</div>
         <div class="type-meta">
           <span class="name">Display</span>
           48 / 1.1 / 500
         </div>
       </div>
       <div class="type-row">
-        <div class="type-specimen t-h1">Plan the week ahead</div>
+        <div class="type-specimen t-h1">Planeje a semana à frente</div>
         <div class="type-meta">
-          <span class="name">Heading 1</span>
+          <span class="name">Título 1</span>
           32 / 1.2 / 500
         </div>
       </div>
       <div class="type-row">
-        <div class="type-specimen t-h2">Plan the week ahead</div>
+        <div class="type-specimen t-h2">Planeje a semana à frente</div>
         <div class="type-meta">
-          <span class="name">Heading 2</span>
+          <span class="name">Título 2</span>
           24 / 1.3 / 500
         </div>
       </div>
       <div class="type-row">
-        <div class="type-specimen t-body">Review milestones, assign owners, and surface blockers before they cascade.</div>
+        <div class="type-specimen t-body">Revise marcos, atribua responsáveis e sinalize bloqueios antes que se propaguem.</div>
         <div class="type-meta">
-          <span class="name">Body</span>
+          <span class="name">Corpo</span>
           16 / 1.55 / 430
         </div>
       </div>
       <div class="type-row">
-        <div class="type-specimen t-small">Review milestones, assign owners, and surface blockers before they cascade.</div>
+        <div class="type-specimen t-small">Revise marcos, atribua responsáveis e sinalize bloqueios antes que se propaguem.</div>
         <div class="type-meta">
-          <span class="name">Small</span>
+          <span class="name">Pequeno</span>
           14 / 1.5 / 430
         </div>
       </div>
       <div class="type-row">
-        <div class="type-specimen t-caption">UPDATED 2 HOURS AGO</div>
+        <div class="type-specimen t-caption">ATUALIZADO HÁ 2 HORAS</div>
         <div class="type-meta">
-          <span class="name">Caption</span>
+          <span class="name">Legenda</span>
           12 / 1.4 / 500
         </div>
       </div>
@@ -504,7 +504,7 @@
 
   <!-- ===================== SPACING ===================== -->
   <section id="spacing">
-    <h2>Spacing</h2>
+    <h2>Espaçamento</h2>
     <hr class="rule">
 
     <div class="spacing-ruler">
@@ -545,7 +545,7 @@
 
   <!-- ===================== RADIUS & ELEVATION ===================== -->
   <section id="shape">
-    <h2>Radius &amp; Elevation</h2>
+    <h2>Raio &amp; Elevação</h2>
     <hr class="rule">
 
     <div class="token-row">
@@ -578,24 +578,24 @@
 
   <!-- ===================== CORE COMPONENTS ===================== -->
   <section id="components">
-    <h2>Core components</h2>
+    <h2>Componentes principais</h2>
     <hr class="rule">
 
     <div class="component">
       <div class="component-name">&lt;Button /&gt;</div>
       <div class="component-stage">
-        <button class="btn btn-primary">Create task</button>
-        <button class="btn btn-secondary">Cancel</button>
-        <button class="btn btn-ghost">Skip</button>
-        <button class="btn btn-danger">Delete</button>
+        <button class="btn btn-primary">Criar tarefa</button>
+        <button class="btn btn-secondary">Cancelar</button>
+        <button class="btn btn-ghost">Pular</button>
+        <button class="btn btn-danger">Excluir</button>
       </div>
     </div>
 
     <div class="component">
       <div class="component-name">&lt;Input /&gt;</div>
       <div class="component-stage">
-        <input class="input" type="text" placeholder="Search tasks&hellip;">
-        <input class="input" type="text" value="Weekly planning">
+        <input class="input" type="text" placeholder="Buscar tarefas&hellip;">
+        <input class="input" type="text" value="Planejamento semanal">
       </div>
     </div>
 
@@ -604,11 +604,11 @@
       <div class="component-stage">
         <label class="checkbox">
           <input type="checkbox">
-          Notify assignees
+          Notificar responsáveis
         </label>
         <label class="checkbox">
           <input type="checkbox" checked>
-          Archive on complete
+          Arquivar ao concluir
         </label>
       </div>
     </div>
@@ -616,10 +616,10 @@
     <div class="component">
       <div class="component-name">&lt;Badge /&gt;</div>
       <div class="component-stage">
-        <span class="badge badge-neutral">Draft</span>
-        <span class="badge badge-accent">In review</span>
-        <span class="badge badge-success">Done</span>
-        <span class="badge badge-warning">Overdue</span>
+        <span class="badge badge-neutral">Rascunho</span>
+        <span class="badge badge-accent">Em revisão</span>
+        <span class="badge badge-success">Concluído</span>
+        <span class="badge badge-warning">Atrasado</span>
       </div>
     </div>
   </section>
