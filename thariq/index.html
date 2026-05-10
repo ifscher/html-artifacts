@@ -1,9 +1,9 @@
-<!doctype html>
-<html lang="en">
+﻿<!doctype html>
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The unreasonable effectiveness of HTML — examples</title>
+<title>A eficácia absurda do HTML — exemplos</title>
 <style>
   :root {
     --ivory:  #FAF9F5;
@@ -160,6 +160,19 @@
   .hero-fig .pane.html .bar.b2 { height: 26px; background: var(--clay); }
   .hero-fig .pane.html .bar.b3 { height: 18px; background: var(--oat); }
   .hero-fig .pane.html .bar.b4 { height: 30px; background: var(--slate); }
+
+  /* ── back link ───────────────────────── */
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--g500);
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: color 120ms;
+  }
+  .back:hover { color: var(--clay); }
 
   /* ── toc pills ────────────────────────── */
 
@@ -340,26 +353,28 @@
 <body>
 <div class="wrap">
 
+  <a class="back" href="../index.html">&larr; Voltar ao catálogo</a>
+
   <header class="masthead">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow">Companion to the blog post</div>
-        <h1>The unreasonable <em>effectiveness</em> of HTML</h1>
+        <div class="eyebrow">Referência do blog post</div>
+        <h1>A absurda <em>eficácia</em> do HTML</h1>
         <p class="intro">
-          Twenty self-contained <code>.html</code> files an agent produced instead of a wall of markdown.
-          Each one trades a document you'd skim for one you'd actually read — open any of them directly in
-          a browser. Grouped by the kind of work they replace.
+          Vinte arquivos <code>.html</code> auto-contidos que um agente produziu no lugar de um muro de markdown.
+          Cada um transforma um documento que você leria por cima em algo que você realmente lê — abra qualquer um
+          direto no browser. Agrupados pelo tipo de trabalho que substituem.
         </p>
         <nav class="toc">
-          <a href="#exploration">Exploration &amp; Planning <span class="n">3</span></a>
+          <a href="#exploration">Exploração e Planejamento <span class="n">3</span></a>
           <a href="#code-review">Code Review <span class="n">3</span></a>
           <a href="#design">Design <span class="n">2</span></a>
-          <a href="#prototyping">Prototyping <span class="n">2</span></a>
-          <a href="#illustrations">Diagrams <span class="n">2</span></a>
-          <a href="#decks">Decks <span class="n">1</span></a>
-          <a href="#research">Research <span class="n">2</span></a>
-          <a href="#reports">Reports <span class="n">2</span></a>
-          <a href="#editors">Custom Editors <span class="n">3</span></a>
+          <a href="#prototyping">Prototipagem <span class="n">2</span></a>
+          <a href="#illustrations">Diagramas <span class="n">2</span></a>
+          <a href="#decks">Apresentações <span class="n">1</span></a>
+          <a href="#research">Pesquisa <span class="n">2</span></a>
+          <a href="#reports">Relatórios <span class="n">2</span></a>
+          <a href="#editors">Editores Customizados <span class="n">3</span></a>
         </nav>
       </div>
       <div class="hero-fig" aria-hidden="true">
@@ -381,14 +396,14 @@
     </div>
   </header>
 
-  <!-- ============================== Exploration & Planning ============================== -->
+  <!-- ============================== Exploracao e Planejamento ============================== -->
   <section id="exploration">
-    <div class="sec-head"><span class="idx">01</span><h2>Exploration &amp; Planning</h2><span class="count">3 demos</span></div>
+    <div class="sec-head"><span class="idx">01</span><h2>Exploração e Planejamento</h2><span class="count">3 demos</span></div>
     <p class="sec-intro">
-      When you're not sure what you want yet. Ask the agent to fan out across several directions and lay
-      them next to each other so you can point at one — instead of reading three sequential walls of text
-      and trying to hold them all in your head. And once you've picked, turn the pick into a plan the
-      implementer can actually read.
+      Quando você ainda não sabe o que quer. Peça ao agente para explorar várias direções e colocar
+      lado a lado para que você possa apontar para uma — em vez de ler três muros de texto sequenciais
+      e tentar manter todos na cabeça. E quando decidir, transforme a escolha em um plano que o
+      implementador consiga de fato ler.
     </p>
     <div class="grid">
       <a class="card" href="01-exploration-code-approaches.html">
@@ -402,9 +417,9 @@
           <circle class="cl" cx="100" cy="56" r="6"/>
         </svg></div>
         <div class="body">
-          <div class="title">Three code approaches</div>
-          <div class="desc">Side-by-side comparison of three ways to solve the same problem, with trade-offs called out inline.</div>
-          <div class="file"><span>01-exploration-code-approaches.html</span><span class="arrow">→</span></div>
+          <div class="title">Três abordagens de código</div>
+          <div class="desc">Comparação lado a lado de três formas de resolver o mesmo problema, com trade-offs destacados inline.</div>
+          <div class="file"><span>01-exploration-code-approaches.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="02-exploration-visual-designs.html">
@@ -419,9 +434,9 @@
           <circle class="ol" cx="102" cy="58" r="6"/>
         </svg></div>
         <div class="body">
-          <div class="title">Visual design directions</div>
-          <div class="desc">A handful of layout and palette options rendered live so you can react to them, not imagine them.</div>
-          <div class="file"><span>02-exploration-visual-designs.html</span><span class="arrow">→</span></div>
+          <div class="title">Direções de design visual</div>
+          <div class="desc">Opções de layout e paleta renderizadas ao vivo para você reagir a elas, não imaginá-las.</div>
+          <div class="file"><span>02-exploration-visual-designs.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="16-implementation-plan.html">
@@ -436,21 +451,21 @@
           <line class="lc" x1="92" y1="56" x2="108" y2="56"/>
         </svg></div>
         <div class="body">
-          <div class="title">Implementation plan</div>
-          <div class="desc">Milestones on a timeline, a data-flow diagram, inline mockups, the risky code, and a risk table — the plan you hand off.</div>
-          <div class="file"><span>16-implementation-plan.html</span><span class="arrow">→</span></div>
+          <div class="title">Plano de implementação</div>
+          <div class="desc">Marcos em uma timeline, diagrama de fluxo de dados, mockups inline, o código arriscado e uma tabela de riscos — o plano que você entrega.</div>
+          <div class="file"><span>16-implementation-plan.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- ============================== Code Review & Understanding ============================== -->
+  <!-- ============================== Code Review e Entendimento ============================== -->
   <section id="code-review">
-    <div class="sec-head"><span class="idx">02</span><h2>Code Review &amp; Understanding</h2><span class="count">3 demos</span></div>
+    <div class="sec-head"><span class="idx">02</span><h2>Code Review e Entendimento</h2><span class="count">3 demos</span></div>
     <p class="sec-intro">
-      Diffs and call-graphs are spatial information; markdown flattens them. Let the agent render the
-      change as an annotated diff, draw the module as boxes and arrows, or write the PR description your
-      reviewers actually want — so the shape of the code is visible at a glance.
+      Diffs e grafos de chamada são informação espacial; markdown achata tudo. Deixe o agente renderizar
+      a mudança como um diff anotado, desenhar o módulo como caixas e setas, ou escrever a descrição de PR
+      que seus revisores realmente querem — para que a forma do código fique visível num relance.
     </p>
     <div class="grid">
       <a class="card" href="03-code-review-pr.html">
@@ -465,9 +480,9 @@
           <circle class="cl" cx="100" cy="58" r="7"/>
         </svg></div>
         <div class="body">
-          <div class="title">Annotated pull request</div>
-          <div class="desc">A diff rendered with margin notes, severity tags and jump links — easier to scan than scrolling a terminal.</div>
-          <div class="file"><span>03-code-review-pr.html</span><span class="arrow">→</span></div>
+          <div class="title">Pull request anotado</div>
+          <div class="desc">Um diff renderizado com notas na margem, tags de severidade e links de navegação — mais fácil de escanear do que rolar um terminal.</div>
+          <div class="file"><span>03-code-review-pr.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="17-pr-writeup.html">
@@ -482,9 +497,9 @@
           <circle class="fl" cx="74" cy="62" r="5"/><rect class="fl" x="84" y="59" width="26" height="5" rx="2"/>
         </svg></div>
         <div class="body">
-          <div class="title">PR writeup for reviewers</div>
-          <div class="desc">The author's side: motivation, before/after, a file-by-file tour with the <em>why</em>, and where to focus the review.</div>
-          <div class="file"><span>17-pr-writeup.html</span><span class="arrow">→</span></div>
+          <div class="title">Descrição de PR para revisores</div>
+          <div class="desc">O lado do autor: motivação, antes/depois, tour arquivo por arquivo com o porquee onde focar a revisão.</div>
+          <div class="file"><span>17-pr-writeup.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="04-code-understanding.html">
@@ -498,9 +513,9 @@
           <line class="ln" x1="70" y1="28" x2="94" y2="52"/>
         </svg></div>
         <div class="body">
-          <div class="title">Module map</div>
-          <div class="desc">An unfamiliar package drawn as boxes and arrows, with the hot path highlighted and entry points listed.</div>
-          <div class="file"><span>04-code-understanding.html</span><span class="arrow">→</span></div>
+          <div class="title">Mapa de módulos</div>
+          <div class="desc">Um pacote desconhecido desenhado como caixas e setas, com o caminho crítico destacado e pontos de entrada listados.</div>
+          <div class="file"><span>04-code-understanding.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
     </div>
@@ -510,9 +525,9 @@
   <section id="design">
     <div class="sec-head"><span class="idx">03</span><h2>Design</h2><span class="count">2 demos</span></div>
     <p class="sec-intro">
-      HTML <em>is</em> the medium your design system ships in, so it's the natural format for talking about
-      it. Tokens become swatches, components become contact sheets, and the artifact can be fed straight
-      back into the next prompt.
+      HTML <em>é</em> o meio em que seu design system é entregue, então é o formato natural para falar sobre
+      ele. Tokens viram swatches, componentes viram contact sheets, e o artefato pode ser alimentado direto
+      de volta no próximo prompt.
     </p>
     <div class="grid">
       <a class="card" href="05-design-system.html">
@@ -526,9 +541,9 @@
           <rect class="fl" x="8" y="68" width="40" height="5" rx="2"/>
         </svg></div>
         <div class="body">
-          <div class="title">Living design system</div>
-          <div class="desc">Colors, type scale and spacing tokens pulled from a repo and rendered as swatches you can copy from.</div>
-          <div class="file"><span>05-design-system.html</span><span class="arrow">→</span></div>
+          <div class="title">Design system vivo</div>
+          <div class="desc">Cores, escala tipográfica e tokens de espaçamento extraídos de um repo e renderizados como swatches copiáveis.</div>
+          <div class="file"><span>05-design-system.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="06-component-variants.html">
@@ -542,20 +557,20 @@
           <circle class="cl" cx="110" cy="20" r="4"/><circle class="fl" cx="110" cy="37" r="4"/><circle class="ol" cx="110" cy="56" r="4"/>
         </svg></div>
         <div class="body">
-          <div class="title">Component variants</div>
-          <div class="desc">Every size, state and intent of one component laid out on a single sheet for review.</div>
-          <div class="file"><span>06-component-variants.html</span><span class="arrow">→</span></div>
+          <div class="title">Variantes de componente</div>
+          <div class="desc">Cada tamanho, estado e intenção de um componente dispostos em uma única folha para revisão.</div>
+          <div class="file"><span>06-component-variants.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- ============================== Prototyping ============================== -->
+  <!-- ============================== Prototipagem ============================== -->
   <section id="prototyping">
-    <div class="sec-head"><span class="idx">04</span><h2>Prototyping</h2><span class="count">2 demos</span></div>
+    <div class="sec-head"><span class="idx">04</span><h2>Prototipagem</h2><span class="count">2 demos</span></div>
     <p class="sec-intro">
-      Motion and interaction can't be described, only felt. A throwaway page with the real easing curve or
-      the real click-through tells you in five seconds what a paragraph of prose never could.
+      Movimento e interação não podem ser descritos, só sentidos. Uma página descartável com a curva de easing
+      real ou o click-through real te diz em cinco segundos o que um parágrafo de prosa nunca conseguiria.
     </p>
     <div class="grid">
       <a class="card" href="07-prototype-animation.html">
@@ -567,9 +582,9 @@
           <line class="ln" x1="12" y1="70" x2="108" y2="70"/><circle class="ol" cx="82" cy="70" r="6"/>
         </svg></div>
         <div class="body">
-          <div class="title">Animation sandbox</div>
-          <div class="desc">The transition in isolation with sliders for duration and easing, so you can tune it before wiring it in.</div>
-          <div class="file"><span>07-prototype-animation.html</span><span class="arrow">→</span></div>
+          <div class="title">Sandbox de animação</div>
+          <div class="desc">A transição isolada com sliders de duração e easing, para ajustar antes de integrar.</div>
+          <div class="file"><span>07-prototype-animation.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="08-prototype-interaction.html">
@@ -582,20 +597,20 @@
           <circle class="cl" cx="20" cy="50" r="4"/><rect class="fl" x="52" y="30" width="16" height="4" rx="2"/><rect class="ol" x="92" y="46" width="16" height="6" rx="3"/>
         </svg></div>
         <div class="body">
-          <div class="title">Clickable flow</div>
-          <div class="desc">Four screens linked together — enough fidelity to feel whether the interaction is right.</div>
-          <div class="file"><span>08-prototype-interaction.html</span><span class="arrow">→</span></div>
+          <div class="title">Fluxo clicável</div>
+          <div class="desc">Quatro telas conectadas — fidelidade suficiente para sentir se a interação está certa.</div>
+          <div class="file"><span>08-prototype-interaction.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- ============================== Illustrations & Diagrams ============================== -->
+  <!-- ============================== Ilustracoes e Diagramas ============================== -->
   <section id="illustrations">
-    <div class="sec-head"><span class="idx">05</span><h2>Illustrations &amp; Diagrams</h2><span class="count">2 demos</span></div>
+    <div class="sec-head"><span class="idx">05</span><h2>Ilustrações e Diagramas</h2><span class="count">2 demos</span></div>
     <p class="sec-intro">
-      Inline SVG gives the agent a real pen. Ask for the figures for a post or a flowchart of a process and
-      get vector art you can tweak by hand or paste straight into the final document.
+      SVG inline dá ao agente uma caneta de verdade. Peça as figuras para um post ou um fluxograma de um
+      processo e receba arte vetorial que você pode ajustar manualmente ou colar direto no documento final.
     </p>
     <div class="grid">
       <a class="card" href="10-svg-illustrations.html">
@@ -607,9 +622,9 @@
           <circle class="ol" cx="86" cy="20" r="5"/>
         </svg></div>
         <div class="body">
-          <div class="title">SVG figure sheet</div>
-          <div class="desc">The diagrams for a blog post, drawn inline so they can be tweaked and copied out one by one.</div>
-          <div class="file"><span>10-svg-illustrations.html</span><span class="arrow">→</span></div>
+          <div class="title">Folha de figuras SVG</div>
+          <div class="desc">Os diagramas para um blog post, desenhados inline para poder ajustar e copiar um por um.</div>
+          <div class="file"><span>10-svg-illustrations.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="13-flowchart-diagram.html">
@@ -623,21 +638,21 @@
           <line class="ln" x1="60" y1="34" x2="60" y2="22"/><line class="ln" x1="60" y1="22" x2="82" y2="22"/>
         </svg></div>
         <div class="body">
-          <div class="title">Annotated flowchart</div>
-          <div class="desc">A deploy pipeline drawn as a real flowchart — click any step to see what runs, timings, and failure paths.</div>
-          <div class="file"><span>13-flowchart-diagram.html</span><span class="arrow">→</span></div>
+          <div class="title">Fluxograma anotado</div>
+          <div class="desc">Um pipeline de deploy desenhado como fluxograma real — clique em qualquer etapa para ver o que roda, tempos e caminhos de falha.</div>
+          <div class="file"><span>13-flowchart-diagram.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- ============================== Decks ============================== -->
+  <!-- ============================== Apresentacoes ============================== -->
   <section id="decks">
-    <div class="sec-head"><span class="idx">06</span><h2>Decks</h2><span class="count">1 demo</span></div>
+    <div class="sec-head"><span class="idx">06</span><h2>Apresentações</h2><span class="count">1 demo</span></div>
     <p class="sec-intro">
-      A handful of <code>&lt;section&gt;</code> tags and twenty lines of JS is a slide deck. Point the agent at a
-      Slack thread or a design doc and get something you can arrow-key through in a meeting — no Keynote,
-      no export step.
+      Algumas tags <code>&lt;section&gt;</code> e vinte linhas de JS formam um slide deck. Aponte o agente para
+      uma thread do Slack ou um design doc e receba algo que você pode navegar com setas numa reunião — sem
+      Keynote, sem etapa de exportação.
     </p>
     <div class="grid">
       <a class="card" href="09-slide-deck.html">
@@ -649,21 +664,21 @@
           <circle class="fl" cx="50" cy="70" r="3"/><circle class="cl" cx="60" cy="70" r="3"/><circle class="fl" cx="70" cy="70" r="3"/>
         </svg></div>
         <div class="body">
-          <div class="title">Arrow-key slide deck</div>
-          <div class="desc">A short presentation as one HTML file. Left and right to navigate, no build step.</div>
-          <div class="file"><span>09-slide-deck.html</span><span class="arrow">→</span></div>
+          <div class="title">Slide deck com setas</div>
+          <div class="desc">Uma apresentação curta como um único arquivo HTML. Esquerda e direita para navegar, sem build.</div>
+          <div class="file"><span>09-slide-deck.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- ============================== Research & Learning ============================== -->
+  <!-- ============================== Pesquisa e Aprendizado ============================== -->
   <section id="research">
-    <div class="sec-head"><span class="idx">07</span><h2>Research &amp; Learning</h2><span class="count">2 demos</span></div>
+    <div class="sec-head"><span class="idx">07</span><h2>Pesquisa e Aprendizado</h2><span class="count">2 demos</span></div>
     <p class="sec-intro">
-      An explainer with collapsible sections, tabbed code samples and a glossary in the margin reads very
-      differently from the same words dumped linearly. The agent can build the scaffolding that makes a new
-      topic navigable.
+      Um explicador com seções colapsáveis, exemplos de código em abas e um glossário na margem se le muito
+      diferente das mesmas palavras despejadas linearmente. O agente pode construir a estrutura que torna um
+      tópico novo navegável.
     </p>
     <div class="grid">
       <a class="card" href="14-research-feature-explainer.html">
@@ -676,9 +691,9 @@
           <path class="ln" d="M16 57 l4 4 l-4 4"/><rect class="fl" x="28" y="56" width="38" height="5" rx="2.5"/>
         </svg></div>
         <div class="body">
-          <div class="title">How a feature works</div>
-          <div class="desc">"Explain rate limiting in this repo" — TL;DR box, collapsible request-path steps, tabbed config snippets, and an FAQ.</div>
-          <div class="file"><span>14-research-feature-explainer.html</span><span class="arrow">→</span></div>
+          <div class="title">Como uma feature funciona</div>
+          <div class="desc">"Explica rate limiting nesse repo" — caixa de resumo, etapas colapsáveis do request path, snippets de config em abas e FAQ.</div>
+          <div class="file"><span>14-research-feature-explainer.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="15-research-concept-explainer.html">
@@ -690,20 +705,21 @@
           <rect class="fl" x="82" y="44" width="28" height="5" rx="2.5"/><rect class="fl" x="82" y="56" width="20" height="5" rx="2.5"/>
         </svg></div>
         <div class="body">
-          <div class="title">Concept explainer</div>
-          <div class="desc">Consistent hashing taught with a live ring you can add/remove nodes from, a comparison table, and a hover-linked glossary.</div>
-          <div class="file"><span>15-research-concept-explainer.html</span><span class="arrow">→</span></div>
+          <div class="title">Explicador de conceito</div>
+          <div class="desc">Consistent hashing ensinado com um anel interativo onde você adiciona/remove nós, tabela comparativa e glossário com hover.</div>
+          <div class="file"><span>15-research-concept-explainer.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- ============================== Reports ============================== -->
+  <!-- ============================== Relatorios ============================== -->
   <section id="reports">
-    <div class="sec-head"><span class="idx">08</span><h2>Reports</h2><span class="count">2 demos</span></div>
+    <div class="sec-head"><span class="idx">08</span><h2>Relatórios</h2><span class="count">2 demos</span></div>
     <p class="sec-intro">
-      Recurring documents — status updates, post-mortems — benefit most from a bit of structure and color.
-      A small chart and a colored timeline turn something people skim into something they actually read.
+      Documentos recorrentes — atualizações de status, post-mortems — são os que mais se beneficiam de um
+      pouco de estrutura e cor. Um gráfico pequeno e uma timeline colorida transformam algo que as pessoas
+      leem por cima em algo que elas realmente leem.
     </p>
     <div class="grid">
       <a class="card" href="11-status-report.html">
@@ -718,9 +734,9 @@
           <rect class="fl" x="100" y="50" width="6" height="8"/>
         </svg></div>
         <div class="body">
-          <div class="title">Weekly status</div>
-          <div class="desc">What shipped, what slipped, and a small chart — formatted for a quick skim on Monday morning.</div>
-          <div class="file"><span>11-status-report.html</span><span class="arrow">→</span></div>
+          <div class="title">Status semanal</div>
+          <div class="desc">O que foi entregue, o que atrasou e um gráfico pequeno — formatado para uma leitura rápida na segunda de manhã.</div>
+          <div class="file"><span>11-status-report.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="12-incident-report.html">
@@ -735,21 +751,22 @@
           <rect class="oa" x="94" y="26" width="20" height="30" rx="4"/>
         </svg></div>
         <div class="body">
-          <div class="title">Incident timeline</div>
-          <div class="desc">A post-mortem with a minute-by-minute timeline, log excerpts and the follow-up checklist.</div>
-          <div class="file"><span>12-incident-report.html</span><span class="arrow">→</span></div>
+          <div class="title">Timeline de incidente</div>
+          <div class="desc">Um post-mortem com timeline minuto a minuto, trechos de log e o checklist de acompanhamento.</div>
+          <div class="file"><span>12-incident-report.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- ============================== Custom Editing Interfaces ============================== -->
+  <!-- ============================== Editores Customizados ============================== -->
   <section id="editors">
-    <div class="sec-head"><span class="idx">09</span><h2>Custom Editing Interfaces</h2><span class="count">3 demos</span></div>
+    <div class="sec-head"><span class="idx">09</span><h2>Editores Customizados</h2><span class="count">3 demos</span></div>
     <p class="sec-intro">
-      Sometimes it's hard to describe what you want in a text box. Ask for a throwaway editor for the exact
-      thing you're working on — and always end with an export button that turns whatever you did in the UI
-      back into something you can paste into the agent or commit. You stay in the loop; the loop gets tighter.
+      Às vezes é difícil descrever o que você quer numa caixa de texto. Peça um editor descartável para
+      exatamente o que você está trabalhando — e sempre termine com um botão de exportar que transforma
+      o que você fez na UI de volta em algo que você pode colar no agente ou commitar. Você continua no
+      controle; o ciclo fica mais curto.
     </p>
     <div class="grid">
       <a class="card" href="18-editor-triage-board.html">
@@ -767,9 +784,9 @@
           <rect class="oa" x="48" y="50" width="20" height="11" rx="2"/>
         </svg></div>
         <div class="body">
-          <div class="title">Ticket triage board</div>
-          <div class="desc">Drag thirty tickets across Now / Next / Later / Cut, then copy the final ordering out as markdown.</div>
-          <div class="file"><span>18-editor-triage-board.html</span><span class="arrow">→</span></div>
+          <div class="title">Board de triagem de tickets</div>
+          <div class="desc">Arraste trinta tickets entre Agora / Próximo / Depois / Cortar, depois copie a ordenação final como markdown.</div>
+          <div class="file"><span>18-editor-triage-board.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="19-editor-feature-flags.html">
@@ -786,9 +803,9 @@
           <line class="lc da" x1="62" y1="24" x2="62" y2="50"/>
         </svg></div>
         <div class="body">
-          <div class="title">Feature flag editor</div>
-          <div class="desc">Toggles grouped by area, dependency warnings when a prerequisite is off, and a "copy diff" button for just the changed keys.</div>
-          <div class="file"><span>19-editor-feature-flags.html</span><span class="arrow">→</span></div>
+          <div class="title">Editor de feature flags</div>
+          <div class="desc">Toggles agrupados por área, avisos de dependência quando um pré-requisito está desligado, e botão de copiar diff apenas das chaves alteradas.</div>
+          <div class="file"><span>19-editor-feature-flags.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
       <a class="card" href="20-editor-prompt-tuner.html">
@@ -804,17 +821,17 @@
           <rect class="oa" x="68" y="54" width="46" height="18" rx="4"/>
         </svg></div>
         <div class="body">
-          <div class="title">Prompt tuner</div>
-          <div class="desc">Editable template on the left with variable slots highlighted; three sample inputs on the right re-render live as you type.</div>
-          <div class="file"><span>20-editor-prompt-tuner.html</span><span class="arrow">→</span></div>
+          <div class="title">Ajustador de prompts</div>
+          <div class="desc">Template editável à esquerda com slots de variáveis destacados; três entradas de exemplo à direita re-renderizam ao vivo enquanto você digita.</div>
+          <div class="file"><span>20-editor-prompt-tuner.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
     </div>
   </section>
 
   <footer>
-    <span class="k">Everything on this page is itself a single <code>.html</code> file.</span>
-    <span>View the repo · <a href="https://thariqs.github.io/html-effectiveness/">thariqs.github.io/html-effectiveness</a></span>
+    <span class="k">Tudo nesta página é, em si, um único arquivo <code>.html</code>.</span>
+    <span>Original por <a href="https://www.thariq.io/blog/the-unreasonable-effectiveness-of-html/">Thariq Shuja</a> · Tradução para referência pessoal</span>
   </footer>
 
 </div>
