@@ -194,6 +194,18 @@
     transition: background 150ms ease;
   }
   a.card:hover .thumb { background: var(--oat); }
+  .thumb svg { width: 100%; height: 100%; overflow: visible; }
+  .thumb svg .st { stroke: var(--g500); fill: none; stroke-width: 2.5; }
+  .thumb svg .fl { fill: var(--g300); }
+  .thumb svg .cl { fill: var(--clay); }
+  .thumb svg .ol { fill: var(--olive); }
+  .thumb svg .oa { fill: var(--oat); stroke: var(--g500); stroke-width: 2.5; }
+  .thumb svg .sl { fill: var(--slate); }
+  .thumb svg .wh { fill: var(--paper); stroke: var(--g500); stroke-width: 2.5; }
+  .thumb svg .ln { stroke: var(--g500); stroke-width: 2.5; fill: none; stroke-linecap: round; }
+  .thumb svg .lc { stroke: var(--clay); stroke-width: 2.5; fill: none; stroke-linecap: round; }
+  a.card:hover .thumb svg .fl { fill: var(--g500); }
+  a.card:hover .thumb svg .oa { fill: var(--paper); }
 
   .body { padding: 18px 20px 16px; display: flex; flex-direction: column; flex: 1; }
   .title {
@@ -285,22 +297,48 @@
     <p class="sec-intro">
       Adicione seus <code>.html</code> na raiz do repo e registre aqui.
     </p>
-    <div class="empty">
-      Nenhum artefato ainda. Crie um <code>.html</code> na raiz e adicione um card aqui.
-    </div>
-
-    <!-- TEMPLATE: copie este bloco para adicionar um novo card
     <div class="grid">
-      <a class="card" href="nome-do-arquivo.html">
-        <div class="thumb" style="font-family: var(--serif); font-size: 24px; color: var(--g500);">?</div>
+      <a class="card" href="01-skill-plan-spec.html">
+        <div class="thumb">
+          <svg viewBox="0 0 120 80">
+            <rect class="wh" x="8" y="10" width="104" height="60" rx="6"/>
+            <rect class="fl" x="18" y="22" width="50" height="5" rx="2.5"/>
+            <rect class="cl" x="18" y="32" width="84" height="4" rx="2"/>
+            <rect class="fl" x="18" y="42" width="70" height="4" rx="2"/>
+            <rect class="fl" x="18" y="52" width="60" height="4" rx="2"/>
+            <rect class="oa" x="18" y="60" width="36" height="4" rx="2"/>
+          </svg>
+        </div>
         <div class="body">
-          <div class="title">Título do artefato</div>
-          <div class="desc">Descrição curta do que esse artefato faz.</div>
-          <div class="file"><span>nome-do-arquivo.html</span><span class="arrow">&rarr;</span></div>
+          <div class="title">Skill html-artifact — Especificação</div>
+          <div class="desc">Documento com fluxo de execução, inputs/outputs, estrutura de pastas, edge cases e questões em aberto.</div>
+          <div class="file"><span>01-skill-plan-spec.html</span><span class="arrow">&rarr;</span></div>
+        </div>
+      </a>
+      <a class="card" href="02-skill-plan-builder.html">
+        <div class="thumb">
+          <svg viewBox="0 0 120 80">
+            <rect class="wh" x="8" y="8" width="50" height="64" rx="6"/>
+            <rect class="wh" x="64" y="8" width="48" height="64" rx="6"/>
+            <rect class="fl" x="14" y="18" width="38" height="4" rx="2"/>
+            <rect class="g200" x="14" y="26" width="38" height="9" rx="3" style="fill:var(--g200)"/>
+            <rect class="fl" x="14" y="40" width="38" height="4" rx="2"/>
+            <rect class="g200" x="14" y="48" width="38" height="9" rx="3" style="fill:var(--g200)"/>
+            <rect class="cl" x="14" y="62" width="28" height="6" rx="3"/>
+            <rect class="oa" x="70" y="16" width="36" height="5" rx="2.5"/>
+            <rect class="fl" x="70" y="26" width="30" height="3" rx="1.5"/>
+            <rect class="fl" x="70" y="33" width="34" height="3" rx="1.5"/>
+            <rect class="fl" x="70" y="40" width="28" height="3" rx="1.5"/>
+            <rect class="fl" x="70" y="50" width="36" height="16" rx="3" style="fill:var(--g100)"/>
+          </svg>
+        </div>
+        <div class="body">
+          <div class="title">Skill html-artifact — Builder</div>
+          <div class="desc">Editor interativo para definir os parâmetros da skill. Preencha os campos e exporte como markdown pronto para o SKILL.md.</div>
+          <div class="file"><span>02-skill-plan-builder.html</span><span class="arrow">&rarr;</span></div>
         </div>
       </a>
     </div>
-    -->
   </section>
 
   <!-- ============================== Referencia ============================== -->

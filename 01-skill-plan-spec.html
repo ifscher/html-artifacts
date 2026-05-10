@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill: html-artifact — Especificação</title>
+<style>
+  :root {
+    --ivory:  #FAF9F5;
+    --paper:  #FFFFFF;
+    --slate:  #141413;
+    --clay:   #D97757;
+    --clay-d: #B85C3E;
+    --oat:    #E3DACC;
+    --olive:  #788C5D;
+    --g100:   #F0EEE6;
+    --g200:   #E6E3DA;
+    --g300:   #D1CFC5;
+    --g500:   #87867F;
+    --g700:   #3D3D3A;
+    --serif: ui-serif, Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--ivory); color: var(--slate); font-family: var(--sans); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 56px 32px 100px; }
+
+  /* header */
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g500); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .eyebrow::before { content: ""; width: 20px; height: 1.5px; background: var(--clay); }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(32px, 4vw, 48px); line-height: 1.08; letter-spacing: -0.018em; margin: 0 0 16px; }
+  h1 em { font-style: italic; color: var(--clay); }
+  .lead { font-size: 16px; color: var(--g700); max-width: 600px; margin: 0 0 40px; }
+
+  /* tldr box */
+  .tldr {
+    background: var(--paper);
+    border: 1.5px solid var(--g300);
+    border-left: 4px solid var(--clay);
+    border-radius: 0 10px 10px 0;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+  }
+  .tldr-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay); margin-bottom: 10px; }
+  .tldr p { margin: 0; font-size: 15px; color: var(--g700); }
+
+  /* flow diagram */
+  .flow { margin: 0 0 48px; }
+  .flow-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g500); margin-bottom: 16px; }
+  .flow-steps { display: flex; align-items: stretch; flex-wrap: nowrap; gap: 0; overflow-x: auto; padding-bottom: 8px; }
+  .flow-step {
+    background: var(--paper);
+    border: 1.5px solid var(--g300);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    min-width: 0;
+    flex: 1 1 0;
+  }
+  .flow-step .step-n { font-family: var(--mono); font-size: 10px; color: var(--clay); font-weight: 600; margin-bottom: 4px; }
+  .flow-step .step-t { font-weight: 500; color: var(--slate); }
+  .flow-step .step-d { font-size: 11.5px; color: var(--g500); margin-top: 3px; }
+  .flow-step.highlight { border-color: var(--clay); background: #FFF7F4; }
+  .flow-arrow { font-size: 18px; color: var(--g300); padding: 0 8px; flex-shrink: 0; }
+
+  /* collapsible sections */
+  .section { border-top: 1.5px solid var(--g200); margin-top: 8px; }
+  .section:first-of-type { margin-top: 0; }
+  details { }
+  summary {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 0;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  .sum-idx { font-family: var(--mono); font-size: 12px; color: var(--clay); font-weight: 600; width: 28px; flex-shrink: 0; }
+  .sum-title { font-family: var(--serif); font-size: 20px; font-weight: 500; flex: 1; }
+  .sum-arrow { font-size: 12px; color: var(--g300); transition: transform 200ms; }
+  details[open] .sum-arrow { transform: rotate(90deg); }
+  .detail-body { padding: 0 0 28px 42px; }
+  @media (max-width: 600px) { .detail-body { padding-left: 0; } }
+
+  /* content inside details */
+  .detail-body p { font-size: 14.5px; color: var(--g700); margin: 0 0 14px; }
+  .detail-body ul { margin: 0 0 14px; padding-left: 20px; }
+  .detail-body li { font-size: 14.5px; color: var(--g700); margin-bottom: 6px; }
+  .detail-body code { font-family: var(--mono); font-size: 12.5px; background: var(--g100); padding: 1px 6px; border-radius: 4px; color: var(--slate); }
+
+  /* table */
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 14px; }
+  th { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--g500); text-align: left; padding: 8px 12px; background: var(--g100); }
+  td { padding: 10px 12px; border-top: 1px solid var(--g200); color: var(--g700); vertical-align: top; }
+  td:first-child { font-family: var(--mono); font-size: 12px; color: var(--slate); white-space: nowrap; }
+  tr:last-child td { border-bottom: 1px solid var(--g200); }
+
+  /* edge case cards */
+  .edge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  @media (max-width: 600px) { .edge-grid { grid-template-columns: 1fr; } }
+  .edge-card { background: var(--paper); border: 1.5px solid var(--g200); border-radius: 8px; padding: 14px 16px; }
+  .edge-card .e-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g500); margin-bottom: 6px; }
+  .edge-card .e-title { font-size: 13.5px; font-weight: 500; color: var(--slate); margin-bottom: 5px; }
+  .edge-card .e-desc { font-size: 12.5px; color: var(--g700); }
+
+  /* file tree */
+  .tree { font-family: var(--mono); font-size: 13px; background: var(--paper); border: 1.5px solid var(--g200); border-radius: 8px; padding: 16px 20px; line-height: 2; color: var(--g700); }
+  .tree .hl { color: var(--clay); font-weight: 600; }
+  .tree .dim { color: var(--g300); }
+
+  footer { margin-top: 64px; border-top: 1.5px solid var(--g200); padding-top: 24px; font-size: 12px; color: var(--g500); font-family: var(--mono); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Planejamento de skill · html-artifact</div>
+  <h1>Skill <em>html-artifact</em></h1>
+  <p class="lead">Gera artefatos HTML auto-contidos no design system estabelecido, salva no projeto atual e mantém o catálogo atualizado automaticamente.</p>
+
+  <div class="tldr">
+    <div class="tldr-label">Resumo</div>
+    <p>Você descreve o que quer. A skill escolhe o template mais próximo dos demos de referência, gera um HTML com os tokens de design corretos, salva em <code>artifacts/</code> do projeto ativo e registra um card no <code>artifacts/index.html</code>. Se a pasta não existir, cria junto com o índice.</p>
+  </div>
+
+  <div class="flow">
+    <div class="flow-label">Fluxo de execução</div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-n">01</div>
+        <div class="step-t">Input</div>
+        <div class="step-d">Descrição + tipo opcional</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-n">02</div>
+        <div class="step-t">Contexto</div>
+        <div class="step-d">Carrega design tokens + demo de referência</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step highlight">
+        <div class="step-n">03</div>
+        <div class="step-t">Geração</div>
+        <div class="step-d">HTML auto-contido</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-n">04</div>
+        <div class="step-t">Salvar</div>
+        <div class="step-d"><code>artifacts/NN-nome.html</code></div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-n">05</div>
+        <div class="step-t">Índice</div>
+        <div class="step-d">Cria ou atualiza <code>index.html</code></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- sections -->
+  <div class="section">
+    <details open>
+      <summary><span class="sum-idx">01</span><span class="sum-title">Inputs</span><span class="sum-arrow">▶</span></summary>
+      <div class="detail-body">
+        <p>A skill recebe dois parâmetros:</p>
+        <table>
+          <tr><th>Parâmetro</th><th>Obrigatório</th><th>Descrição</th></tr>
+          <tr><td>descrição</td><td>sim</td><td>O que o artefato deve mostrar ou fazer. Ex: "plano de implementação do módulo de auth"</td></tr>
+          <tr><td>tipo</td><td>não</td><td>Hint do tipo: <code>spec</code>, <code>report</code>, <code>explorer</code>, <code>editor</code>, <code>deck</code>. Se omitido, a skill infere pelo conteúdo.</td></tr>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="section">
+    <details>
+      <summary><span class="sum-idx">02</span><span class="sum-title">Contexto carregado pela skill</span><span class="sum-arrow">▶</span></summary>
+      <div class="detail-body">
+        <p>A skill injeta no contexto antes de gerar:</p>
+        <ul>
+          <li>Os tokens CSS do design system (<code>--ivory</code>, <code>--clay</code>, <code>--serif</code>, etc.)</li>
+          <li>Os padrões de layout mais usados (card, section, grid, thumb)</li>
+          <li>O demo de referência mais próximo do tipo solicitado, como exemplo concreto</li>
+          <li>Regra: HTML auto-contido, zero dependências externas, CSS e JS inline</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="section">
+    <details>
+      <summary><span class="sum-idx">03</span><span class="sum-title">Estrutura de pastas gerada</span><span class="sum-arrow">▶</span></summary>
+      <div class="detail-body">
+        <div class="tree">
+          projeto/<br>
+          &nbsp;&nbsp;src/<br>
+          &nbsp;&nbsp;...<br>
+          &nbsp;&nbsp;<span class="hl">artifacts/</span><span class="dim"> ← criado na primeira vez</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="hl">index.html</span><span class="dim"> ← catálogo do projeto</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="hl">01-nome-do-artefato.html</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;02-outro-artefato.html<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;...
+        </div>
+        <p style="margin-top:14px">O <code>index.html</code> do projeto referencia os artefatos locais + link para <code>ifscher.github.io/html-artifacts/thariq/</code> como referência de design.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="section">
+    <details>
+      <summary><span class="sum-idx">04</span><span class="sum-title">Comportamento do índice</span><span class="sum-arrow">▶</span></summary>
+      <div class="detail-body">
+        <p>A skill atualiza o <code>artifacts/index.html</code> automaticamente a cada novo artefato:</p>
+        <ul>
+          <li>Adiciona um card com título, descrição e link para o arquivo</li>
+          <li>Incrementa a numeração (<code>NN-</code>) baseado nos arquivos existentes</li>
+          <li>Seção "Referência" no rodapé linka para o catálogo central no GitHub Pages</li>
+          <li>Nunca reescreve o índice do zero — sempre faz append do card novo</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="section">
+    <details>
+      <summary><span class="sum-idx">05</span><span class="sum-title">Edge cases</span><span class="sum-arrow">▶</span></summary>
+      <div class="detail-body">
+        <div class="edge-grid">
+          <div class="edge-card">
+            <div class="e-label">Primeiro artefato</div>
+            <div class="e-title">Pasta não existe</div>
+            <div class="e-desc">Cria <code>artifacts/</code> e gera o <code>index.html</code> do zero com o novo card e a seção de referência.</div>
+          </div>
+          <div class="edge-card">
+            <div class="e-label">Índice sem referência</div>
+            <div class="e-title">Index antigo sem seção ref</div>
+            <div class="e-desc">Adiciona a seção de referência ao final antes de registrar o novo card.</div>
+          </div>
+          <div class="edge-card">
+            <div class="e-label">Tipo ambíguo</div>
+            <div class="e-title">Skill não consegue inferir</div>
+            <div class="e-desc">Pergunta ao usuário com opções: spec / report / explorer / editor / deck.</div>
+          </div>
+          <div class="edge-card">
+            <div class="e-label">Nome de arquivo</div>
+            <div class="e-title">Conflito de numeração</div>
+            <div class="e-desc">Lê os arquivos existentes em <code>artifacts/</code> e usa o próximo número disponível.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="section">
+    <details open>
+      <summary><span class="sum-idx">06</span><span class="sum-title">Decisões tomadas</span><span class="sum-arrow">▶</span></summary>
+      <div class="detail-body">
+        <div class="edge-grid">
+          <div class="edge-card">
+            <div class="e-label">Decidido</div>
+            <div class="e-title">Sem <code>.gitignore</code> automático</div>
+            <div class="e-desc">Artefatos ficam versionados por padrão. Repos são majoritariamente privados — se formatar o PC ou perder a máquina, os artefatos estão no histórico. O usuário adiciona ao <code>.gitignore</code> manualmente se quiser.</div>
+          </div>
+          <div class="edge-card">
+            <div class="e-label">Decidido</div>
+            <div class="e-title">Thumbnail SVG gerado por tipo</div>
+            <div class="e-desc">Cada card no índice recebe um SVG simples baseado no tipo do artefato (spec = documento, editor = dois painéis, report = gráfico, deck = slides). Nada genérico.</div>
+          </div>
+          <div class="edge-card">
+            <div class="e-label">Decidido</div>
+            <div class="e-title">Funciona fora de projeto git</div>
+            <div class="e-desc">Sem restrição. A skill cria a pasta <code>artifacts/</code>, gera o HTML e atualiza o índice independentemente de haver um repositório git.</div>
+          </div>
+          <div class="edge-card">
+            <div class="e-label">Decidido</div>
+            <div class="e-title">Artefatos commitados no repo</div>
+            <div class="e-desc">Versionados junto com o código por padrão. São documentação permanente do projeto, não descartáveis.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <footer>01-skill-plan-spec.html · html-artifacts · ifscher</footer>
+</div>
+</body>
+</html>

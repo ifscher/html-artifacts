@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill: html-artifact — Builder</title>
+<style>
+  :root {
+    --ivory: #FAF9F5; --paper: #FFFFFF; --slate: #141413;
+    --clay: #D97757; --clay-d: #B85C3E; --oat: #E3DACC;
+    --olive: #788C5D; --g100: #F0EEE6; --g200: #E6E3DA;
+    --g300: #D1CFC5; --g500: #87867F; --g700: #3D3D3A;
+    --serif: ui-serif, Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ivory); color: var(--slate); font-family: var(--sans); font-size: 14px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 48px 32px 80px; }
+
+  /* header */
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g500); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .eyebrow::before { content: ""; width: 20px; height: 1.5px; background: var(--clay); }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(28px, 3.5vw, 40px); margin: 0 0 6px; letter-spacing: -0.015em; }
+  h1 em { font-style: italic; color: var(--clay); }
+  .sub { color: var(--g500); margin: 0 0 32px; max-width: 560px; }
+
+  /* toolbar */
+  .toolbar { position: sticky; top: 0; z-index: 10; background: var(--ivory); border-bottom: 1px solid var(--g200); padding: 10px 0 12px; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+  .toolbar .spacer { flex: 1; }
+  button { font-family: var(--mono); font-size: 12px; cursor: pointer; appearance: none; -webkit-appearance: none; }
+  .btn-primary { background: var(--slate); color: var(--ivory); border: 1.5px solid var(--slate); border-radius: 999px; padding: 9px 18px; transition: background 140ms; }
+  .btn-primary:hover { background: var(--g700); }
+  .btn-primary.done { background: var(--olive); border-color: var(--olive); }
+  .btn-ghost { background: transparent; color: var(--g700); border: 1.5px solid var(--g300); border-radius: 999px; padding: 8px 16px; transition: border-color 140ms; }
+  .btn-ghost:hover { border-color: var(--g500); }
+  .progress-label { font-family: var(--mono); font-size: 11px; color: var(--g500); }
+
+  /* two-col layout */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 820px) { .cols { grid-template-columns: 1fr; } }
+
+  /* form panel */
+  .panel { background: var(--paper); border: 1.5px solid var(--g300); border-radius: 12px; overflow: hidden; }
+  .panel-head { padding: 14px 18px; border-bottom: 1.5px solid var(--g200); background: var(--g100); display: flex; align-items: center; gap: 10px; }
+  .panel-head .ph-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g500); }
+  .panel-head .ph-idx { font-family: var(--mono); font-size: 12px; color: var(--clay); font-weight: 600; }
+  .panel-body { padding: 18px; display: flex; flex-direction: column; gap: 16px; }
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 12px; font-weight: 500; color: var(--g700); }
+  .field input, .field textarea, .field select {
+    font-family: var(--mono); font-size: 12.5px; color: var(--slate);
+    background: var(--ivory); border: 1.5px solid var(--g200); border-radius: 6px;
+    padding: 9px 12px; outline: none; transition: border-color 140ms;
+    width: 100%;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--clay); }
+  .field textarea { resize: vertical; min-height: 72px; }
+  .field .hint { font-size: 11.5px; color: var(--g500); }
+
+  /* steps list */
+  .steps-list { display: flex; flex-direction: column; gap: 8px; }
+  .step-row { display: flex; align-items: flex-start; gap: 8px; }
+  .step-num { font-family: var(--mono); font-size: 11px; color: var(--clay); font-weight: 600; padding-top: 10px; width: 20px; flex-shrink: 0; }
+  .step-row input { flex: 1; }
+  .step-row button.del { background: none; border: none; color: var(--g300); font-size: 16px; padding: 6px 4px; cursor: pointer; flex-shrink: 0; transition: color 140ms; }
+  .step-row button.del:hover { color: var(--clay); }
+  .add-step { background: none; border: 1.5px dashed var(--g300); border-radius: 6px; color: var(--g500); padding: 8px; font-size: 12px; width: 100%; cursor: pointer; transition: border-color 140ms, color 140ms; }
+  .add-step:hover { border-color: var(--clay); color: var(--clay); }
+
+  /* tag input */
+  .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; background: var(--ivory); border: 1.5px solid var(--g200); border-radius: 6px; padding: 7px 10px; cursor: text; transition: border-color 140ms; }
+  .tags-wrap:focus-within { border-color: var(--clay); }
+  .tag { display: flex; align-items: center; gap: 4px; background: var(--oat); color: var(--clay-d); border-radius: 4px; padding: 2px 8px; font-family: var(--mono); font-size: 11.5px; font-weight: 600; }
+  .tag button { background: none; border: none; color: var(--clay-d); cursor: pointer; font-size: 13px; padding: 0; line-height: 1; }
+  .tags-wrap input { border: none; background: transparent; outline: none; font-family: var(--mono); font-size: 12px; color: var(--slate); min-width: 80px; flex: 1; padding: 1px 2px; }
+
+  /* preview panel */
+  .preview-panel .panel-body { padding: 0; }
+  .preview-section { padding: 16px 18px; border-bottom: 1px solid var(--g100); }
+  .preview-section:last-child { border-bottom: none; }
+  .preview-section .ps-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g500); margin-bottom: 8px; }
+  .preview-section .ps-val { font-size: 13.5px; color: var(--slate); white-space: pre-wrap; }
+  .preview-section .ps-val.empty { color: var(--g300); font-style: italic; }
+  .preview-section .ps-chip { display: inline-block; background: var(--g100); border: 1px solid var(--g200); border-radius: 4px; padding: 2px 8px; font-family: var(--mono); font-size: 11px; color: var(--g700); margin: 2px 3px 2px 0; }
+  .preview-section .ps-chip.type { background: var(--oat); border-color: var(--oat); color: var(--clay-d); font-weight: 600; }
+  .preview-section ol { margin: 0; padding-left: 18px; }
+  .preview-section li { font-size: 13px; color: var(--g700); margin-bottom: 4px; }
+
+  /* export area */
+  .export-area { font-family: var(--mono); font-size: 12px; background: var(--g100); border: 1.5px solid var(--g200); border-radius: 8px; padding: 14px 16px; white-space: pre-wrap; color: var(--g700); line-height: 1.7; max-height: 320px; overflow-y: auto; margin-top: 16px; }
+
+  footer { margin-top: 48px; font-family: var(--mono); font-size: 11px; color: var(--g500); border-top: 1px solid var(--g200); padding-top: 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Planejamento de skill · builder interativo</div>
+  <h1>Skill <em>builder</em></h1>
+  <p class="sub">Preencha os campos para definir uma skill. O markdown de saída pode ser colado diretamente no <code>SKILL.md</code> ou como prompt para o skill-creator.</p>
+
+  <div class="toolbar">
+    <button id="exportBtn" class="btn-primary">Copiar markdown</button>
+    <button id="resetBtn" class="btn-ghost">Limpar</button>
+    <div class="spacer"></div>
+    <span class="progress-label" id="progressLabel">0 / 6 campos preenchidos</span>
+  </div>
+
+  <div class="cols">
+
+    <!-- FORM -->
+    <div>
+      <div class="panel" style="margin-bottom:20px">
+        <div class="panel-head"><span class="ph-idx">01</span><span class="ph-label">Identidade</span></div>
+        <div class="panel-body">
+          <div class="field">
+            <label>Nome da skill</label>
+            <input type="text" id="name" placeholder="html-artifact" oninput="update()">
+          </div>
+          <div class="field">
+            <label>Trigger — quando usar</label>
+            <textarea id="trigger" placeholder="Quando o usuário pedir para criar um artefato HTML, gerar um relatório visual, criar um documento interativo..." oninput="update()"></textarea>
+          </div>
+          <div class="field">
+            <label>Tipo</label>
+            <select id="type" onchange="update()">
+              <option value="">Selecione...</option>
+              <option value="geração">Geração (produz um arquivo)</option>
+              <option value="análise">Análise (lê e resume)</option>
+              <option value="transformação">Transformação (converte formato)</option>
+              <option value="automação">Automação (executa sequência)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:20px">
+        <div class="panel-head"><span class="ph-idx">02</span><span class="ph-label">Inputs e outputs</span></div>
+        <div class="panel-body">
+          <div class="field">
+            <label>Inputs (um por linha)</label>
+            <textarea id="inputs" placeholder="descrição do artefato (obrigatório)&#10;tipo: spec | report | editor | deck (opcional)" oninput="update()"></textarea>
+          </div>
+          <div class="field">
+            <label>Outputs (um por linha)</label>
+            <textarea id="outputs" placeholder="artifacts/NN-nome.html&#10;artifacts/index.html atualizado" oninput="update()"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:20px">
+        <div class="panel-head"><span class="ph-idx">03</span><span class="ph-label">Passos de execução</span></div>
+        <div class="panel-body">
+          <div class="steps-list" id="stepsList"></div>
+          <button class="add-step" onclick="addStep()">+ Adicionar passo</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><span class="ph-idx">04</span><span class="ph-label">Contexto e restrições</span></div>
+        <div class="panel-body">
+          <div class="field">
+            <label>Arquivos de contexto carregados pela skill</label>
+            <div class="tags-wrap" id="contextTagsWrap" onclick="document.getElementById('contextInput').focus()">
+              <input type="text" id="contextInput" placeholder="path ou descrição..." onkeydown="handleTagKey(event,'contextTags')" oninput="update()">
+            </div>
+            <span class="hint">Enter para adicionar</span>
+          </div>
+          <div class="field">
+            <label>Restrições / regras</label>
+            <textarea id="constraints" placeholder="HTML sempre auto-contido (zero dependências externas)&#10;Nunca reescrever o index do zero, sempre fazer append" oninput="update()"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div>
+      <div class="panel preview-panel" style="margin-bottom:20px; position: sticky; top: 64px;">
+        <div class="panel-head"><span class="ph-idx">↳</span><span class="ph-label">Preview da skill</span></div>
+        <div class="preview-section">
+          <div class="ps-label">Nome</div>
+          <div class="ps-val" id="prev-name"><span class="empty">—</span></div>
+        </div>
+        <div class="preview-section">
+          <div class="ps-label">Tipo · Trigger</div>
+          <div class="ps-val" id="prev-type"></div>
+        </div>
+        <div class="preview-section">
+          <div class="ps-label">Inputs</div>
+          <div class="ps-val" id="prev-inputs"><span class="empty">—</span></div>
+        </div>
+        <div class="preview-section">
+          <div class="ps-label">Outputs</div>
+          <div class="ps-val" id="prev-outputs"><span class="empty">—</span></div>
+        </div>
+        <div class="preview-section">
+          <div class="ps-label">Passos</div>
+          <div class="ps-val" id="prev-steps"><span class="empty">—</span></div>
+        </div>
+        <div class="preview-section">
+          <div class="ps-label">Contexto carregado</div>
+          <div class="ps-val" id="prev-context"></div>
+        </div>
+        <div class="preview-section">
+          <div class="ps-label">Restrições</div>
+          <div class="ps-val" id="prev-constraints"><span class="empty">—</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><span class="ph-idx">↳</span><span class="ph-label">Markdown exportado</span></div>
+        <div class="panel-body">
+          <div class="export-area" id="exportArea"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>02-skill-plan-builder.html · html-artifacts · ifscher</footer>
+</div>
+
+<script>
+(function() {
+  var contextTags = [];
+  var steps = [];
+
+  function el(id) { return document.getElementById(id); }
+
+  function val(id) { return el(id).value.trim(); }
+
+  // ---- Steps ----
+  function addStep(text) {
+    steps.push(text || '');
+    renderSteps();
+    update();
+  }
+
+  function removeStep(i) {
+    steps.splice(i, 1);
+    renderSteps();
+    update();
+  }
+
+  function renderSteps() {
+    var list = el('stepsList');
+    list.innerHTML = '';
+    steps.forEach(function(s, i) {
+      var row = document.createElement('div');
+      row.className = 'step-row';
+      row.innerHTML =
+        '<span class="step-num">' + (i + 1).toString().padStart(2,'0') + '</span>' +
+        '<input type="text" value="' + escHtml(s) + '" placeholder="Descreva o passo..." oninput="stepChanged(' + i + ', this.value)">' +
+        '<button class="del" onclick="removeStep(' + i + ')" title="Remover">×</button>';
+      list.appendChild(row);
+    });
+  }
+
+  window.addStep = addStep;
+  window.removeStep = removeStep;
+  window.stepChanged = function(i, v) { steps[i] = v; update(); };
+
+  // ---- Tags ----
+  window.handleTagKey = function(e, arrName) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      var input = e.target;
+      var v = input.value.trim().replace(/,$/, '');
+      if (v) {
+        contextTags.push(v);
+        input.value = '';
+        renderTags();
+        update();
+      }
+    } else if (e.key === 'Backspace' && e.target.value === '' && contextTags.length) {
+      contextTags.pop();
+      renderTags();
+      update();
+    }
+  };
+
+  function removeTag(i) {
+    contextTags.splice(i, 1);
+    renderTags();
+    update();
+  }
+
+  function renderTags() {
+    var wrap = el('contextTagsWrap');
+    var input = el('contextInput');
+    wrap.innerHTML = '';
+    contextTags.forEach(function(t, i) {
+      var chip = document.createElement('span');
+      chip.className = 'tag';
+      chip.innerHTML = escHtml(t) + '<button onclick="removeTag(' + i + ')" title="Remover">×</button>';
+      wrap.appendChild(chip);
+    });
+    wrap.appendChild(input);
+  }
+
+  window.removeTag = removeTag;
+
+  // ---- Helpers ----
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function countFilled() {
+    var fields = [val('name'), val('trigger'), val('type'), val('inputs'), val('outputs'), val('constraints')];
+    return fields.filter(function(f){ return f !== ''; }).length + (steps.filter(function(s){ return s.trim(); }).length > 0 ? 1 : 0);
+  }
+
+  // ---- Update ----
+  function update() {
+    var name     = val('name');
+    var trigger  = val('trigger');
+    var type     = val('type');
+    var inputs   = val('inputs');
+    var outputs  = val('outputs');
+    var constraints = val('constraints');
+    var stepsFilled = steps.filter(function(s){ return s.trim(); });
+
+    // preview
+    el('prev-name').innerHTML = name ? '<strong>' + escHtml(name) + '</strong>' : '<span class="empty">—</span>';
+
+    var typeHtml = '';
+    if (type) typeHtml += '<span class="ps-chip type">' + escHtml(type) + '</span> ';
+    if (trigger) typeHtml += '<span style="font-size:13px;color:var(--g700)">' + escHtml(trigger.split('\n')[0]) + (trigger.split('\n').length > 1 ? '…' : '') + '</span>';
+    el('prev-type').innerHTML = typeHtml || '<span class="empty">—</span>';
+
+    el('prev-inputs').innerHTML = inputs
+      ? inputs.split('\n').filter(Boolean).map(function(l){ return '<span class="ps-chip">' + escHtml(l) + '</span>'; }).join('')
+      : '<span class="empty">—</span>';
+
+    el('prev-outputs').innerHTML = outputs
+      ? outputs.split('\n').filter(Boolean).map(function(l){ return '<span class="ps-chip">' + escHtml(l) + '</span>'; }).join('')
+      : '<span class="empty">—</span>';
+
+    if (stepsFilled.length) {
+      el('prev-steps').innerHTML = '<ol>' + stepsFilled.map(function(s){ return '<li>' + escHtml(s) + '</li>'; }).join('') + '</ol>';
+    } else {
+      el('prev-steps').innerHTML = '<span class="empty">—</span>';
+    }
+
+    el('prev-context').innerHTML = contextTags.length
+      ? contextTags.map(function(t){ return '<span class="ps-chip">' + escHtml(t) + '</span>'; }).join('')
+      : '<span class="empty">—</span>';
+
+    el('prev-constraints').innerHTML = constraints
+      ? escHtml(constraints.split('\n')[0]) + (constraints.split('\n').length > 1 ? '<br><span style="color:var(--g500)">…mais ' + (constraints.split('\n').length - 1) + ' linha(s)</span>' : '')
+      : '<span class="empty">—</span>';
+
+    // progress
+    var filled = countFilled();
+    el('progressLabel').textContent = filled + ' / 7 campos preenchidos';
+
+    // markdown
+    var md = '';
+    md += '# Skill: ' + (name || 'sem-nome') + '\n\n';
+    if (type) md += '**Tipo:** ' + type + '\n\n';
+    if (trigger) md += '## Quando usar\n' + trigger + '\n\n';
+    if (inputs) md += '## Inputs\n' + inputs.split('\n').filter(Boolean).map(function(l){ return '- ' + l; }).join('\n') + '\n\n';
+    if (outputs) md += '## Outputs\n' + outputs.split('\n').filter(Boolean).map(function(l){ return '- ' + l; }).join('\n') + '\n\n';
+    if (stepsFilled.length) md += '## Passos\n' + stepsFilled.map(function(s, i){ return (i+1) + '. ' + s; }).join('\n') + '\n\n';
+    if (contextTags.length) md += '## Contexto carregado\n' + contextTags.map(function(t){ return '- ' + t; }).join('\n') + '\n\n';
+    if (constraints) md += '## Restrições\n' + constraints.split('\n').filter(Boolean).map(function(l){ return '- ' + l; }).join('\n') + '\n';
+
+    el('exportArea').textContent = md || '(preencha os campos para gerar o markdown)';
+
+    return md;
+  }
+
+  // ---- Buttons ----
+  var copyTimer = null;
+  el('exportBtn').addEventListener('click', function() {
+    var md = update();
+    var btn = el('exportBtn');
+    var copy = function() {
+      btn.textContent = 'Copiado ✓';
+      btn.classList.add('done');
+      if (copyTimer) clearTimeout(copyTimer);
+      copyTimer = setTimeout(function() {
+        btn.textContent = 'Copiar markdown';
+        btn.classList.remove('done');
+      }, 1400);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(md).then(copy, function() { fallback(md); copy(); });
+    } else { fallback(md); copy(); }
+  });
+
+  function fallback(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+
+  el('resetBtn').addEventListener('click', function() {
+    ['name','trigger','type','inputs','outputs','constraints'].forEach(function(id){ el(id).value = ''; });
+    steps = []; contextTags = [];
+    renderSteps(); renderTags(); update();
+  });
+
+  // Init with example steps
+  addStep('Receber descrição e tipo opcional do usuário');
+  addStep('Inferir tipo se omitido; perguntar se ambíguo');
+  addStep('Carregar design tokens e demo de referência como contexto');
+  addStep('Gerar HTML auto-contido usando os padrões estabelecidos');
+  addStep('Verificar/criar pasta artifacts/ no projeto atual');
+  addStep('Salvar arquivo com próximo número disponível (NN-nome.html)');
+  addStep('Criar ou atualizar artifacts/index.html com o novo card');
+
+  update();
+})();
+</script>
+</body>
+</html>
